@@ -11,4 +11,5 @@
 		<div class="text-md text-center font-bold">Neuron</div>
 	</div>
 </div>
+<Handle type="source" position={Position.Top} />
 <Handle type="target" position={Position.Bottom} />
