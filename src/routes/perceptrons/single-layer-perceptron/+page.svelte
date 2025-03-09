@@ -4,66 +4,47 @@
 		Controls,
 		Background,
 		BackgroundVariant,
-		Position,
-		type SnapGrid
+		type SnapGrid,
+		type Edge,
+		type Node
 	} from '@xyflow/svelte';
 	import '@xyflow/svelte/dist/style.css';
 	import { nodeTypes } from '$lib/types';
-	import { simpleId } from '$lib/utils';
 
-	let nodes = $state.raw([
+	const initialNodes: Node[] = [
 		{
 			id: 'neuron-1',
 			type: 'neuron',
-			data: {
-				handles: [
-					{ type: 'target', position: Position.Bottom, id: simpleId() },
-					{ type: 'target', position: Position.Left, id: simpleId() }
-				]
-			},
+			data: {},
 			position: { x: 0, y: 0 }
 		},
 		{
 			id: 'input-1',
 			type: 'nnInput',
-			data: {
-				handles: [{ type: 'source', position: Position.Top, id: simpleId() }]
-			},
-			position: { x: 0, y: 200 }
+			data: {},
+			position: { x: 100, y: 200 }
 		},
 		{
 			id: 'bias-1',
 			type: 'nnInput',
-			data: {
-				handles: [{ type: 'source', position: Position.Right, id: simpleId() }]
-			},
-			position: { x: -200, y: 0 }
+			data: {},
+			position: { x: -100, y: 200 }
 		},
 		{
 			id: 'weight-1',
 			type: 'weight',
-			data: {
-				handles: [
-					{ type: 'target', position: Position.Bottom, id: simpleId() },
-					{ type: 'source', position: Position.Top, id: simpleId() }
-				]
-			},
-			position: { x: 0, y: 100 }
+			data: {},
+			position: { x: 100, y: 100 }
 		},
 		{
 			id: 'weight-2',
 			type: 'weight',
-			data: {
-				handles: [
-					{ type: 'target', position: Position.Left, id: simpleId() },
-					{ type: 'source', position: Position.Right, id: simpleId() }
-				]
-			},
-			position: { x: -100, y: 0 }
+			data: {},
+			position: { x: -100, y: 100 }
 		}
-	]);
+	];
 
-	let edges = $state.raw([
+	let initialEdges: Edge[] = [
 		{
 			id: 'input-1_weight-1',
 			type: 'default',
@@ -88,28 +69,18 @@
 			source: 'weight-2',
 			target: 'neuron-1'
 		}
-	]);
+	];
+
+	let nodes = $state.raw<Node[]>(initialNodes);
+	let edges = $state.raw<Edge[]>(initialEdges);
 
 	const snapGrid: SnapGrid = [25, 25];
 </script>
 
-<!--
-👇 By default, the Svelte Flow container has a height of 100%.
-This means that the parent container needs a height to render the flow.
--->
 <div>
 	<h1>Single-Layer Perceptron</h1>
 	<div style:height="500px" class="border-2">
-		{console.log(nodes)}
-		{console.log(edges)}
-		<SvelteFlow
-			bind:nodes
-			bind:edges
-			{snapGrid}
-			{nodeTypes}
-			fitView
-			onnodeclick={(event) => console.log('on node click', event.node.data)}
-		>
+		<SvelteFlow bind:nodes bind:edges {snapGrid} {nodeTypes} fitView>
 			<Controls />
 			<Background variant={BackgroundVariant.Dots} />
 		</SvelteFlow>
