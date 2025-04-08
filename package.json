@@ -52,9 +52,16 @@
 	},
 	"dependencies": {
 		"@layerstack/utils": "^1.0.0",
+		"@theatre/core": "^0.7.2",
+		"@theatre/studio": "^0.7.2",
+		"@threlte/core": "^8.0.1",
+		"@threlte/extras": "^9.1.0",
+		"@threlte/theatre": "^3.0.0",
+		"@types/three": "^0.175.0",
 		"@xyflow/svelte": "^0.1.29",
 		"d3-array": "^3.2.4",
 		"d3-scale": "^4.0.2",
-		"layerchart": "^1.0.8"
+		"layerchart": "^1.0.8",
+		"three": "^0.175.0"
 	}
 }

@@ -69,6 +69,16 @@
 				]
 			},
 			{
+				title: 'Decision Functions',
+				url: '/decision-functions',
+				items: [
+					{
+						title: 'Step Decision Function',
+						url: '/decision-functions/step-decision-function'
+					}
+				]
+			},
+			{
 				title: 'Calculus',
 				url: '/calculus',
 				items: [
