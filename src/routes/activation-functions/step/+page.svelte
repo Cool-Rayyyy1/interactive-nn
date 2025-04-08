@@ -1,9 +1,6 @@
 <script lang="ts">
 	import Step from '$lib/components/charts/step.svelte';
-	import { useMathJax } from '$lib/utils';
 	import sign_fn from '$lib/assets/sign_fn.svg';
-
-	useMathJax();
 </script>
 
 <h1 class="m-2 text-lg font-extrabold">Step Function</h1>
