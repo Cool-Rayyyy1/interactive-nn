@@ -51,6 +51,10 @@
 		"vitest": "^3.0.0"
 	},
 	"dependencies": {
-		"@xyflow/svelte": "^0.1.29"
+		"@layerstack/utils": "^1.0.0",
+		"@xyflow/svelte": "^0.1.29",
+		"d3-array": "^3.2.4",
+		"d3-scale": "^4.0.2",
+		"layerchart": "^1.0.8"
 	}
 }
