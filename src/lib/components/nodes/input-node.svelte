@@ -1,23 +1,10 @@
 <script lang="ts">
 	import { Handle, Position, type NodeProps } from '@xyflow/svelte';
-	import type { Writable } from 'svelte/store';
 
 	type $$Props = NodeProps;
-
-	export let data: { color: Writable<string> };
-
-	const { color } = data;
 </script>
 
 <div class="colorpicker">
-	<div>
-		color: <strong>{$color}</strong>
-	</div>
-	<input
-		class="nodrag"
-		type="color"
-		on:input={(evt) => data.color.set(evt.target?.value)}
-		value={$color}
-	/>
+	<input class="nodrag" type="color" />
 	<Handle type="source" position={Position.Top} />
 </div>

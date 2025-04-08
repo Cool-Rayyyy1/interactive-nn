@@ -5,7 +5,7 @@
 </script>
 
 <div
-	class=" relative flex h-20 w-20 place-content-center overflow-hidden rounded-full border border-slate-400 bg-blue-200 p-1"
+	class=" relative flex h-20 w-20 place-content-center overflow-hidden rounded-full border border-stone-400 bg-slate-400 p-1"
 >
 	<div class="flex place-content-center">
 		<div class="text-md text-center font-bold">Neuron</div>
