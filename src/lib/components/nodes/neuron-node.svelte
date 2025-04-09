@@ -2,46 +2,49 @@
 	import type { NeuronNodeType } from '$lib/types';
 	import {
 		Handle,
-		Position,
 		useNodeConnections,
 		useNodesData,
+		useUpdateNodeInternals,
 		type NodeProps
 	} from '@xyflow/svelte';
+	import { onMount } from 'svelte';
 
-	let { id }: NodeProps<NeuronNodeType> = $props();
+	let { id, data }: NodeProps<NeuronNodeType> = $props();
 
 	const connections = useNodeConnections({
 		id,
 		handleType: 'target'
 	});
 
-	const nodesData = useNodesData(connections.current.map((connection) => connection.source));
+	let nodesData = $derived(
+		useNodesData(connections.current.map((connection) => connection.source))
+	);
+
+	let neuronVal = $state(0);
+
+	$effect.pre(() => {
+		neuronVal = nodesData.current.reduce((acc, val) => acc + +val.data.input * +val.data.weight, 0);
+	});
+
+	const updateNodeInternals = useUpdateNodeInternals();
+
+	onMount(() => {
+		updateNodeInternals(id);
+		neuronVal = nodesData.current.reduce((acc, val) => acc + +val.data.input * +val.data.weight, 0);
+	});
 </script>
 
-<div
-	class="relative flex h-72 w-72 flex-1 place-content-center overflow-hidden rounded-full border border-slate-400 bg-blue-200 p-1"
->
+<div class="w-30 h-30 rounded-full border-2 border-stone-400 bg-blue-400 p-4 shadow-md">
 	<div>
-		<h1 class="text-md text-center font-bold">Neuron</h1>
 		{#if nodesData.current.length === 0}
 			<div>no connected nodes</div>
 		{:else}
 			<div>
-				{#each nodesData.current as nodeData}
-					<div>
-						<h1>Input:{nodeData.data.input}</h1>
-						<h1>Weight:{nodeData.data.weight}</h1>
-						{#if !Number.isNaN(nodeData.data.weight * nodeData.data.input)}
-							<div>
-								{nodeData.data.weight * nodeData.data.input}
-							</div>
-						{:else}
-							<div>Please enter valid numbers.</div>
-						{/if}
-					</div>
-				{/each}
+				<h1>{neuronVal}</h1>
 			</div>
 		{/if}
 	</div>
-	<Handle type="target" position={Position.Bottom} />
+	{#each data.handles as handle}
+		<Handle type={handle.type} position={handle.position} id={handle.id} />
+	{/each}
 </div>

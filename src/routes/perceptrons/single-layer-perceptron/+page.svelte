@@ -6,7 +6,8 @@
 		BackgroundVariant,
 		type SnapGrid,
 		type Edge,
-		type Node
+		type Node,
+		Position
 	} from '@xyflow/svelte';
 	import '@xyflow/svelte/dist/style.css';
 	import { nodeTypes } from '$lib/types';
@@ -15,32 +16,81 @@
 		{
 			id: 'neuron-1',
 			type: 'neuron',
-			data: {},
-			position: { x: 0, y: 0 }
+			data: {
+				handles: [
+					{
+						type: 'target',
+						position: Position.Left,
+						id: 'neuron-1-left'
+					},
+					{
+						type: 'target',
+						position: Position.Bottom,
+						id: 'neuron-1-bottom'
+					}
+				]
+			},
+			position: { x: 11, y: -4 }
 		},
 		{
 			id: 'input-1',
 			type: 'nnInput',
-			data: {},
-			position: { x: 100, y: 200 }
+			data: {
+				handles: [
+					{
+						type: 'source',
+						position: Position.Top
+					}
+				]
+			},
+			position: { x: 0, y: 200 }
 		},
 		{
 			id: 'bias-1',
 			type: 'nnInput',
-			data: {},
-			position: { x: -100, y: 200 }
+			data: {
+				handles: [
+					{
+						type: 'source',
+						position: Position.Right
+					}
+				]
+			},
+			position: { x: -250, y: 0 }
 		},
 		{
 			id: 'weight-1',
 			type: 'weight',
-			data: {},
-			position: { x: 100, y: 100 }
+			data: {
+				handles: [
+					{
+						type: 'target',
+						position: Position.Bottom
+					},
+					{
+						type: 'source',
+						position: Position.Top
+					}
+				]
+			},
+			position: { x: 0, y: 100 }
 		},
 		{
 			id: 'weight-2',
 			type: 'weight',
-			data: {},
-			position: { x: -100, y: 100 }
+			data: {
+				handles: [
+					{
+						type: 'target',
+						position: Position.Left
+					},
+					{
+						type: 'source',
+						position: Position.Right
+					}
+				]
+			},
+			position: { x: -125, y: 0 }
 		}
 	];
 
@@ -55,7 +105,8 @@
 			id: 'weight-1_neuron-1',
 			type: 'default',
 			source: 'weight-1',
-			target: 'neuron-1'
+			target: 'neuron-1',
+			targetHandle: 'neuron-1-bottom'
 		},
 		{
 			id: 'bias-1_weight-2',
@@ -67,7 +118,8 @@
 			id: 'weight-2_neuron-1',
 			type: 'default',
 			source: 'weight-2',
-			target: 'neuron-1'
+			target: 'neuron-1',
+			targetHandle: 'neuron-1-left'
 		}
 	];
 
