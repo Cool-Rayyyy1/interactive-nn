@@ -4,7 +4,7 @@
 </script>
 
 <h1>Step Decision Function</h1>
-<div>
+<div class="h-[1000px] w-full">
 	<Canvas>
 		<DefaultScene />
 	</Canvas>

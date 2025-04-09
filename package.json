@@ -51,7 +51,6 @@
 		"vitest": "^3.0.0"
 	},
 	"dependencies": {
-<<<<<<< HEAD
 		"@layerstack/utils": "^1.0.0",
 		"@theatre/core": "^0.7.2",
 		"@theatre/studio": "^0.7.2",
@@ -59,13 +58,10 @@
 		"@threlte/extras": "^9.1.0",
 		"@threlte/theatre": "^3.0.0",
 		"@types/three": "^0.175.0",
-		"@xyflow/svelte": "^0.1.29",
+		"@xyflow/svelte": "^1.0.0-next.5",
 		"d3-array": "^3.2.4",
 		"d3-scale": "^4.0.2",
 		"layerchart": "^1.0.8",
 		"three": "^0.175.0"
-=======
-		"@xyflow/svelte": "^1.0.0-next.3"
->>>>>>> 3d7092e24b27123a05678628be7a94c3df70035c
 	}
 }

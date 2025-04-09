@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<script>
-	import SingleLayerPerceptron from '$lib/components/perceptrons/single-layer-perceptron.svelte';
-=======
 <script lang="ts">
 	import {
 		SvelteFlow,
@@ -79,19 +75,14 @@
 	let edges = $state.raw<Edge[]>(initialEdges);
 
 	const snapGrid: SnapGrid = [25, 25];
->>>>>>> 3d7092e24b27123a05678628be7a94c3df70035c
 </script>
 
 <div>
 	<h1>Single-Layer Perceptron</h1>
-<<<<<<< HEAD
-	<SingleLayerPerceptron />
-=======
 	<div style:height="500px" class="border-2">
 		<SvelteFlow bind:nodes bind:edges {snapGrid} {nodeTypes} fitView>
 			<Controls />
 			<Background variant={BackgroundVariant.Dots} />
 		</SvelteFlow>
 	</div>
->>>>>>> 3d7092e24b27123a05678628be7a94c3df70035c
 </div>

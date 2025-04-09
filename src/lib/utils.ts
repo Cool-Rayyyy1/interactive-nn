@@ -4,8 +4,6 @@ import type { InputNodeType, WeightNodeType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
-<<<<<<< HEAD
-=======
 }
 
 export function simpleId(): string {
@@ -18,7 +16,6 @@ export function isInputNode(
   return !node || !node.type
     ? false
     : node.type === 'nnInput' || node.type === 'weight';
->>>>>>> 3d7092e24b27123a05678628be7a94c3df70035c
 }
 
 export function range(start: number, end: number, step: number): number[] {

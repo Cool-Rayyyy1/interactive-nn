@@ -19,11 +19,7 @@
 </script>
 
 <div
-<<<<<<< HEAD
-	class=" relative flex h-20 w-20 place-content-center overflow-hidden rounded-full border border-stone-400 bg-slate-400 p-1"
-=======
 	class="relative flex h-72 w-72 flex-1 place-content-center overflow-hidden rounded-full border border-slate-400 bg-blue-200 p-1"
->>>>>>> 3d7092e24b27123a05678628be7a94c3df70035c
 >
 	<div>
 		<h1 class="text-md text-center font-bold">Neuron</h1>

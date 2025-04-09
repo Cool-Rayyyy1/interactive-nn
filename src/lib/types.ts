@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-export interface Data {
-  x: number,
-  y: number,
-}
-=======
 import NnInputNode from '$lib/components/nodes/nn-input-node.svelte';
 import NeuronNode from '$lib/components/nodes/neuron-node.svelte';
 import WeightNode from '$lib/components/nodes/weight-node.svelte';
@@ -22,4 +16,8 @@ export type NeuronNodeType = Node<{ input: number, weight: number }, 'neuron'>;
 
 export type CustomNodes = InputNodeType | WeightNodeType | NeuronNodeType;
 
->>>>>>> 3d7092e24b27123a05678628be7a94c3df70035c
+export interface Data {
+  x: number,
+  y: number,
+}
+
