@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
+	import type CC from 'camera-controls';
 	import DefaultScene from '$lib/components/scenes/default-scene.svelte';
+	import type { Mesh } from 'three';
+
+	let controls = $state<CC>();
+	let mesh = $state<Mesh>();
 </script>
 
 <h1>Step Decision Function</h1>
 <div class="h-[1000px] w-full">
 	<Canvas>
-		<DefaultScene />
+		<DefaultScene bind:controls bind:mesh />
 	</Canvas>
 </div>
