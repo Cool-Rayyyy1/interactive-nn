@@ -80,14 +80,14 @@ export function weightedInput(node: ProductNode): Input[] {
 }
 
 /**
- * Runs an input value through the given Neuron's activation function
+ * Runs an input value through the given activation function
  * 
- * @param neuron - The neuron with the required activation function
+ * @param activation - The activation function to calculate the output with
  * @param input - The input value to transform with the activation
  * @returns The activated valued of the input
  */
-export function activate(neuron: Neuron, input: number): number {
-  switch (neuron.activation) {
+export function activate(activation: ActivationFunction, input: number): number {
+  switch (activation) {
     case ActivationFunction.Step:
       return Math.sign(input)
     case ActivationFunction.Sigmoid:
@@ -108,7 +108,7 @@ export function activate(neuron: Neuron, input: number): number {
 export function layerValue(layer: InputLayer): Input[] {
   const bias = weightedBias(layer.bias);
   const inputDotProduct = mergeProductArrays(layer.values.map((val) => weightedInput(val)));
-  return inputDotProduct.map((val): Input => <Input>{ input: val.input, output: activate(layer.neuron, bias.output + val.output) })
+  return inputDotProduct.map((val): Input => <Input>{ input: val.input, output: activate(layer.neuron.activation, bias.output + val.output) })
 }
 
 /**
@@ -159,5 +159,5 @@ export function genInputs(range: number[]): Input[] {
  * @returns Input[] with activated output values
  */
 export function activateInputs(inputs: Input[], neuron: Neuron): Input[] {
-  return inputs.map((val) => <Input>{ input: val.input, output: activate(neuron, val.output) })
+  return inputs.map((val) => <Input>{ input: val.input, output: activate(neuron.activation, val.output) })
 }
