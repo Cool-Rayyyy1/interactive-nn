@@ -1,14 +1,21 @@
 <script lang="ts">
-	import type { Data } from '$lib/types';
-	import { range } from '$lib/utils';
+	import type { ActivationFunction, Coords2d } from '$lib/types';
+	import { activate, range } from '$lib/utils';
 	import { Axis, Chart, Spline, Svg, Tooltip, Highlight } from 'layerchart';
 
-	let sgnRange = range(-10, 10, 0.01);
+	let {
+		start,
+		end,
+		step,
+		activation
+	}: { start: number; end: number; step: number; activation: ActivationFunction } = $props();
 
-	let data: Data[] = sgnRange.map((val): Data => {
+	const inputRange = range(start, end, step);
+
+	let data: Coords2d[] = inputRange.map((val): Coords2d => {
 		return {
 			x: val,
-			y: Math.sign(val)
+			y: +activate(activation, val).toFixed(4)
 		};
 	});
 </script>
