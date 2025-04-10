@@ -18,13 +18,8 @@
 			id: 'neuron-1',
 			type: 'neuron',
 			data: {
-				inputs: range(-5, 6, 1),
+				inputs: range(-5, 5, 1),
 				handles: [
-					{
-						type: 'target',
-						position: Position.Left,
-						id: 'neuron-1-left'
-					},
 					{
 						type: 'target',
 						position: Position.Bottom,
@@ -32,12 +27,27 @@
 					}
 				]
 			},
-			position: { x: 11, y: -4 }
+			position: { x: 0, y: 0 }
+		},
+		{
+			id: 'bias-1',
+			type: 'nnInput',
+			data: {
+				display: '1',
+				handles: [
+					{
+						type: 'source',
+						position: Position.Top
+					}
+				]
+			},
+			position: { x: -200, y: 200 }
 		},
 		{
 			id: 'input-1',
 			type: 'nnInput',
 			data: {
+				display: 'X1',
 				handles: [
 					{
 						type: 'source',
@@ -48,17 +58,18 @@
 			position: { x: 0, y: 200 }
 		},
 		{
-			id: 'bias-1',
+			id: 'input-2',
 			type: 'nnInput',
 			data: {
+				display: 'X2',
 				handles: [
 					{
 						type: 'source',
-						position: Position.Right
+						position: Position.Top
 					}
 				]
 			},
-			position: { x: -250, y: 0 }
+			position: { x: 200, y: 200 }
 		},
 		{
 			id: 'weight-1',
@@ -76,7 +87,7 @@
 					}
 				]
 			},
-			position: { x: 0, y: 100 }
+			position: { x: -200, y: 100 }
 		},
 		{
 			id: 'weight-2',
@@ -86,23 +97,41 @@
 				handles: [
 					{
 						type: 'target',
-						position: Position.Left
+						position: Position.Bottom
 					},
 					{
 						type: 'source',
-						position: Position.Right
+						position: Position.Top
 					}
 				]
 			},
-			position: { x: -125, y: 0 }
+			position: { x: 0, y: 100 }
+		},
+		{
+			id: 'weight-3',
+			type: 'weight',
+			data: {
+				weight: 1,
+				handles: [
+					{
+						type: 'target',
+						position: Position.Bottom
+					},
+					{
+						type: 'source',
+						position: Position.Top
+					}
+				]
+			},
+			position: { x: 200, y: 100 }
 		}
 	];
 
 	let initialEdges: Edge[] = [
 		{
-			id: 'input-1_weight-1',
+			id: 'bias-1_weight-1',
 			type: 'default',
-			source: 'input-1',
+			source: 'bias-1',
 			target: 'weight-1'
 		},
 		{
@@ -113,9 +142,9 @@
 			targetHandle: 'neuron-1-bottom'
 		},
 		{
-			id: 'bias-1_weight-2',
+			id: 'input-1_weight-2',
 			type: 'default',
-			source: 'bias-1',
+			source: 'input-1',
 			target: 'weight-2'
 		},
 		{
@@ -123,7 +152,20 @@
 			type: 'default',
 			source: 'weight-2',
 			target: 'neuron-1',
-			targetHandle: 'neuron-1-left'
+			targetHandle: 'neuron-1-bottom'
+		},
+		{
+			id: 'input-2_weight-3',
+			type: 'default',
+			source: 'input-2',
+			target: 'weight-3'
+		},
+		{
+			id: 'weight-3_neuron-1',
+			type: 'default',
+			source: 'weight-3',
+			target: 'neuron-1',
+			targetHandle: 'neuron-1-bottom'
 		}
 	];
 

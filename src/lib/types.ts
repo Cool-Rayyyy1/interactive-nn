@@ -12,9 +12,9 @@ export const nodeTypes: NodeTypes = {
   weight: WeightNode
 };
 
-export type InputNodeType = Node<{ input: number, handles: HandleProp[] }, 'nnInput'>;
-export type WeightNodeType = Node<{ input: number, weight: number, handles: HandleProp[] }, 'weight'>;
-export type NeuronNodeType = Node<{ input: number, weight: number, handles: HandleProp[] }, 'neuron'>;
+export type InputNodeType = Node<{ display: string, handles: HandleProp[] }, 'nnInput'>;
+export type WeightNodeType = Node<{ productNode: ProductNode, handles: HandleProp[] }, 'weight'>;
+export type NeuronNodeType = Node<{ layer: InputLayer | HiddenLayer, handles: HandleProp[] }, 'neuron'>;
 
 export type CustomNodes = InputNodeType | WeightNodeType | NeuronNodeType;
 
@@ -33,4 +33,43 @@ export interface Config {
   coords: { x: number; y: number; z: number };
   shape: [number, number, number];
   color: string;
-};
+}
+
+export interface Network {
+  input: InputLayer,
+  hidden?: HiddenLayer[],
+}
+
+export interface InputLayer {
+  bias: BiasNode;
+  values: ProductNode[];
+  neuron: Neuron;
+}
+
+export interface HiddenLayer {
+  bias: BiasNode;
+  weights: number[]
+  neuron: Neuron;
+}
+
+export interface ProductNode {
+  weight: number;
+  inputs: number[];
+}
+
+export interface BiasNode {
+  weight: number;
+  input: number;
+}
+
+export interface Neuron {
+  activation: ActivationFunction
+}
+
+export enum ActivationFunction {
+  Step,
+  Sigmoid,
+  Tanh,
+  ReLU,
+}
+

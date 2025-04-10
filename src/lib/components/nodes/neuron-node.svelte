@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NeuronNodeType } from '$lib/types';
+	import { type NeuronNodeType } from '$lib/types';
 	import {
 		Handle,
 		useNodeConnections,
@@ -23,14 +23,14 @@
 	let neuronVal = $state(0);
 
 	$effect.pre(() => {
-		neuronVal = nodesData.current.reduce((acc, val) => acc + +val.data.input * +val.data.weight, 0);
+		neuronVal = 0;
 	});
 
 	const updateNodeInternals = useUpdateNodeInternals();
 
 	onMount(() => {
 		updateNodeInternals(id);
-		neuronVal = nodesData.current.reduce((acc, val) => acc + +val.data.input * +val.data.weight, 0);
+		neuronVal = 0;
 	});
 </script>
 

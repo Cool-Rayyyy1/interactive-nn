@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import type { InputNodeType, WeightNodeType } from "./types";
+import { ActivationFunction, type BiasNode, type InputLayer, type InputNodeType, type Network, type Neuron, type ProductNode, type WeightNodeType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -30,8 +30,48 @@ export function sigmoid(x: number): number {
   return (1 / (1 + Math.exp(-x)))
 }
 
-
 export function relu(x: number): number {
   return Math.max(0, x)
 }
 
+export function weightedBias(input: BiasNode): number {
+  return input.weight * input.input
+}
+
+
+export function weightedInput(input: ProductNode): number[] {
+  return input.inputs.map((val) => val * input.weight)
+}
+
+export function activate(neuron: Neuron, input: number): number {
+  switch (neuron.activation) {
+    case ActivationFunction.Step:
+      return Math.sign(input)
+    case ActivationFunction.Sigmoid:
+      return sigmoid(input)
+    case ActivationFunction.Tanh:
+      return Math.tanh(input)
+    case ActivationFunction.ReLU:
+      return relu(input)
+  }
+}
+
+export function layerValue(layer: InputLayer): number[] {
+  const bias = weightedBias(layer.bias);
+  const inputDotProduct = mergeProductArrays(layer.values.map((val) => weightedInput(val)));
+  return inputDotProduct.map((val) => activate(layer.neuron, bias + val))
+}
+
+export function networkValue(network: Network): number[] {
+  return layerValue(network.input)
+}
+
+function mergeProductArrays(arrays: number[][]): number[] {
+  const cols = range(0, arrays.length, 1);
+  const merged: number[] = []
+  for (let i = 0; i < arrays[0].length; i++) {
+    const total = cols.reduce((acc, val, idx) => acc + arrays[idx][i], 0);
+    merged[i] = total
+  }
+  return merged;
+}

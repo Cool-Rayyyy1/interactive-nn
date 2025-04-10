@@ -1,39 +1,16 @@
 <script lang="ts">
-	import {
-		Handle,
-		useNodeConnections,
-		useNodesData,
-		useSvelteFlow,
-		useUpdateNodeInternals,
-		type NodeProps
-	} from '@xyflow/svelte';
-	import { onMount, untrack } from 'svelte';
-	import { isInputNode } from '$lib/utils';
+	import { Handle, useSvelteFlow, useUpdateNodeInternals, type NodeProps } from '@xyflow/svelte';
+	import { onMount } from 'svelte';
 	import type { WeightNodeType } from '$lib/types';
 
 	let { id, data }: NodeProps<WeightNodeType> = $props();
 
 	const { updateNodeData } = useSvelteFlow();
-
-	const connections = useNodeConnections();
-
-	let nodeData = $derived(useNodesData(connections.current[0]?.source));
-	let textNodeData = $derived(isInputNode(nodeData.current) ? nodeData.current.data : null);
-
-	$effect.pre(() => {
-		const input = textNodeData?.input ?? '';
-
-		if (input === untrack(() => data.input)) return;
-		updateNodeData(id, {
-			input: input
-		});
-	});
-
 	const updateNodeInternals = useUpdateNodeInternals();
 
 	onMount(() => {
 		updateNodeInternals(id);
-		updateNodeData(id, { weight: 1 });
+		updateNodeData(id, { weight: data.weight });
 	});
 </script>
 
