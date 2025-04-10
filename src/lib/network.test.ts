@@ -1,24 +1,33 @@
 import { expect, test } from 'vitest';
-import { layerValue, networkValue, relu, sigmoid, weightedBias, weightedInput } from './utils';
-import { ActivationFunction, type BiasNode, type HiddenLayer, type InputLayer, type Network, type Neuron, type ProductNode } from './types';
+import { genInputs, layerValue, networkValue, range, relu, sigmoid, weightedBias } from './utils';
+import { ActivationFunction, type BiasNode, type InputLayer, type Network, type Neuron, type ProductNode } from './types';
 
 const bias1: BiasNode = {
-  input: 1,
+  input: { input: 1, output: 1 },
   weight: 2,
 }
 
 const node1: ProductNode = {
   weight: 3,
-  inputs: [1, 2, 3],
+  inputs: genInputs(range(1, 4, 1)),
 }
 
 const node2: ProductNode = {
   weight: 2,
-  inputs: [1, 2, 3],
+  inputs: genInputs(range(1, 4, 1)),
+}
+
+const node3: ProductNode = {
+  weight: 1,
+  inputs: genInputs(range(-5, 5, 1)),
 }
 
 const neuron1: Neuron = {
   activation: ActivationFunction.ReLU
+}
+
+const neuron2: Neuron = {
+  activation: ActivationFunction.Step
 }
 
 const layer1: InputLayer = {
@@ -29,6 +38,16 @@ const layer1: InputLayer = {
 
 const network1: Network = {
   input: layer1
+}
+
+const layer2: InputLayer = {
+  bias: bias1,
+  values: [node3],
+  neuron: neuron2,
+}
+
+const network2: Network = {
+  input: layer2
 }
 
 test('WeightedBias1', () => {
@@ -101,4 +120,11 @@ test('NetworkValue1', () => {
   let value = networkValue(network1)
 
   expect(value).toEqual([7, 12, 17]);
+});
+
+
+test('NetworkValue2', () => {
+  let value = networkValue(network2)
+
+  expect(value).toEqual([-1, -1, -1, 0, 1, 1, 1, 1, 1, 1]);
 });

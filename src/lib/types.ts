@@ -54,16 +54,21 @@ export interface HiddenLayer {
 
 export interface ProductNode {
   weight: number;
-  inputs: number[];
+  inputs: Input[];
 }
 
 export interface BiasNode {
   weight: number;
-  input: number;
+  input: Input;
 }
 
 export interface Neuron {
   activation: ActivationFunction
+}
+
+export interface Input {
+  readonly input: number;
+  output: number;
 }
 
 export enum ActivationFunction {
