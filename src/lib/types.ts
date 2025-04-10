@@ -13,18 +13,10 @@ export const nodeTypes: NodeTypes = {
 };
 
 export type InputNodeType = Node<{ display: string, handles: HandleProp[] }, 'nnInput'>;
-export type WeightNodeType = Node<{ productNode: ProductNode, handles: HandleProp[] }, 'weight'>;
+export type WeightNodeType = Node<{ node: ProductNode, handles: HandleProp[] }, 'weight'>;
 export type NeuronNodeType = Node<{ layer: InputLayer | HiddenLayer, handles: HandleProp[] }, 'neuron'>;
 
 export type CustomNodes = InputNodeType | WeightNodeType | NeuronNodeType;
-
-/**
- * 2d (x, y) coordinates in a cartesian plane
- */
-export interface Coords2d {
-  x: number,
-  y: number,
-}
 
 /**
  * Props for a <Handle /> component in xyflow
@@ -119,9 +111,9 @@ export interface Input {
  *  - ReLU
  */
 export enum ActivationFunction {
-  Step,
-  Sigmoid,
-  Tanh,
-  ReLU,
+  Step = "Step",
+  Sigmoid = "Sigmoid",
+  Tanh = "Tanh",
+  ReLU = "ReLU",
 }
 

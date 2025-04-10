@@ -3,14 +3,14 @@
 	import { onMount } from 'svelte';
 	import type { WeightNodeType } from '$lib/types';
 
-	let { id, data }: NodeProps<WeightNodeType> = $props();
+	let { id, data = $bindable() }: NodeProps<WeightNodeType> = $props();
 
 	const { updateNodeData } = useSvelteFlow();
 	const updateNodeInternals = useUpdateNodeInternals();
 
 	onMount(() => {
 		updateNodeInternals(id);
-		updateNodeData(id, { weight: data.productNode.weight });
+		updateNodeData(id, { weight: data.node.weight });
 	});
 </script>
 
@@ -27,9 +27,10 @@ can be passed as props.
 	<span class="text-gray-900"
 		>W: <input
 			class="w-10 bg-gray-100 p-1"
-			value={data.productNode.weight}
+			value={data.node.weight}
 			oninput={(evt) => {
 				updateNodeData(id, { weight: evt.currentTarget.value });
+				data.node.weight = +evt.currentTarget.value;
 			}}
 		/></span
 	>

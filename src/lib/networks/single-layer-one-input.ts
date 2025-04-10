@@ -16,12 +16,8 @@ const bias: BiasNode = {
 const values: ProductNode[] = [
   {
     weight: 1,
-    inputs: genInputs(range(-5, 5, 0.1))
+    inputs: genInputs(range(-5, 5, 0.01))
   },
-  {
-    weight: 1,
-    inputs: genInputs(range(-5, 5, 0.1))
-  }
 ]
 
 const inputLayer: InputLayer = {
@@ -30,7 +26,7 @@ const inputLayer: InputLayer = {
   neuron,
 }
 
-export const SingleLayerTwoInputNetwork: Network = {
+export const SingleLayerOneInputNetwork: Network = {
   input: inputLayer
 }
 

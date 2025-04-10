@@ -10,15 +10,16 @@
 		Position
 	} from '@xyflow/svelte';
 	import '@xyflow/svelte/dist/style.css';
-	import { nodeTypes } from '$lib/types';
-	import { range } from '$lib/utils';
+	import { nodeTypes, type Network } from '$lib/types';
+
+	let { network = $bindable() }: { network: Network } = $props();
 
 	const initialNodes: Node[] = [
 		{
 			id: 'neuron-1',
 			type: 'neuron',
 			data: {
-				inputs: range(-5, 5, 1),
+				layer: network.input,
 				handles: [
 					{
 						type: 'target',
@@ -75,7 +76,7 @@
 			id: 'weight-1',
 			type: 'weight',
 			data: {
-				weight: 1,
+				node: network.input.bias,
 				handles: [
 					{
 						type: 'target',
@@ -93,7 +94,7 @@
 			id: 'weight-2',
 			type: 'weight',
 			data: {
-				weight: 1,
+				node: network.input.values[0],
 				handles: [
 					{
 						type: 'target',
@@ -111,7 +112,7 @@
 			id: 'weight-3',
 			type: 'weight',
 			data: {
-				weight: 1,
+				node: network.input.values[1],
 				handles: [
 					{
 						type: 'target',

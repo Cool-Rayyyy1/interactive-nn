@@ -2,21 +2,21 @@
 	import { T, useTask, useThrelte } from '@threlte/core';
 	import Box from './box.svelte';
 	import { Grid } from '@threlte/extras';
-	import { range } from '$lib/utils';
 	import type CC from 'camera-controls';
-	import type { Config } from '$lib/types';
+	import type { Config, Input } from '$lib/types';
 	import { PerspectiveCamera, type ColorRepresentation, type Mesh } from 'three';
 	import CameraControls from '$lib/shared/CameraControls';
-	import { randomInteger } from '@layerstack/utils';
 
 	let {
 		color = '#ff3e00',
 		controls = $bindable(),
-		mesh = $bindable()
+		mesh = $bindable(),
+		data = $bindable()
 	}: {
 		color?: ColorRepresentation;
 		controls: CC | undefined;
 		mesh?: Mesh;
+		data: Input[];
 	} = $props();
 
 	const { dom, invalidate } = useThrelte();
@@ -24,12 +24,12 @@
 	const camera = new PerspectiveCamera();
 	controls = new CameraControls(dom, camera);
 
-	const configs: Config[][] = range(0, 10, 1).map((val, idx) => {
-		return range(0, 10, 1).map((ival, iidx) => {
-			const shape: [number, number, number] = [1, randomInteger(1, 10), 1];
-			const color = (idx + iidx) % 2 === 0 ? 'white' : 'black';
+	const configs: Config[][] = data.map((val) => {
+		return data.map((ival) => {
+			const shape: [number, number, number] = [val.input, val.output, ival.input];
+			const color = val.output < 0.5 ? 'white' : 'black';
 			return <Config>{
-				coords: { x: val + 0.5, y: 0.5 * shape[1], z: ival + 0.5 },
+				coords: { x: val.input + 0.5, y: 0.5 * shape[1], z: ival.input + 0.5 },
 				shape,
 				color
 			};
@@ -87,7 +87,6 @@
 	backgroundColor="#ffffff"
 	backgroundOpacity={100}
 	gridSize={[20, 20]}
-	position={[10, 0, 10]}
 />
 <Grid
 	sectionColor={color}
@@ -96,7 +95,6 @@
 	gridSize={[20, 10]}
 	axis="x"
 	plane="zy"
-	position={[0, 5, 10]}
 />
 <Grid
 	sectionColor={color}
@@ -105,7 +103,6 @@
 	gridSize={[20, 10]}
 	axis="x"
 	plane="xy"
-	position={[10, 5, 0]}
 />
 
 <T.DirectionalLight position={[10, 10, 10]} castShadow />
