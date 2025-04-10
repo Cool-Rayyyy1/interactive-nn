@@ -12,6 +12,13 @@
 	});
 </script>
 
+<!--
+@component
+An xyflow Node for an Input in a Neural Network.
+
+Its display name and its list of handles 
+can be passed as props.
+-->
 <div class="w-22 rounded-full border-2 border-stone-400 bg-slate-100 px-4 py-2 shadow-md">
 	<div>
 		<h1>{data.display}</h1>

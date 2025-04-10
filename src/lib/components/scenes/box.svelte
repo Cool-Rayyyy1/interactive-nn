@@ -5,6 +5,16 @@
 	let { config }: { config: Config } = $props();
 </script>
 
+<!--
+@component
+A box in a 3d Neural Network output scene.$$render(
+
+A Config can be passed as a prop to control its:
+  - x, y, z values
+  - Color
+  - Shape
+)
+-->
 <T.Mesh
 	position.x={config.coords.x}
 	position.y={config.coords.y}

@@ -81,6 +81,13 @@
 	};
 </script>
 
+<!--
+@component
+Dynamically generates breadcrumbs from the page URL.
+
+Uses a lookup dict so that each URL segment is transformed
+into a human-friendly format.
+-->
 <Breadcrumb.Root>
 	<Breadcrumb.List>
 		{@const segments = page.url.pathname.split('/')}

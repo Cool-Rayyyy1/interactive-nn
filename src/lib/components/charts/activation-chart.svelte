@@ -20,6 +20,15 @@
 	});
 </script>
 
+<!--
+@component
+Generates a 2d plot for the provided range and activation function
+
+- Usage:
+  ```svelte
+<ActivationChart start={-5} end={5} step={0.01} activation={ActivationFunction.Step} />
+  ```
+-->
 <div class="h-[300px] rounded border p-4">
 	<Chart {data} x="x" y="y" yNice padding={{ left: 16, bottom: 24 }} tooltip={{ mode: 'bisect-x' }}>
 		<Svg>

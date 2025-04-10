@@ -111,6 +111,12 @@ export interface Input {
  * Tracks the various Activation Functions available in a network. Helpful for 
  * matching which Activation Function should be applied by a given Neuron
  * in the Network.
+ *
+ * Variants:
+ *  - Step
+ *  - Sigmoid
+ *  - Tanh
+ *  - ReLU
  */
 export enum ActivationFunction {
   Step,

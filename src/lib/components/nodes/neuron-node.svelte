@@ -34,6 +34,13 @@
 	});
 </script>
 
+<!--
+@component
+An xyflow Node for a Neuron in a Neural Network.
+
+The layer it receives input from and a list of handles 
+can be passed as props.
+-->
 <div class="w-30 h-30 rounded-full border-2 border-stone-400 bg-blue-400 p-4 shadow-md">
 	<div>
 		{#if nodesData.current.length === 0}
