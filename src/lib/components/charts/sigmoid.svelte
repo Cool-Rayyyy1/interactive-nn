@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Data } from '$lib/types';
+	import type { Coords } from '$lib/types';
 	import { range, sigmoid } from '$lib/utils';
 	import { Axis, Chart, Spline, Svg, Tooltip, Highlight } from 'layerchart';
 
 	let sgnRange = range(-10, 10, 0.1);
 
-	let data: Data[] = sgnRange.map((val): Data => {
+	let data: Coords[] = sgnRange.map((val): Coords => {
 		return {
 			x: val,
 			y: +sigmoid(val).toFixed(4)
