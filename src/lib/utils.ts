@@ -34,13 +34,13 @@ export function relu(x: number): number {
   return Math.max(0, x)
 }
 
-export function weightedBias(input: BiasNode): number {
-  return input.weight * input.input.output
+export function weightedBias(node: BiasNode): Input {
+  return { input: node.input.input, output: node.weight * node.input.output }
 }
 
 
-export function weightedInput(input: ProductNode): number[] {
-  return input.inputs.map((val) => val.output * input.weight)
+export function weightedInput(node: ProductNode): Input[] {
+  return node.inputs.map((val) => <Input>{ input: val.input, output: val.output * node.weight })
 }
 
 export function activate(neuron: Neuron, input: number): number {
@@ -56,26 +56,30 @@ export function activate(neuron: Neuron, input: number): number {
   }
 }
 
-export function layerValue(layer: InputLayer): number[] {
+export function layerValue(layer: InputLayer): Input[] {
   const bias = weightedBias(layer.bias);
   const inputDotProduct = mergeProductArrays(layer.values.map((val) => weightedInput(val)));
-  return inputDotProduct.map((val) => activate(layer.neuron, bias + val))
+  return inputDotProduct.map((val): Input => <Input>{ input: val.input, output: activate(layer.neuron, bias.output + val.output) })
 }
 
-export function networkValue(network: Network): number[] {
+export function networkValue(network: Network): Input[] {
   return layerValue(network.input)
 }
 
-function mergeProductArrays(arrays: number[][]): number[] {
+function mergeProductArrays(arrays: Input[][]): Input[] {
   const cols = range(0, arrays.length, 1);
-  const merged: number[] = []
+  const merged: Input[] = []
   for (let i = 0; i < arrays[0].length; i++) {
-    const total = cols.reduce((acc, _, idx) => acc + arrays[idx][i], 0);
-    merged[i] = total
+    const total = cols.reduce((acc, _, idx) => acc + arrays[idx][i].output, 0);
+    merged[i] = { input: arrays[0][i].input, output: total }
   }
   return merged;
 }
 
 export function genInputs(range: number[]): Input[] {
   return range.map((val) => <Input>{ input: val, output: val })
+}
+
+export function activateInputs(inputs: Input[], neuron: Neuron): Input[] {
+  return inputs.map((val) => <Input>{ input: val.input, output: activate(neuron, val.output) })
 }
