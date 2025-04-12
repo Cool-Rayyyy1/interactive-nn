@@ -1,0 +1,86 @@
+---
+title: Activation Functions
+---
+
+<script context="module">
+	import sign_fn from '$lib/assets/sign_fn.svg';
+	import sigmoid_fn from '$lib/assets/sigmoid_fn.svg';
+	import tanh_fn from '$lib/assets/tanh_fn.svg';
+	import relu_fn from '$lib/assets/relu_fn.svg';
+	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
+	import { ActivationFunction } from '$lib/types';
+	import { activate, range } from '$lib/utils';
+
+	const inputRange = range(-5, 5, 0.01);
+
+	let stepData = inputRange.map((val) => {
+		return {
+			input: val,
+			output: +activate(ActivationFunction.Step, val).toFixed(4)
+		};
+	});
+
+	const smallInputRange = range(-5, 5, 0.1);
+
+	let sigmoidData = smallInputRange.map((val) => {
+		return {
+			input: val,
+			output: +activate(ActivationFunction.Sigmoid, val).toFixed(4)
+		};
+	});
+
+	let tanhData = smallInputRange.map((val) => {
+		return {
+			input: val,
+			output: +activate(ActivationFunction.Tanh, val).toFixed(4)
+		};
+	});
+
+	let reluData = inputRange.map((val) => {
+		return {
+			input: val,
+			output: +activate(ActivationFunction.ReLU, val).toFixed(4)
+		};
+	});
+
+  export {sign_fn, sigmoid_fn, tanh_fn, relu_fn, ActivationChart, stepData, sigmoidData, tanhData, reluData };
+</script>
+
+
+# { title }
+
+Activation functions are non-linear transformations.
+
+<div id="what-is-an-activation-function"></div>
+
+## What is an Activation Function?
+
+An Activation Function applies a non-linear transformation to some weighted input.
+
+<div id="step"></div>
+
+## Step
+
+<img class="m-2" alt="The Sign Function" src={sign_fn} />
+<ActivationChart data={stepData} />
+
+<div id="sigmoid"></div>
+
+## Sigmoid
+
+<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
+<ActivationChart data={sigmoidData} />
+
+<div id="tanh"></div>
+
+## Tanh
+
+<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
+<ActivationChart data={tanhData} />
+
+<div id="relu"></div>
+
+## ReLU
+
+<img class="m-2" alt="The ReLU Function" src={relu_fn} />
+<ActivationChart data={reluData} />
