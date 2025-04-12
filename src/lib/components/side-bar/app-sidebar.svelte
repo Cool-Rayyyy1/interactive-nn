@@ -109,12 +109,13 @@
 
 <Sidebar.Root {...restProps} bind:ref>
 	<Sidebar.Header>
-		<div class="flex place-content-center">
-			<h1 class="font-bold text-blue-400">Interactive NN</h1>
+		<div class="flex flex-col place-items-center">
+			<h1 class="text-xl font-bold text-blue-400"><a href="/">Interactive NN</a></h1>
+			<img class="object-fit h-32 w-32" alt="Interactive-NN Logo" src="/nn-icon.png" />
 		</div>
 	</Sidebar.Header>
+	<Sidebar.Separator class="m-1" />
 	<Sidebar.Content>
-		<!-- We create a Sidebar.Group for each parent. -->
 		{#each data.navMain as group (group.title)}
 			<Sidebar.Group>
 				<Sidebar.GroupLabel><a href={group.url}>{group.title}</a></Sidebar.GroupLabel>
