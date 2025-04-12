@@ -25,11 +25,11 @@
 	controls = new CameraControls(dom, camera);
 
 	const configs: Config[][] = data.map((val) => {
+		const shape: [number, number, number] = [1, 1, 1];
 		return data.map((ival) => {
-			const shape: [number, number, number] = [val.input, val.output, ival.input];
 			const color = val.output < 0.5 ? 'white' : 'black';
 			return <Config>{
-				coords: { x: val.input + 0.5, y: 0.5 * shape[1], z: ival.input + 0.5 },
+				coords: { x: val.input + 0.5, y: 0.5 * val.output, z: ival.input + 0.5 },
 				shape,
 				color
 			};
@@ -86,23 +86,26 @@
 	cellColor="#33334d"
 	backgroundColor="#ffffff"
 	backgroundOpacity={100}
-	gridSize={[20, 20]}
+	gridSize={[10, 10]}
+	position={[0, 0, 0]}
 />
 <Grid
 	sectionColor={color}
 	sectionThickness={1}
 	cellColor="#cccccc"
-	gridSize={[20, 10]}
+	gridSize={[10, 2]}
 	axis="x"
 	plane="zy"
+	position={[0, 0, 0]}
 />
 <Grid
 	sectionColor={color}
 	sectionThickness={1}
 	cellColor="#cccccc"
-	gridSize={[20, 10]}
+	gridSize={[10, 2]}
 	axis="x"
 	plane="xy"
+	position={[0, 0, 0]}
 />
 
 <T.DirectionalLight position={[10, 10, 10]} castShadow />

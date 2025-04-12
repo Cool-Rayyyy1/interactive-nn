@@ -16,11 +16,11 @@ const bias: BiasNode = {
 const values: ProductNode[] = [
   {
     weight: 1,
-    inputs: genInputs(range(-5, 5, 0.1))
+    inputs: genInputs(range(-5, 5, 1))
   },
   {
     weight: 1,
-    inputs: genInputs(range(-5, 5, 0.1))
+    inputs: genInputs(range(-5, 5, 1))
   }
 ]
 
