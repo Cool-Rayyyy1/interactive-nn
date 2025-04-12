@@ -30,23 +30,23 @@
 				items: [
 					{
 						title: 'What is an Activation Function?',
-						url: '/activation-functions/what-is-an-activation-function'
+						url: '/activation-functions#what-is-an-activation-function'
 					},
 					{
 						title: 'Step',
-						url: '/activation-functions/step'
+						url: '/activation-functions#step'
 					},
 					{
 						title: 'Sigmoid',
-						url: '/activation-functions/sigmoid'
+						url: '/activation-functions#sigmoid'
 					},
 					{
 						title: 'Tanh',
-						url: '/activation-functions/tanh'
+						url: '/activation-functions#tanh'
 					},
 					{
 						title: 'ReLU',
-						url: '/activation-functions/relu'
+						url: '/activation-functions#relu'
 					}
 				]
 			},
@@ -117,7 +117,7 @@
 		<!-- We create a Sidebar.Group for each parent. -->
 		{#each data.navMain as group (group.title)}
 			<Sidebar.Group>
-				<Sidebar.GroupLabel>{group.title}</Sidebar.GroupLabel>
+				<Sidebar.GroupLabel><a href={group.url}>{group.title}</a></Sidebar.GroupLabel>
 				<Sidebar.GroupContent>
 					<Sidebar.Menu>
 						{#each group.items as item (item.title)}
