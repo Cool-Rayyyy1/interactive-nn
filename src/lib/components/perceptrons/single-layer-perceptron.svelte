@@ -11,8 +11,9 @@
 	} from '@xyflow/svelte';
 	import '@xyflow/svelte/dist/style.css';
 	import { nodeTypes, type Network } from '$lib/types';
+	import { getNetworkContext } from '$lib/context';
 
-	let { network = $bindable() }: { network: Network } = $props();
+	let network: Network = getNetworkContext();
 
 	const initialNodes: Node[] = [
 		{
