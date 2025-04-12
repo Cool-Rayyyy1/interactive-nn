@@ -1,0 +1,27 @@
+---
+title: Getting Started with Neural Networks
+---
+
+# { title }
+
+Neural Networks are an exciting way to use networks of connected neurons to predict information.
+
+## What is a Neural Network?
+<div id="what-is-a-neural-network"/>
+
+Neural Networks are networks of neurons.
+
+## Neurons
+<div id="neurons" />
+
+Neurons have activation functions.
+
+## Inputs
+<div id="inputs" />
+
+Inputs are what the inputs to the network are.
+
+## Outputs
+<div id="outputs" />
+
+Outputs are the transformed values from the network.
