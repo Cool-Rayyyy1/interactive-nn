@@ -8,19 +8,19 @@
 				items: [
 					{
 						title: 'What is a Neural Network?',
-						url: '/getting-started/what-is-a-neural-network'
+						url: '/getting-started#what-is-a-neural-network'
 					},
 					{
 						title: 'Neurons',
-						url: '/getting-started/neurons'
+						url: '/getting-started#neurons'
 					},
 					{
 						title: 'Inputs',
-						url: '/getting-started/inputs'
+						url: '/getting-started#inputs'
 					},
 					{
 						title: 'Outputs',
-						url: '/getting-started/outputs'
+						url: '/getting-started#outputs'
 					}
 				]
 			},

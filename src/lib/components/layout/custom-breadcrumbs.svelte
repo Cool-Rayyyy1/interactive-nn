@@ -90,7 +90,10 @@ into a human-friendly format.
 -->
 <Breadcrumb.Root>
 	<Breadcrumb.List>
-		{@const segments = page.url.pathname.split('/')}
+		{@const segments = page.url.pathname
+			.split(/[/\#]/)
+			.concat([page.url.hash.replace('#', '')])
+			.filter((word) => word != '')}
 		{#each segments as segment, index}
 			{@const breadcrumb: BreadcrumbObject | undefined = lookup[segment]}
 			{#if breadcrumb}
