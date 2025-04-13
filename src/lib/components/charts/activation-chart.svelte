@@ -26,7 +26,7 @@ Generates a 2d plot for the provided range and activation function
 		<Svg>
 			<Axis placement="left" grid rule />
 			<Axis placement="bottom" grid rule />
-			<Spline class="stroke-primary stroke-2" />
+			<Spline class="stroke-primary stroke-2" tweened />
 			<Highlight points lines />
 		</Svg>
 
