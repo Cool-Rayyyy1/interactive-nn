@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Config } from '$lib/types';
 	import { T } from '@threlte/core';
+	import { Outlines } from '@threlte/extras';
 
 	let { config }: { config: Config } = $props();
 </script>
@@ -24,4 +25,5 @@ A Config can be passed as a prop to control its:
 	<T.BoxGeometry args={config.shape} />
 	<T.MeshBasicMaterial color={config.color} />
 	<T.MeshStandardMaterial color={config.color} />
+	<Outlines color="black" />
 </T.Mesh>

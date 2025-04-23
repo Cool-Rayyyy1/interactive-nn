@@ -30,23 +30,23 @@
 				items: [
 					{
 						title: 'What is an Activation Function?',
-						url: '/activation-functions/what-is-an-activation-function'
+						url: '/activation-functions#what-is-an-activation-function'
 					},
 					{
 						title: 'Step',
-						url: '/activation-functions/step'
+						url: '/activation-functions#step'
 					},
 					{
 						title: 'Sigmoid',
-						url: '/activation-functions/sigmoid'
+						url: '/activation-functions#sigmoid'
 					},
 					{
 						title: 'Tanh',
-						url: '/activation-functions/tanh'
+						url: '/activation-functions#tanh'
 					},
 					{
 						title: 'ReLU',
-						url: '/activation-functions/relu'
+						url: '/activation-functions#relu'
 					}
 				]
 			},
@@ -109,15 +109,16 @@
 
 <Sidebar.Root {...restProps} bind:ref>
 	<Sidebar.Header>
-		<div class="flex place-content-center">
-			<h1 class="font-bold text-blue-400">Interactive NN</h1>
+		<div class="flex flex-col place-items-center">
+			<h1 class="text-xl font-bold text-blue-400"><a href="/">Interactive NN</a></h1>
+			<img class="object-fit h-32 w-32" alt="Interactive-NN Logo" src="/nn-icon.png" />
 		</div>
 	</Sidebar.Header>
+	<Sidebar.Separator class="m-1" />
 	<Sidebar.Content>
-		<!-- We create a Sidebar.Group for each parent. -->
 		{#each data.navMain as group (group.title)}
 			<Sidebar.Group>
-				<Sidebar.GroupLabel>{group.title}</Sidebar.GroupLabel>
+				<Sidebar.GroupLabel><a href={group.url}>{group.title}</a></Sidebar.GroupLabel>
 				<Sidebar.GroupContent>
 					<Sidebar.Menu>
 						{#each group.items as item (item.title)}
