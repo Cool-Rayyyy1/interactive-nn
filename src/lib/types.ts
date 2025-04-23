@@ -13,8 +13,8 @@ export const nodeTypes: NodeTypes = {
 };
 
 export type InputNodeType = Node<{ display: string, handles: HandleProp[] }, 'nnInput'>;
-export type WeightNodeType = Node<{ node: ProductNode, handles: HandleProp[] }, 'weight'>;
-export type NeuronNodeType = Node<{ layer: InputLayer | HiddenLayer, handles: HandleProp[] }, 'neuron'>;
+export type WeightNodeType = Node<{ weight: number, handles: HandleProp[] }, 'weight'>;
+export type NeuronNodeType = Node<{ neuron: Neuron, handles: HandleProp[] }, 'neuron'>;
 
 export type CustomNodes = InputNodeType | WeightNodeType | NeuronNodeType;
 
@@ -40,8 +40,18 @@ export interface Config {
  * Parent type for a Neural Network visual representation
  */
 export interface Network {
-  input: InputLayer,
-  hidden?: HiddenLayer[],
+  readonly inputs: number[],
+  layers: Layer[],
+}
+
+/**
+ * A Layer in a Neural Network
+ */
+export interface Layer {
+  bias: Bias;
+  inputs: number[];
+  weights: number[];
+  neurons: Neuron[];
 }
 
 /**
@@ -52,51 +62,11 @@ export interface Neuron {
 }
 
 /**
- * An Input Layer to a Neural Network
- */
-export interface InputLayer {
-  bias: BiasNode;
-  values: ProductNode[];
-  neuron: Neuron;
-}
-
-/**
- * A Hidden Layer in a Neural Network
- */
-export interface HiddenLayer {
-  bias: BiasNode;
-  weights: number[]
-  neuron: Neuron;
-}
-
-/**
- * An Input Node to a Neural Network. This is distinguished from a normal
- * input to a Neural Network as it has one associated weight, but a range 
- * of associated inputs. This is because for the visual representation goal
- * of this project, we generate outputs for a provided range. The users only 
- * interact with weights.
- */
-export interface ProductNode {
-  weight: number;
-  inputs: Input[];
-}
-
-/**
  * A Bias Node in a Neural Network with a weight value, and an Input.
  */
-export interface BiasNode {
+export interface Bias {
+  input: number;
   weight: number;
-  input: Input;
-}
-
-/**
- * An input to a Neural Network. This is effectively a tuple to keep track of
- * the original input value can be tracked as the ouput is transformed as 
- * it is passed through the Neural Network.
- */
-export interface Input {
-  readonly input: number;
-  output: number;
 }
 
 /**

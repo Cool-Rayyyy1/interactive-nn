@@ -20,7 +20,7 @@
 			id: 'neuron-1',
 			type: 'neuron',
 			data: {
-				layer: network.input,
+				neuron: network.layers[0].neurons[0],
 				handles: [
 					{
 						type: 'target',
@@ -68,7 +68,7 @@
 			id: 'weight-1',
 			type: 'weight',
 			data: {
-				node: network.input.values[0],
+				node: network.layers[0].weights[0],
 				handles: [
 					{
 						type: 'target',
@@ -86,7 +86,7 @@
 			id: 'weight-2',
 			type: 'weight',
 			data: {
-				node: network.input.bias,
+				node: network.layers[0].bias.weight,
 				handles: [
 					{
 						type: 'target',

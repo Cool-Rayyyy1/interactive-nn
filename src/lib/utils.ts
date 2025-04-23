@@ -1,9 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ActivationFunction, type BiasNode, type Input, type InputLayer, type Network, type Neuron, type ProductNode } from "./types";
+import { ActivationFunction, type Bias, type Layer, type Network } from "./types";
 
 /**
- * Tailwind utility function. Provided by shadcn-svelte
+ * Tailwind utility function. Provided by shadcn-svelte.
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -57,29 +57,6 @@ export function relu(x: number): number {
 }
 
 /**
- * Calculates the weighted value of a BiasNode in the network
- *
- * @param node - The BiasNode input
- * @returns the weight value of the BiasNode
- */
-export function weightedBias(node: BiasNode): Input {
-  return { input: node.input.input, output: node.weight * node.input.output }
-}
-
-/**
- * Calculates the weighted input range to the network for a given
- * ProductNode. It returns a range of Inputs, which contain the original input
- * and its transformed value at the given location in the network, due to the
- * interactive structure of this application
- *
- * @param node - The ProductNode Input
- * @returns The ranged of weighted inputs
- */
-export function weightedInput(node: ProductNode): Input[] {
-  return node.inputs.map((val) => <Input>{ input: val.input, output: val.output * node.weight })
-}
-
-/**
  * Runs an input value through the given activation function
  * 
  * @param activation - The activation function to calculate the output with
@@ -100,15 +77,43 @@ export function activate(activation: ActivationFunction, input: number): number 
 }
 
 /**
+ * Calculates the weighted value of a Bias in the network
+ *
+ * @param node - The Bias input
+ * @returns the weighted value of the Bias
+ */
+export function weightedBias(node: Bias): number {
+  return node.input * node.weight
+}
+
+/**
+ * Calculates the weighted input range to the network for a given
+ * ProductNode. It returns a range of Inputs, which contain the original input
+ * and its transformed value at the given location in the network, due to the
+ * interactive structure of this application
+ *
+ * @param node - The ProductNode Input
+ * @returns The ranged of weighted inputs
+ */
+export function weightedInputs(inputs: number[], weights: number[]): number[] {
+  return inputs.map((input, idx): number => {
+    return input * weights[idx]
+  })
+}
+
+/**
  * Computes the activated, weighted output range for the given network layer.
  *
  * @param layer - The network layer to compute the value of
  * @returns The activated, weighted output range for the layer
  */
-export function layerValue(layer: InputLayer): Input[] {
+export function layerValue(layer: Layer): number[] {
   const bias = weightedBias(layer.bias);
-  const inputDotProduct = mergeProductArrays(layer.values.map((val) => weightedInput(val)));
-  return inputDotProduct.map((val): Input => <Input>{ input: val.input, output: activate(layer.neuron.activation, bias.output + val.output) })
+  const inputs = weightedInputs(layer.inputs, layer.weights);
+  const weightedValue = bias + inputs.reduce((acc, curr): number => acc + curr, 0);
+  return layer.neurons.map((neuron) => {
+    return activate(neuron.activation, weightedValue)
+  })
 }
 
 /**
@@ -117,47 +122,12 @@ export function layerValue(layer: InputLayer): Input[] {
  * @param network - The network to compute the value of
  * @returns The activated, weighted output range for the network
  */
-export function networkValue(network: Network): Input[] {
-  return layerValue(network.input)
-}
-
-/**
- * Helper function to combine the values of adjacted Input[]
- *
- * @remarks
- * This is similar to a zip function. Arrays of Input[][]
- * must be same length.
- *
- * @param arrays - The Input[][] arrays to combine element-wise
- * @returns The element-wise combined Input[]
- */
-function mergeProductArrays(arrays: Input[][]): Input[] {
-  const cols = range(0, arrays.length, 1);
-  const merged: Input[] = []
-  for (let i = 0; i < arrays[0].length; i++) {
-    const total = cols.reduce((acc, _, idx) => acc + arrays[idx][i].output, 0);
-    merged[i] = { input: arrays[0][i].input, output: total }
+export function networkValue(network: Network): number[] {
+  let values: number[] = network.inputs
+  for (let idx = 0; idx < network.layers.length - 1; idx++) {
+    values = layerValue(network.layers[idx]);
+    network.layers[idx + 1].inputs = values;
   }
-  return merged;
+  return layerValue(network.layers[network.layers.length - 1])
 }
 
-/**
- * Helper to generate a range of Input
- *
- * @param range - number[] range to generate Input[] from
- * @returns The generated Input[] range
- */
-export function genInputs(range: number[]): Input[] {
-  return range.map((val) => <Input>{ input: val, output: val })
-}
-
-/**
- * Helper to generate activated values for an Input[]
- * 
- * @param inputs - The range of inputs to calculate activated values of 
- * @param neuron - The Neuron with the required activation function
- * @returns Input[] with activated output values
- */
-export function activateInputs(inputs: Input[], neuron: Neuron): Input[] {
-  return inputs.map((val) => <Input>{ input: val.input, output: activate(neuron.activation, val.output) })
-}
