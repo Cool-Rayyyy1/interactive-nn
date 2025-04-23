@@ -4,9 +4,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const config = {
   preprocess: [vitePreprocess(), mdsvex({
-    layout: {
-      _: 'src/lib/markdown-layout.svelte'
-    },
+    layout: './src/lib/markdown-layout.svelte'
   })],
   kit: { adapter: adapter() },
   extensions: ['.svelte', '.svx']
