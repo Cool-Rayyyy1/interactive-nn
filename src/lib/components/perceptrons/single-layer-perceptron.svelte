@@ -17,7 +17,7 @@
 
 	const initialNodes: Node[] = [
 		{
-			id: 'neuron-1',
+			id: 'neuron-0-0',
 			type: 'neuron',
 			data: {
 				neuron: network.layers[0].neurons[0],
@@ -25,19 +25,33 @@
 					{
 						type: 'target',
 						position: Position.Left,
-						id: 'neuron-1-left'
+						id: 'neuron-0-0-left'
 					},
 					{
 						type: 'target',
 						position: Position.Bottom,
-						id: 'neuron-1-bottom'
+						id: 'neuron-0-0-bottom'
 					}
 				]
 			},
-			position: { x: 11, y: -4 }
+			position: { x: 0, y: 0 }
 		},
 		{
-			id: 'input-1',
+			id: 'input-0-0',
+			type: 'nnInput',
+			data: {
+				display: 'B=1',
+				handles: [
+					{
+						type: 'source',
+						position: Position.Right
+					}
+				]
+			},
+			position: { x: -200, y: 0 }
+		},
+		{
+			id: 'input-0-1',
 			type: 'nnInput',
 			data: {
 				display: 'X1',
@@ -51,26 +65,32 @@
 			position: { x: 0, y: 200 }
 		},
 		{
-			id: 'bias-1',
-			type: 'nnInput',
+			id: 'weight-0-0-0',
+			type: 'weight',
 			data: {
-				display: 'B=1',
+				layer: 0,
+				neuron: 0,
+				index: 0,
 				handles: [
+					{
+						type: 'target',
+						position: Position.Left
+					},
 					{
 						type: 'source',
 						position: Position.Right
 					}
 				]
 			},
-			position: { x: -250, y: 0 }
+			position: { x: -100, y: 0 }
 		},
 		{
-			id: 'weight-1',
+			id: 'weight-0-0-1',
 			type: 'weight',
 			data: {
 				layer: 0,
 				neuron: 0,
-				index: 0,
+				index: 1,
 				handles: [
 					{
 						type: 'target',
@@ -83,55 +103,35 @@
 				]
 			},
 			position: { x: 0, y: 100 }
-		},
-		{
-			id: 'weight-2',
-			type: 'weight',
-			data: {
-				layer: 0,
-				neuron: 0,
-				index: 1,
-				handles: [
-					{
-						type: 'target',
-						position: Position.Left
-					},
-					{
-						type: 'source',
-						position: Position.Right
-					}
-				]
-			},
-			position: { x: -125, y: 0 }
 		}
 	];
 
 	let initialEdges: Edge[] = [
 		{
-			id: 'input-1_weight-1',
+			id: 'input-0-0_weight-0-0-0',
 			type: 'default',
-			source: 'input-1',
-			target: 'weight-1'
+			source: 'input-0-0',
+			target: 'weight-0-0-0'
 		},
 		{
-			id: 'weight-1_neuron-1',
+			id: 'weight-0-0-0_neuron-0-0',
 			type: 'default',
-			source: 'weight-1',
-			target: 'neuron-1',
-			targetHandle: 'neuron-1-bottom'
+			source: 'weight-0-0-0',
+			target: 'neuron-0-0',
+			targetHandle: 'neuron-0-0-left'
 		},
 		{
-			id: 'bias-1_weight-2',
+			id: 'input-0-1_weight-0-0-1',
 			type: 'default',
-			source: 'bias-1',
-			target: 'weight-2'
+			source: 'input-0-1',
+			target: 'weight-0-0-1'
 		},
 		{
-			id: 'weight-2_neuron-1',
+			id: 'weight-0-0-1_neuron-0-0',
 			type: 'default',
-			source: 'weight-2',
-			target: 'neuron-1',
-			targetHandle: 'neuron-1-left'
+			source: 'weight-0-0-1',
+			target: 'neuron-0-0',
+			targetHandle: 'neuron-0-0-bottom'
 		}
 	];
 
