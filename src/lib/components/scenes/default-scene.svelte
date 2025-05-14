@@ -216,6 +216,14 @@
 	<h1>5</h1>
 </HTML>
 
+<HTML position.x={5.1} position.z={-5} position.y={-1.9} occlude>
+	<h1>-2</h1>
+</HTML>
+
+<HTML position.x={5.1} position.z={-5} position.y={-0.9} occlude>
+	<h1>-1</h1>
+</HTML>
+
 <HTML position.x={5.1} position.z={-5} position.y={1.1} occlude>
 	<h1>1</h1>
 </HTML>
@@ -224,10 +232,26 @@
 	<h1>2</h1>
 </HTML>
 
+<HTML position.x={-5} position.z={5.1} position.y={-1.9} occlude>
+	<h1>-2</h1>
+</HTML>
+
+<HTML position.x={-5} position.z={5.1} position.y={-0.9} occlude>
+	<h1>-1</h1>
+</HTML>
+
 <HTML position.x={-5} position.z={5.1} position.y={1.1} occlude>
 	<h1>1</h1>
 </HTML>
 
 <HTML position.x={-5} position.z={5.1} position.y={2.1} occlude>
 	<h1>2</h1>
+</HTML>
+
+<HTML position.x={6} occlude>
+	<h1 class="font-extrabold">X1</h1>
+</HTML>
+
+<HTML position.z={6} occlude>
+	<h1 class="font-extrabold">X2</h1>
 </HTML>
