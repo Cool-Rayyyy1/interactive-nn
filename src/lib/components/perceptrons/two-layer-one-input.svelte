@@ -111,7 +111,7 @@
 					}
 				]
 			},
-			position: { x: -200, y: 0 }
+			position: { x: 0, y: 0 }
 		},
 		{
 			id: 'weight-0-0-0',
@@ -211,7 +211,7 @@
 					}
 				]
 			},
-			position: { x: -100, y: -100 }
+			position: { x: 0, y: -100 }
 		},
 		{
 			id: 'weight-1-0-1',
@@ -231,7 +231,7 @@
 					}
 				]
 			},
-			position: { x: 0, y: -100 }
+			position: { x: -100, y: -100 }
 		},
 		{
 			id: 'weight-1-0-2',
