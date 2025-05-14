@@ -1,22 +1,24 @@
 <script lang="ts">
-	import SingleLayerTwoInput from '$lib/components/perceptrons/single-layer-two-input.svelte';
+	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
+	import TwoLayerOneInput from '$lib/components/perceptrons/two-layer-one-input.svelte';
 	import { setNetworkContext } from '$lib/context';
-	import { SingleLayerTwoInputNetwork } from '$lib/networks/single-layer-two-inputs';
-	import type { Input3d, Network } from '$lib/types';
-	import { networkValue3d } from '$lib/utils';
+	import { TwoLayerOneInputNetwork } from '$lib/networks/two-layer-one-input';
+	import type { Input2d, Network } from '$lib/types';
+	import { networkValue2d } from '$lib/utils';
 
-	let network: Network = $state(SingleLayerTwoInputNetwork);
+	let network: Network = $state(TwoLayerOneInputNetwork);
 	$inspect(network.inputs);
 
-	let data: Input3d[] = $derived(networkValue3d(network));
+	let data: Input2d[] = $derived(networkValue2d(network));
 	$inspect(data);
 
 	setNetworkContext(network);
 </script>
 
 <div>
-	<h1>Single-Layer Perceptron</h1>
+	<h1>Two Layer Perceptron</h1>
+	<ActivationChart {data} />
 	<div style:height="500px" class="border-2">
-		<SingleLayerTwoInput />
+		<TwoLayerOneInput />
 	</div>
 </div>
