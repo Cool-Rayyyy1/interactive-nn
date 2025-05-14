@@ -7,7 +7,6 @@
 	import { networkValue2d } from '$lib/utils';
 
 	let network: Network = $state(TwoLayerOneInputNetwork);
-	$inspect(network.inputs);
 
 	let data: Input2d[] = $derived(networkValue2d(network));
 	$inspect(data);

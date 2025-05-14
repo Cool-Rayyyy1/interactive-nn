@@ -1,5 +1,4 @@
 <script lang="ts" module>
-	// sample data
 	const data = {
 		navMain: [
 			{
@@ -51,30 +50,30 @@
 				]
 			},
 			{
-				title: 'Perceptrons',
-				url: '/perceptrons',
+				title: 'Single-Input Perceptrons',
+				url: '/single-input-perceptrons',
 				items: [
 					{
 						title: 'What is a Perceptron?',
-						url: '/perceptrons/what-is-a-perceptron'
+						url: '/single-input-perceptrons/what-is-a-perceptron'
 					},
 					{
 						title: 'Single-Layer Perceptron',
-						url: '/perceptrons/single-layer-perceptron'
+						url: '/single-input-perceptrons/single-layer-perceptron'
 					},
 					{
 						title: 'Multi-Layer Perceptron',
-						url: '/perceptrons/multi-layer-perceptron'
+						url: '/single-input-perceptrons/multi-layer-perceptron'
 					}
 				]
 			},
 			{
-				title: 'Decision Functions',
-				url: '/decision-functions',
+				title: 'Two-Input Perceptrons',
+				url: '/two-input-perceptrons',
 				items: [
 					{
-						title: 'Step Decision Function',
-						url: '/decision-functions/step-decision-function'
+						title: 'Single-Layer Perceptron',
+						url: '/two-input-perceptrons/single-layer-perceptron'
 					}
 				]
 			},
