@@ -54,7 +54,7 @@
 			id: 'bias-1',
 			type: 'nnInput',
 			data: {
-				display: 'B',
+				display: 'B=1',
 				handles: [
 					{
 						type: 'source',

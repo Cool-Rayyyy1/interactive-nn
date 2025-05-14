@@ -75,7 +75,7 @@
 			id: 'input-0-0',
 			type: 'nnInput',
 			data: {
-				display: 'B',
+				display: 'B=1',
 				handles: [
 					{
 						type: 'source',
@@ -103,7 +103,7 @@
 			id: 'input-1-0',
 			type: 'nnInput',
 			data: {
-				display: 'B',
+				display: 'B=1',
 				handles: [
 					{
 						type: 'source',
