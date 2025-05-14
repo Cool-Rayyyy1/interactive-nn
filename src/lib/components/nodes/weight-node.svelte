@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { Handle, useSvelteFlow, useUpdateNodeInternals, type NodeProps } from '@xyflow/svelte';
 	import { onMount } from 'svelte';
-	import type { WeightNodeType } from '$lib/types';
+	import type { Network, Weight, WeightNodeType } from '$lib/types';
+	import { getNetworkContext } from '$lib/context';
 
 	let { id, data = $bindable() }: NodeProps<WeightNodeType> = $props();
+	let network: Network = getNetworkContext();
+	let weight: Weight = $state(network.layers[data.layer].weights[data.neuron][data.index]);
 
-	const { updateNodeData } = useSvelteFlow();
-	const updateNodeInternals = useUpdateNodeInternals();
+	let { updateNodeData } = useSvelteFlow();
+	let updateNodeInternals = useUpdateNodeInternals();
 
 	onMount(() => {
 		updateNodeInternals(id);
-		updateNodeData(id, { weight: data.node.weight });
+		updateNodeData(id, { weight: weight.value });
 	});
 </script>
 
@@ -27,10 +30,11 @@ can be passed as props.
 	<span class="text-gray-900"
 		>W: <input
 			class="w-10 bg-gray-100 p-1"
-			value={data.node.weight}
+			value={weight.value}
+			type="number"
 			oninput={(evt) => {
 				updateNodeData(id, { weight: evt.currentTarget.value });
-				data.node.weight = +evt.currentTarget.value;
+				weight.value = +evt.currentTarget.value;
 			}}
 		/></span
 	>

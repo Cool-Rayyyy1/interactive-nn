@@ -1,25 +1,23 @@
-import { ActivationFunction, type Network, type Bias, type Neuron, type Layer } from "$lib/types"
-import { range } from "$lib/utils"
+import { ActivationFunction, type Network, type Neuron, type Layer } from "$lib/types"
+import { genInputs, genWeights, range } from "$lib/utils"
 
-const inputs = range(-5, 5, 1)
+const SIZE = 2
 
-const neuron: Neuron = {
-  activation: ActivationFunction.Step
+let values = range(-5, 5, 1)
+let inputs = genInputs(SIZE, values)
+
+
+let neurons: Neuron[] = [
+  { activation: ActivationFunction.Step }
+]
+
+let layer1: Layer = {
+  inputs: inputs,
+  weights: genWeights(SIZE + 1, neurons.length),
+  neurons: neurons,
 }
 
-const bias: Bias = {
-  input: 1,
-  weight: 1,
-}
-
-const layer1: Layer = {
-  bias,
-  inputs,
-  weights: Array(inputs.length).fill(1),
-  neurons: [neuron],
-}
-
-export const SingleLayerTwoInputNetwork: Network = {
+export let SingleLayerTwoInputNetwork: Network = {
   inputs,
   layers: [layer1],
 }

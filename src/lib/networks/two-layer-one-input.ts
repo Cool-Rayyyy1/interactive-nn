@@ -7,6 +7,7 @@ let values = range(-5, 5, 0.01);
 let inputs = genInputs(SIZE, values);
 
 let neurons: Neuron[] = [
+  { activation: ActivationFunction.Step },
   { activation: ActivationFunction.Step }
 ]
 

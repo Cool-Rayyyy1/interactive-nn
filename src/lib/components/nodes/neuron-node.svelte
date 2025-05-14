@@ -22,7 +22,7 @@ can be passed as props.
 <div class="w-30 h-30 rounded-full border-2 border-stone-400 bg-blue-400 p-4 shadow-md">
 	<div>
 		<div>
-			<h1>{data.layer.neuron.activation}</h1>
+			<h1>{data.neuron.activation}</h1>
 		</div>
 	</div>
 	{#each data.handles as handle}

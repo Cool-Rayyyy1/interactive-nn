@@ -3,12 +3,12 @@
 	import SingleLayerPerceptron from '$lib/components/perceptrons/single-layer-perceptron.svelte';
 	import { setNetworkContext } from '$lib/context';
 	import { SingleLayerOneInputNetwork } from '$lib/networks/single-layer-one-input';
-	import type { Network } from '$lib/types';
-	import { networkValue } from '$lib/utils';
+	import type { Input2d, Network } from '$lib/types';
+	import { networkValue2d } from '$lib/utils';
 
 	let network: Network = $state(SingleLayerOneInputNetwork);
 
-	let data = $derived(networkValue(network));
+	let data: Input2d[] = $derived(networkValue2d(network));
 
 	setNetworkContext(network);
 </script>

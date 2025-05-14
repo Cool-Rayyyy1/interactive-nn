@@ -3,7 +3,7 @@
 	import Box from './box.svelte';
 	import { Grid } from '@threlte/extras';
 	import type CC from 'camera-controls';
-	import type { Config, Input } from '$lib/types';
+	import type { Config, Input3d } from '$lib/types';
 	import { PerspectiveCamera, type ColorRepresentation, type Mesh } from 'three';
 	import CameraControls from '$lib/shared/CameraControls';
 	import { HTML } from '@threlte/extras';
@@ -17,7 +17,7 @@
 		color?: ColorRepresentation;
 		controls: CC | undefined;
 		mesh?: Mesh;
-		data: Input[];
+		data: Input3d[];
 	} = $props();
 
 	const { dom, invalidate } = useThrelte();
@@ -25,17 +25,18 @@
 	const camera = new PerspectiveCamera();
 	controls = new CameraControls(dom, camera);
 
-	const configs: Config[][] = data.map((val) => {
-		const shape: [number, number, number] = [1, 1, 1];
-		return data.map((ival) => {
+	const shape: [number, number, number] = [1, 0.1, 1];
+
+	let configs: Config[] = $derived(
+		data.map((val) => {
 			const color = val.output < 0.5 ? 'white' : 'blue';
 			return <Config>{
-				coords: { x: ival.input + 0.5, y: 0.5 * val.output, z: val.input + 0.5 },
+				coords: { x: val.input_x1 + 0.5, y: val.output, z: val.input_x2 + 0.5 },
 				shape,
 				color
 			};
-		});
-	});
+		})
+	);
 
 	$effect(() => {
 		return () => {
@@ -63,10 +64,8 @@
 	}}
 />
 
-{#each configs as oconfig}
-	{#each oconfig as config}
-		<Box {config} />
-	{/each}
+{#each configs as config}
+	<Box {config} />
 {/each}
 
 <T is={camera} makeDefault />
@@ -86,18 +85,9 @@
 	sectionThickness={1}
 	cellColor="#33334d"
 	backgroundColor="#ffffff"
-	backgroundOpacity={100}
+	backgroundOpacity={0}
 	gridSize={[10, 10]}
-	position={[0, 0.01, 0]}
-/>
-<Grid
-	sectionColor={color}
-	sectionThickness={1}
-	cellColor="#33334d"
-	backgroundColor="#ffffff"
-	backgroundOpacity={100}
-	gridSize={[10, 10]}
-	position={[0, -0.01, 0]}
+	position={[0, 0, 0]}
 />
 <Grid
 	sectionColor={color}

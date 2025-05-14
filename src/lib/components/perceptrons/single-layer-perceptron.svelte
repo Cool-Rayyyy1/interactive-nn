@@ -68,7 +68,9 @@
 			id: 'weight-1',
 			type: 'weight',
 			data: {
-				node: network.layers[0].weights[0],
+				layer: 0,
+				neuron: 0,
+				index: 0,
 				handles: [
 					{
 						type: 'target',
@@ -86,7 +88,9 @@
 			id: 'weight-2',
 			type: 'weight',
 			data: {
-				node: network.layers[0].bias.weight,
+				layer: 0,
+				neuron: 0,
+				index: 1,
 				handles: [
 					{
 						type: 'target',

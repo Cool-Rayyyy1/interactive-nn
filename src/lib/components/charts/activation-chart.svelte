@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Input } from '$lib/types';
+	import type { Input2d } from '$lib/types';
 	import { Axis, Chart, Spline, Svg, Tooltip, Highlight } from 'layerchart';
 
-	let { data = $bindable() }: { data: Input[] } = $props();
+	let { data }: { data: Input2d[] } = $props();
 </script>
 
 <!--
@@ -16,7 +16,7 @@ Generates a 2d plot for the provided range and activation function
 -->
 <div class="h-[300px] rounded border p-4">
 	<Chart
-		{data}
+		bind:data
 		x="input"
 		y="output"
 		yNice

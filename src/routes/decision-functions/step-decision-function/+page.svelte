@@ -4,7 +4,7 @@
 	import DefaultScene from '$lib/components/scenes/default-scene.svelte';
 	import type { Mesh } from 'three';
 	import type { Network } from '$lib/types';
-	import { networkValue } from '$lib/utils';
+	import { networkValue3d } from '$lib/utils';
 	import { SingleLayerTwoInputNetwork } from '$lib/networks/single-layer-two-inputs';
 	import SingleLayerTwoInput from '$lib/components/perceptrons/single-layer-two-input.svelte';
 	import { setNetworkContext } from '$lib/context';
@@ -14,7 +14,7 @@
 
 	let network: Network = $state(SingleLayerTwoInputNetwork);
 
-	let data = $derived(networkValue(network));
+	let data = $derived(networkValue3d(network));
 
 	setNetworkContext(network);
 </script>

@@ -1,134 +1,6 @@
 import { expect, test } from 'vitest';
-import { layerValue, networkValue, range, relu, sigmoid, weightedBias, weightedInputs } from './utils';
-import { ActivationFunction, type Bias, type Layer, type Network, type Neuron } from './types';
-
-const inputs1: number[] = range(-5, 5, 1);
-
-const inputs2: number[] = range(0, 5, 1);
-
-const bias1: Bias = {
-  input: 1,
-  weight: 2,
-}
-
-const weights1: number[] = Array(10).fill(1);
-
-const weights2: number[] = Array(10).fill(2);
-
-const neuron1: Neuron = {
-  activation: ActivationFunction.ReLU,
-}
-
-const neuron2: Neuron = {
-  activation: ActivationFunction.Step,
-}
-
-const layer1: Layer = {
-  bias: bias1,
-  inputs: inputs1,
-  weights: weights1,
-  neurons: [neuron1],
-}
-
-const layer2: Layer = {
-  bias: bias1,
-  inputs: inputs1,
-  weights: weights2,
-  neurons: [neuron1],
-}
-
-const layer3: Layer = {
-  bias: bias1,
-  inputs: inputs2,
-  weights: weights1,
-  neurons: [neuron1],
-}
-
-const layer4: Layer = {
-  bias: bias1,
-  inputs: inputs1,
-  weights: weights1,
-  neurons: [neuron2],
-}
-
-const layer5: Layer = {
-  bias: bias1,
-  inputs: inputs2,
-  weights: weights1,
-  neurons: [neuron2],
-}
-
-const network1: Network = {
-  inputs: inputs1,
-  layers: [layer1],
-}
-
-const network2: Network = {
-  inputs: inputs1,
-  layers: [layer2],
-}
-
-const network3: Network = {
-  inputs: inputs2,
-  layers: [layer3],
-}
-
-const network4: Network = {
-  inputs: inputs1,
-  layers: [layer4],
-}
-
-const network5: Network = {
-  inputs: inputs2,
-  layers: [layer5],
-}
-
-const network6: Network = {
-  inputs: inputs2,
-  layers: [layer3, layer5],
-}
-
-const network7: Network = {
-  inputs: inputs2,
-  layers: [layer3, layer3],
-}
-
-const layer8: Layer = {
-  bias: { input: 1, weight: 2 },
-  inputs: range(0, 5, 1),
-  weights: Array(10).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }]
-}
-
-const network8: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer8, layer8, layer8, layer8],
-}
-
-const layer9a: Layer = {
-  bias: { input: 1, weight: 2 },
-  inputs: range(0, 5, 1),
-  weights: Array(10).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const layer9b: Layer = {
-  bias: { input: 1, weight: 2 },
-  inputs: range(0, 5, 1),
-  weights: Array(10).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }]
-}
-
-const network9: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer9a, layer9b],
-}
-
-test('WeightedBias1', () => {
-  let value = weightedBias(bias1);
-
-  expect(value).toEqual(2);
-});
+import { genInputs, genWeights, layerValue, range, relu, sigmoid, weightedInput, weightedInputs } from './utils';
+import { ActivationFunction, type Input, type Layer, type Neuron, type Weight } from './types';
 
 test('ActivateStep1', () => {
   let value = Math.sign(-10);
@@ -184,292 +56,458 @@ test('ActivateTanh2', () => {
   expect(value).toEqual(-0.96);
 });
 
+
+test('GenInputs1', () => {
+  let inputs = genInputs(1, range(-1, 2, 1))
+
+  let expected: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+
+  expect(inputs).toEqual(expected);
+});
+
+test('GenInputs2', () => {
+  let inputs = genInputs(2, range(-1, 2, 1))
+
+  let expected: Input[] = [
+    { value: [1, -1, -1] }, { value: [1, -1, 0] }, { value: [1, -1, 1] },
+    { value: [1, 0, -1] }, { value: [1, 0, 0] }, { value: [1, 0, 1] },
+    { value: [1, 1, -1] }, { value: [1, 1, 0] }, { value: [1, 1, 1] }
+  ]
+
+  expect(inputs).toEqual(expected);
+});
+
+// Test one layer network with a bias, 1x input, 1x neuron = 2 Weights
+test('GenWeights1', () => {
+  let weights = genWeights(1 + 1, 1)
+
+  let expected: Weight[][] = [
+    [{ value: 1 }, { value: 1 }]
+  ]
+
+  expect(weights).toEqual(expected);
+});
+
+
+// Test one layer network with a bias, 2x input, 1x neuron = 3 Weights
+test('GenWeights2', () => {
+  let weights = genWeights(2 + 1, 1)
+
+  let expected: Weight[][] = [
+    [{ value: 1 }, { value: 1 }, { value: 1 }]
+  ]
+
+  expect(weights).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('GenWeights3', () => {
+  let weights = genWeights(2 + 1, 4)
+
+  let expected: Weight[][] = [
+    [{ value: 1 }, { value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }, { value: 1 }],
+  ]
+
+  expect(weights).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('WeightedInput1', () => {
+  let input = <Input>{ value: [1, 2] }
+  let weight = [<Weight>{ value: 1 }, <Weight>{ value: 1 }]
+
+  let weighted = weightedInput(input, weight)
+  let expected = <Input>{ value: [3] }
+
+  expect(weighted).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('WeightedInput2', () => {
+  let input = <Input>{ value: [1, 2, 3] }
+  let weight = [<Weight>{ value: 1 }, <Weight>{ value: 1 }, <Weight>{ value: 1 }]
+
+  let weighted = weightedInput(input, weight)
+  let expected = <Input>{ value: [6] }
+
+  expect(weighted).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('WeightedInput3', () => {
+  let input = <Input>{ value: [1, 2, 3] }
+  let weight = [<Weight>{ value: 3 }, <Weight>{ value: 3 }, <Weight>{ value: 3 }]
+
+  let weighted = weightedInput(input, weight)
+  let expected = <Input>{ value: [18] }
+
+  expect(weighted).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('WeightedInputs1', () => {
-  let value = weightedInputs(layer1.inputs, layer1.weights);
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4]
+  let weights = genWeights(1 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let weighted = weightedInputs(inputs, weights)
+
+  let expected = [
+    { value: [0] }, { value: [1] }, { value: [2] }
+  ]
+
+  expect(weighted).toEqual(expected);
 });
 
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('WeightedInputs2', () => {
-  let value = weightedInputs(layer2.inputs, layer2.weights);
+  let inputs = genInputs(2, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1, -1] }, { value: [1, -1, 0] }, { value: [1, -1, 1] },
+    { value: [1, 0, -1] }, { value: [1, 0, 0] }, { value: [1, 0, 1] },
+    { value: [1, 1, -1] }, { value: [1, 1, 0] }, { value: [1, 1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [-10, - 8, -6, -4, -2, 0, 2, 4, 6, 8]
+  let weights = genWeights(2 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let weighted = weightedInputs(inputs, weights)
+
+  let expected = [
+    { value: [-1] }, { value: [0] }, { value: [1] },
+    { value: [0] }, { value: [1] }, { value: [2] },
+    { value: [1] }, { value: [2] }, { value: [3] },
+  ]
+
+  expect(weighted).toEqual(expected);
 });
 
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('WeightedInputs3', () => {
-  let value = weightedInputs(layer3.inputs, layer3.weights);
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [0, 1, 2, 3, 4]
+  let weights: Weight[][] = [
+    [{ value: 3 }, { value: -3 }]
+  ]
 
-  expect(value).toEqual(expected);
+  let weighted = weightedInputs(inputs, weights)
+
+  let expected = [
+    { value: [6] }, { value: [3] }, { value: [0] }
+  ]
+
+  expect(weighted).toEqual(expected);
 });
 
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('WeightedInputs4', () => {
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
+
+  let weights = genWeights(1 + 1, 2)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
+
+  let weighted = weightedInputs(inputs, weights)
+
+  let expected = [
+    { value: [0] }, { value: [1] }, { value: [2] },
+    { value: [0] }, { value: [1] }, { value: [2] }
+  ]
+
+  expect(weighted).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('WeightedInputs5', () => {
+  let inputs = genInputs(2, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1, -1] }, { value: [1, -1, 0] }, { value: [1, -1, 1] },
+    { value: [1, 0, -1] }, { value: [1, 0, 0] }, { value: [1, 0, 1] },
+    { value: [1, 1, -1] }, { value: [1, 1, 0] }, { value: [1, 1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
+
+  let weights = genWeights(2 + 1, 2)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
+
+  let weighted = weightedInputs(inputs, weights)
+
+  let expected = [
+    { value: [-1] }, { value: [0] }, { value: [1] },
+    { value: [0] }, { value: [1] }, { value: [2] },
+    { value: [1] }, { value: [2] }, { value: [3] },
+    { value: [-1] }, { value: [0] }, { value: [1] },
+    { value: [0] }, { value: [1] }, { value: [2] },
+    { value: [1] }, { value: [2] }, { value: [3] },
+  ]
+
+  expect(weighted).toEqual(expected);
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('LayerValueMeta1', () => {
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
+
+  let weights = genWeights(1 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
+
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.ReLU }]
+  }
+
+  let step = layer1.inputs.length
+  let size = step * layer1.neurons.length
+
+  expect(3).toEqual(step)
+  expect(3).toEqual(size)
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('LayerValueMeta2', () => {
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
+
+  let weights = genWeights(1 + 1, 2)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
+
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.ReLU }]
+  }
+
+  let step = layer1.inputs.length
+  let size = step * layer1.neurons.length
+
+  expect(3).toEqual(step)
+  expect(6).toEqual(size)
+});
+
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('LayerValue1', () => {
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
+
+  let weights = genWeights(1 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
+
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.ReLU }]
+  }
+
   let value = layerValue(layer1);
 
-  let expected: number[] = [0]
+  let expected: Input[] = [
+    { value: [0] }, { value: [1] }, { value: [2] }
+  ]
 
-  expect(value).toEqual(expected);
+  expect(value).toEqual(expected)
 });
 
-test('NetworkValue1', () => {
-  let value = networkValue(network1)
-
-  let expected: number[] = [0]
-
-  expect(value).toEqual(expected);
-});
-
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('LayerValue2', () => {
-  let value = layerValue(layer2);
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [0]
+  let weights = genWeights(1 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.Step }]
+  }
+
+  let value = layerValue(layer1);
+
+  let expected: Input[] = [
+    { value: [0] }, { value: [1] }, { value: [1] }
+  ]
+
+  expect(value).toEqual(expected)
 });
 
-test('NetworkValue2', () => {
-  let value = networkValue(network2)
-
-  let expected: number[] = [0]
-
-  expect(value).toEqual(expected);
-});
-
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('LayerValue3', () => {
-  let value = layerValue(layer3);
+  let inputs = genInputs(1, range(-3, 4, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -3] }, { value: [1, -2] }, { value: [1, -1] }, { value: [1, 0] },
+    { value: [1, 1] }, { value: [1, 2] }, { value: [1, 3] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [12]
+  let weights = genWeights(1 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.Step }]
+  }
+
+  let value = layerValue(layer1);
+
+  let expected: Input[] = [
+    { value: [-1] }, { value: [-1] }, { value: [0] }, { value: [1] }, { value: [1] }, { value: [1] }, { value: [1] }
+  ]
+
+  expect(value).toEqual(expected)
 });
 
-test('NetworkValue3', () => {
-  let value = networkValue(network3)
-
-  let expected: number[] = [12]
-
-  expect(value).toEqual(expected);
-});
-
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('LayerValue4', () => {
-  let value = layerValue(layer4);
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [-1]
+  let weights = genWeights(1 + 1, 2)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.Step }, <Neuron>{ activation: ActivationFunction.Step }]
+  }
+  let value = layerValue(layer1);
+
+  let expected: Input[] = [
+    { value: [0] }, { value: [1] }, { value: [1] }, { value: [0] }, { value: [1] }, { value: [1] }
+  ]
+
+  expect(value).toEqual(expected)
 });
 
-test('NetworkValue4', () => {
-  let value = networkValue(network4)
-
-  let expected: number[] = [-1]
-
-  expect(value).toEqual(expected);
-});
-
-
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
 test('LayerValue5', () => {
-  let value = layerValue(layer5);
+  let inputs = genInputs(1, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1] }, { value: [1, 0] }, { value: [1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [1]
+  let weights = genWeights(1 + 1, 2)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }],
+    [{ value: 1 }, { value: 1 }]
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.Step }, <Neuron>{ activation: ActivationFunction.ReLU }]
+  }
+  let value = layerValue(layer1);
+
+  let expected: Input[] = [
+    { value: [0] }, { value: [1] }, { value: [1] }, { value: [0] }, { value: [1] }, { value: [2] }
+  ]
+
+  expect(value).toEqual(expected)
 });
 
-test('NetworkValue5', () => {
-  let value = networkValue(network5)
+// Test one layer network with a bias, 2x input, 4x neuron = 12 Weights
+test('LayerValue5', () => {
+  let inputs = genInputs(2, range(-1, 2, 1))
+  let expectedInputs: Input[] = [
+    { value: [1, -1, -1] }, { value: [1, -1, 0] }, { value: [1, -1, 1] },
+    { value: [1, 0, -1] }, { value: [1, 0, 0] }, { value: [1, 0, 1] },
+    { value: [1, 1, -1] }, { value: [1, 1, 0] }, { value: [1, 1, 1] }
+  ]
+  expect(inputs).toEqual(expectedInputs);
 
-  let expected: number[] = [1]
+  let weights = genWeights(2 + 1, 1)
+  let expectedWeights: Weight[][] = [
+    [{ value: 1 }, { value: 1 }, { value: 1 }],
+  ]
+  expect(weights).toEqual(expectedWeights);
 
-  expect(value).toEqual(expected);
+  let layer1: Layer = {
+    inputs: inputs,
+    weights: weights,
+    neurons: [<Neuron>{ activation: ActivationFunction.Step }]
+  }
+
+  let value = layerValue(layer1);
+
+  let expected: Input[] = [
+    { value: [-1] }, { value: [0] }, { value: [1] },
+    { value: [0] }, { value: [1] }, { value: [1] },
+    { value: [1] }, { value: [1] }, { value: [1] },
+  ]
+
+  expect(value).toEqual(expected)
 });
 
-test('NetworkValue6', () => {
-  let value = networkValue(network6)
-
-  let expected: number[] = [1]
-
-  expect(value).toEqual(expected);
-});
-
-
-test('NetworkValue7', () => {
-  let value = networkValue(network7)
-
-  let expected: number[] = [14]
-
-  expect(value).toEqual(expected);
-});
-
-test('NetworkValue8', () => {
-  let value = networkValue(network8)
-
-  let expected: number[] = [18]
-
-  expect(value).toEqual(expected);
-});
-
-test('NetworkValue9', () => {
-  let value = networkValue(network9)
-
-  let expected: number[] = [3]
-
-  expect(value).toEqual(expected);
-});
-
-const layer10: Layer = {
-  bias: { input: 1, weight: 3 },
-  inputs: range(0, 5, 1),
-  weights: Array(10).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.ReLU }]
-}
-
-const network10: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer10],
-}
-
-test('LayerValue10', () => {
-  let value = layerValue(layer10);
-
-  let expected: number[] = [13, 13]
-
-  expect(value).toEqual(expected);
-});
-
-test('NetworkValue10', () => {
-  let value = networkValue(network10)
-
-  let expected: number[] = [13, 13]
-
-  expect(value).toEqual(expected);
-});
-
-const layer11: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: range(0, 5, 1),
-  weights: Array(11).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const network11: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer11],
-}
-
-test('LayerValue11', () => {
-  let value = layerValue(layer11);
-
-  let expected: number[] = [15, 1]
-
-  expect(value).toEqual(expected);
-});
-
-test('NetworkValue11', () => {
-  let value = networkValue(network11)
-
-  let expected: number[] = [15, 1]
-
-  expect(value).toEqual(expected);
-});
-
-const layer12a: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: range(0, 5, 1),
-  weights: Array(12).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const layer12b: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: [],
-  weights: Array(12).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const network12: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer12a, layer12b],
-}
-
-test('NetworkValue12', () => {
-  let value = networkValue(network12)
-
-  let expected: number[] = [21, 1]
-
-  expect(value).toEqual(expected);
-});
-
-const layer13a: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: range(0, 5, 1),
-  weights: Array(13).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const layer13b: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: [],
-  weights: Array(13).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const layer13c: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: [],
-  weights: Array(13).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.ReLU }]
-}
-
-const network13: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer13a, layer13b, layer13c],
-}
-
-test('NetworkValue13', () => {
-  let value = networkValue(network13)
-
-  let expected: number[] = [27, 27]
-
-  expect(value).toEqual(expected);
-});
-
-const layer14a: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: range(0, 5, 1),
-  weights: Array(14).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const layer14b: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: [],
-  weights: Array(14).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.ReLU }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const layer14c: Layer = {
-  bias: { input: 1, weight: 5 },
-  inputs: [],
-  weights: Array(14).fill(1),
-  neurons: [<Neuron>{ activation: ActivationFunction.Step }, <Neuron>{ activation: ActivationFunction.Step }]
-}
-
-const network14: Network = {
-  inputs: range(0, 5, 1),
-  layers: [layer14a, layer14b, layer14c],
-}
-
-test('NetworkValue14', () => {
-  let value = networkValue(network14)
-
-  let expected: number[] = [1, 1]
-
-  expect(value).toEqual(expected);
-});
 

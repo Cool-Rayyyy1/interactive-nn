@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ActivationFunction, type Bias, type Layer, type Network } from "./types";
+import { ActivationFunction, type Layer, type Network, type Input2d, type Weight, type Input3d, type Input } from "./types";
+
+const BIAS = 1;
 
 /**
  * Tailwind utility function. Provided by shadcn-svelte.
@@ -27,6 +29,52 @@ export function range(start: number, end: number, step: number): number[] {
   }
   return result;
 }
+
+/**
+ * Generates inputs to the Neural Network from an input layer size and range of values.
+ *
+ * @param size How many inputs in the input layer. Only 1 or 2 is supported.
+ * @param range The range of values to generate inputs from.
+ * @returns Inputs as a number[][]
+ */
+export function genInputs(size: 1 | 2, range: number[]): Input[] {
+  let output: Input[] = [];
+
+  switch (size) {
+    case 1:
+      range.forEach((val) => {
+        output.push(<Input>{ value: [BIAS, val] })
+      })
+      return output
+    case 2:
+      range.forEach((val1) => {
+        range.forEach((val2) => {
+          output.push(<Input>{ value: [BIAS, val1, val2] })
+        })
+      })
+      return output
+  }
+}
+
+/**
+ * Generates inputs to the Neural Network from an input layer size and range of values.
+ *
+ * @param size How many inputs in the input layer. Only 1 or 2 is supported.
+ * @param range The range of values to generate inputs from.
+ * @returns Inputs as a number[][]
+ */
+export function genWeights(inputs: number, neurons: number): Weight[][] {
+  let weights: Weight[][] = []
+  for (let idx_a = 0; idx_a < neurons; idx_a++) {
+    let local: Weight[] = []
+    for (let idx_b = 0; idx_b < inputs; idx_b++) {
+      local.push(<Weight>{ value: 1 })
+    }
+    weights.push(local)
+  }
+  return weights;
+}
+
 
 /**
  * Calculates the sigmoid value of a given input
@@ -77,13 +125,20 @@ export function activate(activation: ActivationFunction, input: number): number 
 }
 
 /**
- * Calculates the weighted value of a Bias in the network
+ * Calculates the weighted input range to the network for a given
+ * ProductNode. It returns a range of Inputs, which contain the original input
+ * and its transformed value at the given location in the network, due to the
+ * interactive structure of this application
  *
- * @param node - The Bias input
- * @returns the weighted value of the Bias
+ * @param node - The ProductNode Input
+ * @returns The ranged of weighted inputs
  */
-export function weightedBias(node: Bias): number {
-  return node.input * node.weight
+export function weightedInput(input: Input, weight: Weight[]): Input {
+  let weighted = input.value.map((i, idx) => {
+    return weight[idx].value * i
+  })
+  let reduced = weighted.reduce((acc, curr) => acc + curr, 0)
+  return <Input>{ value: [reduced] }
 }
 
 /**
@@ -95,10 +150,14 @@ export function weightedBias(node: Bias): number {
  * @param node - The ProductNode Input
  * @returns The ranged of weighted inputs
  */
-export function weightedInputs(inputs: number[], weights: number[]): number[] {
-  return inputs.map((input, idx): number => {
-    return input * weights[idx]
+export function weightedInputs(inputs: Input[], weights: Weight[][]): Input[] {
+  let weighted: Input[] = []
+  weights.forEach((weight) => {
+    inputs.map((input) => {
+      weighted.push(weightedInput(input, weight))
+    })
   })
+  return weighted
 }
 
 /**
@@ -107,12 +166,42 @@ export function weightedInputs(inputs: number[], weights: number[]): number[] {
  * @param layer - The network layer to compute the value of
  * @returns The activated, weighted output range for the layer
  */
-export function layerValue(layer: Layer): number[] {
-  const bias = weightedBias(layer.bias);
-  const inputs = weightedInputs(layer.inputs, layer.weights);
-  const weightedValue = bias + inputs.reduce((acc, curr): number => acc + curr, 0);
-  return layer.neurons.map((neuron) => {
-    return activate(neuron.activation, weightedValue)
+export function layerValue(layer: Layer): Input[] {
+  let step = layer.inputs.length
+  let size = step * layer.neurons.length
+  let weightedValues = weightedInputs(layer.inputs, layer.weights)
+
+  for (let idx = 0; idx < size; idx++) {
+    let activation = layer.neurons[Math.floor(idx / step)]
+    weightedValues[idx] = <Input>{
+      value: weightedValues[idx].value.map((val) => {
+        return activate(activation.activation, val)
+      })
+    }
+  }
+
+  return weightedValues
+}
+
+/**
+ * Computes the activated, weighted output range for the given network.
+ *
+ * @param network - The network to compute the value of
+ * @returns The activated, weighted output range for the network
+ */
+export function networkValue2d(network: Network): Input2d[] {
+  let inputs: Input[] = network.inputs
+  let outputs: Input[] = []
+
+  for (let idx = 0; idx < network.layers.length - 1; idx++) {
+    outputs = layerValue(network.layers[idx])
+    network.layers[idx + 1].inputs = outputs
+  }
+
+  outputs = layerValue(network.layers[network.layers.length - 1])
+
+  return inputs.map((i, idx) => {
+    return <Input2d>{ input: i.value[1], output: outputs[idx].value[0] }
   })
 }
 
@@ -122,12 +211,19 @@ export function layerValue(layer: Layer): number[] {
  * @param network - The network to compute the value of
  * @returns The activated, weighted output range for the network
  */
-export function networkValue(network: Network): number[] {
-  let values: number[] = network.inputs
+export function networkValue3d(network: Network): Input3d[] {
+  let inputs: Input[] = network.inputs
+  let outputs: Input[] = []
+
   for (let idx = 0; idx < network.layers.length - 1; idx++) {
-    values = layerValue(network.layers[idx]);
-    network.layers[idx + 1].inputs = values;
+    outputs = layerValue(network.layers[idx])
+    network.layers[idx + 1].inputs = outputs
   }
-  return layerValue(network.layers[network.layers.length - 1])
+
+  outputs = layerValue(network.layers[network.layers.length - 1])
+
+  return inputs.map((i, idx) => {
+    return <Input3d>{ input_x1: i.value[1], input_x2: i.value[2], output: outputs[idx].value[0] }
+  })
 }
 

@@ -13,7 +13,7 @@ export const nodeTypes: NodeTypes = {
 };
 
 export type InputNodeType = Node<{ display: string, handles: HandleProp[] }, 'nnInput'>;
-export type WeightNodeType = Node<{ weight: number, handles: HandleProp[] }, 'weight'>;
+export type WeightNodeType = Node<{ layer: number, neuron: number, index: number, handles: HandleProp[] }, 'weight'>;
 export type NeuronNodeType = Node<{ neuron: Neuron, handles: HandleProp[] }, 'neuron'>;
 
 export type CustomNodes = InputNodeType | WeightNodeType | NeuronNodeType;
@@ -39,18 +39,17 @@ export interface Config {
 /**
  * Parent type for a Neural Network visual representation
  */
-export interface Network {
-  readonly inputs: number[],
-  layers: Layer[],
+export class Network {
+  inputs: Input[] = $state<Input[]>([]);
+  layers: Layer[] = $state<Layer[]>([]);
 }
 
 /**
  * A Layer in a Neural Network
  */
 export interface Layer {
-  bias: Bias;
-  inputs: number[];
-  weights: number[];
+  inputs: Input[];
+  weights: Weight[][];
   neurons: Neuron[];
 }
 
@@ -62,11 +61,36 @@ export interface Neuron {
 }
 
 /**
- * A Bias Node in a Neural Network with a weight value, and an Input.
+ * A Weight value in the network. It has to be an object so that it can
+ * be updated dynamically with xyflow.
  */
-export interface Bias {
+export interface Input {
+  value: number[];
+}
+
+/**
+ * A Weight value in the network. It has to be an object so that it can
+ * be updated dynamically with xyflow.
+ */
+export interface Weight {
+  value: number;
+}
+
+/**
+ * The x, y input to a chart from the network.
+ */
+export interface Input2d {
   input: number;
-  weight: number;
+  output: number;
+}
+
+/**
+ * The x, y, z input to a chart from the network.
+ */
+export interface Input3d {
+  input_x1: number;
+  input_x2: number;
+  output: number;
 }
 
 /**
