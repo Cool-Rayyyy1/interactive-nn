@@ -224,7 +224,6 @@ export function networkValue3d(network: Network): Input3d[] {
       input = <Input>{ value: [BIAS, ...input.value] }
       return input
     })
-    network.layers[idx + 1].inputs = outputs
   }
 
   outputs = layerValue(outputs, network.layers[network.layers.length - 1])

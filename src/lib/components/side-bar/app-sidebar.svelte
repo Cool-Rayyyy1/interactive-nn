@@ -74,6 +74,10 @@
 					{
 						title: 'Single-Layer Perceptron',
 						url: '/two-input-perceptrons/single-layer-perceptron'
+					},
+					{
+						title: 'Two-Layer Perceptron',
+						url: '/two-input-perceptrons/two-layer-perceptron'
 					}
 				]
 			},
