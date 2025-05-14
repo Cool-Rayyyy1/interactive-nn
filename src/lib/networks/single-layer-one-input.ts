@@ -3,20 +3,20 @@ import { genInputs, genWeights, range } from "$lib/utils"
 
 const SIZE = 1
 
-let values = range(-5, 5, 0.01);
-let inputs = genInputs(SIZE, values);
+const values = range(-5, 5, 0.01);
+const inputs = genInputs(SIZE, values);
 
-let neurons: Neuron[] = [
+const neurons: Neuron[] = [
   { activation: ActivationFunction.Step }
 ]
 
-let layer1: Layer = {
+const layer1: Layer = {
   inputs: inputs,
   weights: genWeights(SIZE + 1, neurons.length),
   neurons: neurons,
 }
 
-export let SingleLayerOneInputNetwork: Network = {
+export const SingleLayerOneInputNetwork: Network = {
   inputs: inputs,
   layers: [layer1],
 }

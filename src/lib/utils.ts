@@ -38,7 +38,7 @@ export function range(start: number, end: number, step: number): number[] {
  * @returns Inputs as a number[][]
  */
 export function genInputs(size: 1 | 2, range: number[]): Input[] {
-  let output: Input[] = [];
+  const output: Input[] = [];
 
   switch (size) {
     case 1:
@@ -64,9 +64,9 @@ export function genInputs(size: 1 | 2, range: number[]): Input[] {
  * @returns Inputs as a number[][]
  */
 export function genWeights(inputs: number, neurons: number): Weight[][] {
-  let weights: Weight[][] = []
+  const weights: Weight[][] = []
   for (let idx_a = 0; idx_a < neurons; idx_a++) {
-    let local: Weight[] = []
+    const local: Weight[] = []
     for (let idx_b = 0; idx_b < inputs; idx_b++) {
       local.push(<Weight>{ value: 1 })
     }
@@ -134,10 +134,10 @@ export function activate(activation: ActivationFunction, input: number): number 
  * @returns The ranged of weighted inputs
  */
 export function weightedInput(input: Input, weight: Weight[]): Input {
-  let weighted = input.value.map((i, idx) => {
+  const weighted = input.value.map((i, idx) => {
     return weight[idx].value * i
   })
-  let reduced = weighted.reduce((acc, curr) => acc + curr, 0)
+  const reduced = weighted.reduce((acc, curr) => acc + curr, 0)
   return <Input>{ value: [reduced] }
 }
 
@@ -151,7 +151,7 @@ export function weightedInput(input: Input, weight: Weight[]): Input {
  * @returns The ranged of weighted inputs
  */
 export function weightedInputs(inputs: Input[], weights: Weight[][]): Input[] {
-  let weighted: Input[] = []
+  const weighted: Input[] = []
   weights.forEach((weight) => {
     inputs.map((input) => {
       weighted.push(weightedInput(input, weight))
@@ -166,13 +166,13 @@ export function weightedInputs(inputs: Input[], weights: Weight[][]): Input[] {
  * @param layer - The network layer to compute the value of
  * @returns The activated, weighted output range for the layer
  */
-export function layerValue(layer: Layer): Input[] {
-  let step = layer.inputs.length
-  let size = step * layer.neurons.length
-  let weightedValues = weightedInputs(layer.inputs, layer.weights)
+export function layerValue(inputs: Input[], layer: Layer): Input[] {
+  const step = inputs.length
+  const size = step * layer.neurons.length
+  const weightedValues = weightedInputs(inputs, layer.weights)
 
   for (let idx = 0; idx < size; idx++) {
-    let activation = layer.neurons[Math.floor(idx / step)]
+    const activation = layer.neurons[Math.floor(idx / step)]
     weightedValues[idx] = <Input>{
       value: weightedValues[idx].value.map((val) => {
         return activate(activation.activation, val)
@@ -190,15 +190,18 @@ export function layerValue(layer: Layer): Input[] {
  * @returns The activated, weighted output range for the network
  */
 export function networkValue2d(network: Network): Input2d[] {
-  let inputs: Input[] = network.inputs
-  let outputs: Input[] = []
+  const inputs: Input[] = network.inputs
+  let outputs: Input[] = network.inputs
 
   for (let idx = 0; idx < network.layers.length - 1; idx++) {
-    outputs = layerValue(network.layers[idx])
-    network.layers[idx + 1].inputs = outputs
+    outputs = layerValue(outputs, network.layers[idx])
+    outputs = outputs.map((input) => {
+      input = <Input>{ value: [BIAS, ...input.value] }
+      return input
+    })
   }
 
-  outputs = layerValue(network.layers[network.layers.length - 1])
+  outputs = layerValue(outputs, network.layers[network.layers.length - 1])
 
   return inputs.map((i, idx) => {
     return <Input2d>{ input: i.value[1], output: outputs[idx].value[0] }
@@ -212,15 +215,19 @@ export function networkValue2d(network: Network): Input2d[] {
  * @returns The activated, weighted output range for the network
  */
 export function networkValue3d(network: Network): Input3d[] {
-  let inputs: Input[] = network.inputs
-  let outputs: Input[] = []
+  const inputs: Input[] = network.inputs
+  let outputs: Input[] = network.inputs
 
   for (let idx = 0; idx < network.layers.length - 1; idx++) {
-    outputs = layerValue(network.layers[idx])
+    outputs = layerValue(outputs, network.layers[idx])
+    outputs = outputs.map((input) => {
+      input = <Input>{ value: [BIAS, ...input.value] }
+      return input
+    })
     network.layers[idx + 1].inputs = outputs
   }
 
-  outputs = layerValue(network.layers[network.layers.length - 1])
+  outputs = layerValue(outputs, network.layers[network.layers.length - 1])
 
   return inputs.map((i, idx) => {
     return <Input3d>{ input_x1: i.value[1], input_x2: i.value[2], output: outputs[idx].value[0] }

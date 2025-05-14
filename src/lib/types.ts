@@ -40,8 +40,8 @@ export interface Config {
  * Parent type for a Neural Network visual representation
  */
 export class Network {
-  inputs: Input[] = $state<Input[]>([]);
-  layers: Layer[] = $state<Layer[]>([]);
+  inputs: Input[] = [];
+  layers: Layer[] = [];
 }
 
 /**
