@@ -25,7 +25,7 @@
 					{
 						type: 'target',
 						position: Position.Bottom,
-						id: 'neuron-1-bottom'
+						id: 'neuron-0-0-bottom'
 					},
 					{
 						type: 'source',
@@ -45,7 +45,7 @@
 					{
 						type: 'target',
 						position: Position.Bottom,
-						id: 'neuron-1-bottom'
+						id: 'neuron-0-1-bottom'
 					},
 					{
 						type: 'source',
@@ -65,7 +65,7 @@
 					{
 						type: 'target',
 						position: Position.Bottom,
-						id: 'neuron-1-bottom'
+						id: 'neuron-1-0-bottom'
 					}
 				]
 			},
@@ -285,28 +285,28 @@
 			type: 'default',
 			source: 'weight-0-0-0',
 			target: 'neuron-0-0',
-			targetHandle: 'neuron-1-bottom'
+			targetHandle: 'neuron-0-0-bottom'
 		},
 		{
 			id: 'weight-0-0-1_neuron-0-0',
 			type: 'default',
 			source: 'weight-0-0-1',
 			target: 'neuron-0-0',
-			targetHandle: 'neuron-1-bottom'
+			targetHandle: 'neuron-0-0-bottom'
 		},
 		{
 			id: 'weight-0-1-0_neuron-0-1',
 			type: 'default',
 			source: 'weight-0-1-0',
 			target: 'neuron-0-1',
-			targetHandle: 'neuron-1-bottom'
+			targetHandle: 'neuron-0-1-bottom'
 		},
 		{
 			id: 'weight-0-1-1_neuron-0-1',
 			type: 'default',
 			source: 'weight-0-1-1',
 			target: 'neuron-0-1',
-			targetHandle: 'neuron-1-bottom'
+			targetHandle: 'neuron-0-1-bottom'
 		},
 		// Layer 1
 		{
