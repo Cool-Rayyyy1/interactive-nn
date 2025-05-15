@@ -9,7 +9,6 @@
 	let network: Network = $state(TwoLayerOneInputNetwork);
 
 	let data: Input2d[] = $derived(networkValue2d(network));
-	$inspect(data);
 
 	setNetworkContext(network);
 </script>
