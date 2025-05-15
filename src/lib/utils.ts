@@ -152,10 +152,13 @@ export function weightedInput(input: Input, weight: Weight[]): Input {
  */
 export function weightedInputs(inputs: Input[], weights: Weight[][]): Input[] {
   const weighted: Input[] = []
-  weights.forEach((weight) => {
-    inputs.map((input) => {
-      weighted.push(weightedInput(input, weight))
+  inputs.map((input) => {
+    const local: Input[] = []
+    weights.forEach((weight) => {
+      local.push(weightedInput(input, weight))
     })
+    const reduced: Input = local.reduce((acc, curr): Input => <Input>{ value: acc.value.concat(curr.value) }, <Input>{ value: [] })
+    weighted.push(reduced)
   })
   return weighted
 }
@@ -167,15 +170,12 @@ export function weightedInputs(inputs: Input[], weights: Weight[][]): Input[] {
  * @returns The activated, weighted output range for the layer
  */
 export function layerValue(inputs: Input[], layer: Layer): Input[] {
-  const step = inputs.length
-  const size = step * layer.neurons.length
   const weightedValues = weightedInputs(inputs, layer.weights)
 
-  for (let idx = 0; idx < size; idx++) {
-    const activation = layer.neurons[Math.floor(idx / step)]
+  for (let idx = 0; idx < inputs.length; idx++) {
     weightedValues[idx] = <Input>{
-      value: weightedValues[idx].value.map((val) => {
-        return activate(activation.activation, val)
+      value: weightedValues[idx].value.map((val, i) => {
+        return activate(layer.neurons[i].activation, val)
       })
     }
   }

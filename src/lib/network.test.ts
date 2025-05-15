@@ -238,8 +238,7 @@ test('WeightedInputs4', () => {
   const weighted = weightedInputs(inputs, weights)
 
   const expected = [
-    { value: [0] }, { value: [1] }, { value: [2] },
-    { value: [0] }, { value: [1] }, { value: [2] }
+    { value: [0, 0] }, { value: [1, 1] }, { value: [2, 2] },
   ]
 
   expect(weighted).toEqual(expected);
@@ -265,12 +264,9 @@ test('WeightedInputs5', () => {
   const weighted = weightedInputs(inputs, weights)
 
   const expected = [
-    { value: [-1] }, { value: [0] }, { value: [1] },
-    { value: [0] }, { value: [1] }, { value: [2] },
-    { value: [1] }, { value: [2] }, { value: [3] },
-    { value: [-1] }, { value: [0] }, { value: [1] },
-    { value: [0] }, { value: [1] }, { value: [2] },
-    { value: [1] }, { value: [2] }, { value: [3] },
+    { value: [-1, -1] }, { value: [0, 0] }, { value: [1, 1] },
+    { value: [0, 0] }, { value: [1, 1] }, { value: [2, 2] },
+    { value: [1, 1] }, { value: [2, 2] }, { value: [3, 3] },
   ]
 
   expect(weighted).toEqual(expected);
@@ -442,7 +438,7 @@ test('LayerValue4', () => {
   const value = layerValue(inputs, layer1);
 
   const expected: Input[] = [
-    { value: [0] }, { value: [1] }, { value: [1] }, { value: [0] }, { value: [1] }, { value: [1] }
+    { value: [0, 0] }, { value: [1, 1] }, { value: [1, 1] }
   ]
 
   expect(value).toEqual(expected)
@@ -471,7 +467,7 @@ test('LayerValue5', () => {
   const value = layerValue(inputs, layer1);
 
   const expected: Input[] = [
-    { value: [0] }, { value: [1] }, { value: [1] }, { value: [0] }, { value: [1] }, { value: [2] }
+    { value: [0, 0] }, { value: [1, 1] }, { value: [1, 2] }
   ]
 
   expect(value).toEqual(expected)
