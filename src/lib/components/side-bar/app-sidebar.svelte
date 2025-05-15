@@ -50,7 +50,7 @@
 				]
 			},
 			{
-				title: 'One-Input Perceptrons',
+				title: 'One Input Perceptrons',
 				url: '/one-input-perceptrons',
 				items: [
 					{
@@ -58,26 +58,30 @@
 						url: '/one-input-perceptrons/what-is-a-perceptron'
 					},
 					{
-						title: 'One-Layer Perceptron',
+						title: 'One Layer Perceptron',
 						url: '/one-input-perceptrons/one-layer-perceptron'
 					},
 					{
-						title: 'Two-Layer Perceptron',
+						title: 'Two Layer Perceptron',
 						url: '/one-input-perceptrons/two-layer-perceptron'
 					}
 				]
 			},
 			{
-				title: 'Two-Input Perceptrons',
+				title: 'Two Input Perceptrons',
 				url: '/two-input-perceptrons',
 				items: [
 					{
-						title: 'One-Layer Perceptron',
+						title: 'One Layer Perceptron',
 						url: '/two-input-perceptrons/one-layer-perceptron'
 					},
 					{
-						title: 'Two-Layer Perceptron',
+						title: 'Two Layer Perceptron',
 						url: '/two-input-perceptrons/two-layer-perceptron'
+					},
+					{
+						title: 'Two Layer, Four Neuron',
+						url: '/two-input-perceptrons/four-neuron-perceptron'
 					}
 				]
 			},

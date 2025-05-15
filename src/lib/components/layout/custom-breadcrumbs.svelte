@@ -38,29 +38,33 @@
 			segment: 'ReLU',
 			path: '/activation-functions/relu'
 		},
-		perceptrons: {
-			segment: 'Perceptrons',
-			path: '/perceptrons'
+		'one-input-perceptrons': {
+			segment: 'One Imput Perceptrons',
+			path: '/one-input-perceptrons'
 		},
 		'what-is-a-perceptron': {
 			segment: 'What is a Perceptron?',
-			path: '/perceptrons/what-is-a-perceptron'
+			path: '/one-input-perceptrons/what-is-a-perceptron'
 		},
-		'single-layer-perceptron': {
-			segment: 'Single-Layer Perceptron',
-			path: '/perceptrons/single-layer-perceptron'
+		'one-input-perceptron': {
+			segment: 'One Layer Perceptron',
+			path: '/one-input-perceptrons/one-layer-perceptron'
 		},
-		'multi-layer-perceptron': {
-			segment: 'Multi-Layer Perceptron',
-			path: '/perceptrons/multi-layer-perceptron'
+		'two-layer-perceptron': {
+			segment: 'Two Layer Perceptron',
+			path: '/one-input-perceptrons/two-layer-perceptron'
 		},
-		'decision-functions': {
-			segment: 'Decision Functions',
-			path: '/decision-functions'
+		'two-input-perceptrons': {
+			segment: 'Two Input Perceptrons',
+			path: '/two-input-perceptrons'
 		},
-		'step-decision-function': {
-			segment: 'Step Decision Function',
-			path: '/step-decision-function'
+		'one-layer-perceptron': {
+			segment: 'One Layer Perceptron',
+			path: '/one-layer-perceptron'
+		},
+		'four-neuron-perceptron': {
+			segment: 'Four Neuron Perceptron',
+			path: '/four-neuron-perceptron'
 		},
 		calculus: {
 			segment: 'Calculus',
