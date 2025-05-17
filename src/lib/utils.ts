@@ -75,7 +75,6 @@ export function genWeights(inputs: number, neurons: number): Weight[][] {
   return weights;
 }
 
-
 /**
  * Calculates the sigmoid value of a given input
  *
@@ -88,6 +87,20 @@ export function genWeights(inputs: number, neurons: number): Weight[][] {
  */
 export function sigmoid(x: number): number {
   return (1 / (1 + Math.exp(-x)))
+}
+
+/**
+ * Calculates the derivative of the sigmoid value of a given input
+ *
+ * @remarks 
+ * Sigmoid is calculated by:
+ * (sigmoid(x) / (1 - sigmoid(x))
+ *
+ * @param x - The input value
+ * @returns The derivative sigmoid value of the input
+ */
+export function dx_sigmoid(x: number): number {
+  return (sigmoid(x) / (1 - sigmoid(x)))
 }
 
 /**

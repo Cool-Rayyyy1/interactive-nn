@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { Input2d } from '$lib/types';
 	import { Axis, Chart, Spline, Svg, Tooltip, Highlight } from 'layerchart';
 
-	let { data }: { data: Input2d[] } = $props();
+	let { data }: { data: { input: number; output: number; derivative: number } } = $props();
 </script>
 
 <!--
@@ -16,9 +15,9 @@ Generates a 2d plot for the provided range and activation function
 -->
 <div class="h-[300px] rounded border p-4">
 	<Chart
-		bind:data
+		{data}
 		x="input"
-		y="output"
+		y={['output', 'derivative']}
 		yNice
 		padding={{ left: 16, bottom: 24 }}
 		tooltip={{ mode: 'bisect-x' }}
@@ -26,15 +25,22 @@ Generates a 2d plot for the provided range and activation function
 		<Svg>
 			<Axis placement="left" grid rule />
 			<Axis placement="bottom" grid rule />
-			<Spline class="stroke-primary stroke-2" tweened />
+			<Spline class="stroke-primary stroke-2" motion="tween" />
 			<Highlight points lines />
 		</Svg>
 
-		<Tooltip.Root let:data>
-			<Tooltip.Header>Coordinates</Tooltip.Header>
-			<Tooltip.List>
-				<Tooltip.Item label="(x, y): " value={'(' + data.input + ', ' + data.output + ')'} />
-			</Tooltip.List>
+		{#snippet marks()}
+			<Spline y="output" class="stroke-primary" />
+			<Spline y="derivative" class="stroke-secondary" />
+		{/snippet}
+
+		<Tooltip.Root>
+			{#snippet children({ data })}
+				<Tooltip.Header>Coordinates</Tooltip.Header>
+				<Tooltip.List>
+					<Tooltip.Item label="(x, y): " value={'(' + data.input + ', ' + data.output + ')'} />
+				</Tooltip.List>
+			{/snippet}
 		</Tooltip.Root>
 	</Chart>
 </div>
