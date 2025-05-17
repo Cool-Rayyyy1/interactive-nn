@@ -1,7 +1,17 @@
 <script lang="ts">
-	import { Axis, Chart, Spline, Svg, Tooltip, Highlight } from 'layerchart';
+	import type { SeriesData } from '$lib/types';
+	import { scaleOrdinal } from 'd3-scale';
+	import { Axis, Chart, Svg, Tooltip, Highlight, Area } from 'layerchart';
+	import { flatGroup } from 'd3-array';
 
-	let { data }: { data: { input: number; output: number; derivative: number } } = $props();
+	let { data }: { data: SeriesData[] } = $props();
+
+	const dataByKey = flatGroup(data, (d) => d.key);
+
+	const dataColors = {
+		activation: 'oklch(69.6% 0.17 162.48)',
+		derivative: 'oklch(54.6% 0.245 262.881)'
+	};
 </script>
 
 <!--
@@ -17,30 +27,34 @@ Generates a 2d plot for the provided range and activation function
 	<Chart
 		{data}
 		x="input"
-		y={['output', 'derivative']}
+		y="output"
 		yNice
+		c="key"
+		cScale={scaleOrdinal()}
+		cDomain={Object.keys(dataColors)}
+		cRange={Object.values(dataColors)}
 		padding={{ left: 16, bottom: 24 }}
-		tooltip={{ mode: 'bisect-x' }}
+		tooltip={{ mode: 'voronoi' }}
 	>
-		<Svg>
-			<Axis placement="left" grid rule />
-			<Axis placement="bottom" grid rule />
-			<Spline class="stroke-primary stroke-2" motion="tween" />
-			<Highlight points lines />
-		</Svg>
+		{#snippet children({ context })}
+			<Svg>
+				<Axis placement="left" grid rule />
+				<Axis placement="bottom" grid rule />
+				{#each dataByKey as [key, data]}
+					{@const color = context.cScale?.(key)}
+					<Area {data} fill={color} fillOpacity={0.3} line={{ class: 'stroke-2', stroke: color }} />
+				{/each}
+				<Highlight points lines />
+			</Svg>
 
-		{#snippet marks()}
-			<Spline y="output" class="stroke-primary" />
-			<Spline y="derivative" class="stroke-secondary" />
+			<Tooltip.Root>
+				{#snippet children({ data })}
+					<Tooltip.Header>Coordinates</Tooltip.Header>
+					<Tooltip.List>
+						<Tooltip.Item label="(x, y): " value={'(' + data.input + ', ' + data.output + ')'} />
+					</Tooltip.List>
+				{/snippet}
+			</Tooltip.Root>
 		{/snippet}
-
-		<Tooltip.Root>
-			{#snippet children({ data })}
-				<Tooltip.Header>Coordinates</Tooltip.Header>
-				<Tooltip.List>
-					<Tooltip.Item label="(x, y): " value={'(' + data.input + ', ' + data.output + ')'} />
-				</Tooltip.List>
-			{/snippet}
-		</Tooltip.Root>
 	</Chart>
 </div>

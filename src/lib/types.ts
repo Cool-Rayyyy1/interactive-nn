@@ -111,3 +111,9 @@ export enum ActivationFunction {
   ReLU = "ReLU",
 }
 
+export interface SeriesData {
+  input: number;
+  output: number;
+  key: string;
+}
+

@@ -1,46 +1,70 @@
-<script>
+<script lang="ts">
 	import sign_fn from '$lib/assets/sign_fn.svg';
 	import sigmoid_fn from '$lib/assets/sigmoid_fn.svg';
 	import tanh_fn from '$lib/assets/tanh_fn.svg';
 	import relu_fn from '$lib/assets/relu_fn.svg';
 	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
-	import { ActivationFunction } from '$lib/types';
-	import { activate, dx_sigmoid, range } from '$lib/utils';
+	import { ActivationFunction, type SeriesData } from '$lib/types';
+	import { activate, derive, range } from '$lib/utils';
 
 	const inputRange = range(-5, 5, 0.01);
 
-	let stepData = inputRange.map((val) => {
-		return {
+	let stepData: SeriesData[] = [];
+	inputRange.forEach((val) => {
+		stepData.push({
 			input: val,
 			output: +activate(ActivationFunction.Step, val).toFixed(4),
-			derivative: 0
-		};
+			key: 'activation'
+		});
+		stepData.push({
+			input: val,
+			output: +derive(ActivationFunction.Step, val).toFixed(4),
+			key: 'derivative'
+		});
 	});
 
 	const smallInputRange = range(-5, 5, 0.1);
 
-	let sigmoidData = smallInputRange.map((val) => {
-		return {
+	let sigmoidData: SeriesData[] = [];
+	smallInputRange.forEach((val) => {
+		sigmoidData.push({
 			input: val,
 			output: +activate(ActivationFunction.Sigmoid, val).toFixed(4),
-			derivative: dx_sigmoid(val)
-		};
+			key: 'activation'
+		});
+		sigmoidData.push({
+			input: val,
+			output: +derive(ActivationFunction.Sigmoid, val).toFixed(4),
+			key: 'derivative'
+		});
 	});
 
-	let tanhData = smallInputRange.map((val) => {
-		return {
+	let tanhData: SeriesData[] = [];
+	smallInputRange.forEach((val) => {
+		tanhData.push({
 			input: val,
 			output: +activate(ActivationFunction.Tanh, val).toFixed(4),
-			derivative: 0
-		};
+			key: 'activation'
+		});
+		tanhData.push({
+			input: val,
+			output: +derive(ActivationFunction.Tanh, val).toFixed(4),
+			key: 'derivative'
+		});
 	});
 
-	let reluData = inputRange.map((val) => {
-		return {
+	let reluData: SeriesData[] = [];
+	inputRange.forEach((val) => {
+		reluData.push({
 			input: val,
 			output: +activate(ActivationFunction.ReLU, val).toFixed(4),
-			derivative: 0
-		};
+			key: 'activation'
+		});
+		reluData.push({
+			input: val,
+			output: +derive(ActivationFunction.ReLU, val).toFixed(4),
+			key: 'derivative'
+		});
 	});
 </script>
 

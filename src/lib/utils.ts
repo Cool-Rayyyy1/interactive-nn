@@ -120,8 +120,6 @@ export function relu(x: number): number {
 /**
  * Calculates the derivative value of relu of a given input
  *
- * @remarks
- *
  * @param x - The input value
  * @returns The derivative value of the input
  */
@@ -148,10 +146,8 @@ export function dx_sign(): number {
 /**
  * Calculates the derivative value of tanh of a given input
  *
- * @remarks
- * As the sgn function has no slope, this always returns 0.
- *
- * @returns 0
+ * @param x - The input value
+ * @returns The derivative value of the input
  */
 export function dx_tanh(x: number): number {
   return 1 - Math.tanh(x) ** 2;
@@ -175,6 +171,26 @@ export function activate(activation: ActivationFunction, input: number): number 
       return Math.tanh(input)
     case ActivationFunction.ReLU:
       return relu(input)
+  }
+}
+
+/**
+ * Runs an input value through the given activation function
+ * 
+ * @param activation - The activation function to calculate the output with
+ * @param input - The input value to transform with the activation
+ * @returns The activated valued of the input
+ */
+export function derive(activation: ActivationFunction, input: number): number {
+  switch (activation) {
+    case ActivationFunction.Step:
+      return dx_sign()
+    case ActivationFunction.Sigmoid:
+      return dx_sigmoid(input)
+    case ActivationFunction.Tanh:
+      return dx_tanh(input)
+    case ActivationFunction.ReLU:
+      return dx_relu(input)
   }
 }
 
