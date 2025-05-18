@@ -7,6 +7,8 @@
 	import { ActivationFunction, type SeriesData } from '$lib/types';
 	import { activate, derive, range } from '$lib/utils';
 
+	const keys = ['activation'];
+
 	const inputRange = range(-3, 3, 0.01);
 
 	let stepData: SeriesData[] = inputRange.map(
@@ -59,21 +61,21 @@
 
 	<div id="step">
 		<img class="m-2" alt="The Sign Function" src={sign_fn} />
-		<ActivationChart data={stepData} />
+		<ActivationChart data={stepData} showDx={false} {keys} />
 	</div>
 
 	<div id="sigmoid">
 		<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
-		<ActivationChart data={sigmoidData} />
+		<ActivationChart data={sigmoidData} showDx={false} {keys} />
 	</div>
 
 	<div id="tanh">
 		<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
-		<ActivationChart data={tanhData} />
+		<ActivationChart data={tanhData} showDx={false} {keys} />
 	</div>
 
 	<div id="relu">
 		<img class="m-2" alt="The ReLU Function" src={relu_fn} />
-		<ActivationChart data={reluData} />
+		<ActivationChart data={reluData} showDx={false} {keys} />
 	</div>
 </div>
