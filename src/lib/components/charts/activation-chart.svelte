@@ -29,9 +29,9 @@ Generates a 2d plot for the provided range and activation function
 				<Axis placement="left" grid rule />
 				<Axis placement="bottom" rule />
 
-				<Spline y="activation" class="stroke-green-500" />
+				<Spline y="activation" class="stroke-green-500" motion="tween" />
 				{#if showDx}
-					<Spline y="derivative" class="stroke-blue-500" />
+					<Spline y="derivative" class="stroke-blue-500" motion="tween" />
 				{/if}
 
 				<Highlight points lines />
