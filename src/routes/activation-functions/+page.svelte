@@ -7,65 +7,45 @@
 	import { ActivationFunction, type SeriesData } from '$lib/types';
 	import { activate, derive, range } from '$lib/utils';
 
-	const inputRange = range(-5, 5, 0.01);
+	const inputRange = range(-3, 3, 0.01);
 
-	let stepData: SeriesData[] = [];
-	inputRange.forEach((val) => {
-		stepData.push({
-			input: val,
-			output: +activate(ActivationFunction.Step, val).toFixed(4),
-			key: 'activation'
-		});
-		stepData.push({
-			input: val,
-			output: +derive(ActivationFunction.Step, val).toFixed(4),
-			key: 'derivative'
-		});
-	});
+	let stepData: SeriesData[] = inputRange.map(
+		(val): SeriesData =>
+			<SeriesData>{
+				input: val,
+				activation: +activate(ActivationFunction.Step, val).toFixed(4),
+				derivative: +derive(ActivationFunction.Step, val).toFixed(4)
+			}
+	);
 
-	const smallInputRange = range(-5, 5, 0.1);
+	const smallInputRange = range(-3, 3, 0.1);
 
-	let sigmoidData: SeriesData[] = [];
-	smallInputRange.forEach((val) => {
-		sigmoidData.push({
-			input: val,
-			output: +activate(ActivationFunction.Sigmoid, val).toFixed(4),
-			key: 'activation'
-		});
-		sigmoidData.push({
-			input: val,
-			output: +derive(ActivationFunction.Sigmoid, val).toFixed(4),
-			key: 'derivative'
-		});
-	});
+	let sigmoidData: SeriesData[] = smallInputRange.map(
+		(val): SeriesData =>
+			<SeriesData>{
+				input: val,
+				activation: +activate(ActivationFunction.Sigmoid, val).toFixed(4),
+				derivative: +derive(ActivationFunction.Sigmoid, val).toFixed(4)
+			}
+	);
 
-	let tanhData: SeriesData[] = [];
-	smallInputRange.forEach((val) => {
-		tanhData.push({
-			input: val,
-			output: +activate(ActivationFunction.Tanh, val).toFixed(4),
-			key: 'activation'
-		});
-		tanhData.push({
-			input: val,
-			output: +derive(ActivationFunction.Tanh, val).toFixed(4),
-			key: 'derivative'
-		});
-	});
+	let tanhData: SeriesData[] = smallInputRange.map(
+		(val): SeriesData =>
+			<SeriesData>{
+				input: val,
+				activation: +activate(ActivationFunction.Tanh, val).toFixed(4),
+				derivative: +derive(ActivationFunction.Tanh, val).toFixed(4)
+			}
+	);
 
-	let reluData: SeriesData[] = [];
-	inputRange.forEach((val) => {
-		reluData.push({
-			input: val,
-			output: +activate(ActivationFunction.ReLU, val).toFixed(4),
-			key: 'activation'
-		});
-		reluData.push({
-			input: val,
-			output: +derive(ActivationFunction.ReLU, val).toFixed(4),
-			key: 'derivative'
-		});
-	});
+	let reluData: SeriesData[] = inputRange.map(
+		(val): SeriesData =>
+			<SeriesData>{
+				input: val,
+				activation: +activate(ActivationFunction.ReLU, val).toFixed(4),
+				derivative: +derive(ActivationFunction.ReLU, val).toFixed(4)
+			}
+	);
 </script>
 
 <div>

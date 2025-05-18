@@ -1,17 +1,10 @@
 <script lang="ts">
 	import type { SeriesData } from '$lib/types';
-	import { scaleOrdinal } from 'd3-scale';
-	import { Axis, Chart, Svg, Tooltip, Highlight, Area } from 'layerchart';
-	import { flatGroup } from 'd3-array';
+	import { Axis, Chart, Svg, Highlight, Spline, Tooltip } from 'layerchart';
 
 	let { data }: { data: SeriesData[] } = $props();
 
-	const dataByKey = flatGroup(data, (d) => d.key);
-
-	const dataColors = {
-		activation: 'oklch(69.6% 0.17 162.48)',
-		derivative: 'oklch(54.6% 0.245 262.881)'
-	};
+	const keys = ['activation', 'derivative'];
 </script>
 
 <!--
@@ -23,38 +16,42 @@ Generates a 2d plot for the provided range and activation function
 <ActivationChart {data} />
   ```
 -->
-<div class="h-[300px] rounded border p-4">
+
+<div class="h-[300px] rounded-sm border p-4">
 	<Chart
 		{data}
 		x="input"
-		y="output"
+		y={keys}
 		yNice
-		c="key"
-		cScale={scaleOrdinal()}
-		cDomain={Object.keys(dataColors)}
-		cRange={Object.values(dataColors)}
 		padding={{ left: 16, bottom: 24 }}
-		tooltip={{ mode: 'voronoi' }}
+		tooltip={{ mode: 'bisect-x' }}
 	>
-		{#snippet children({ context })}
-			<Svg>
-				<Axis placement="left" grid rule />
-				<Axis placement="bottom" grid rule />
-				{#each dataByKey as [key, data]}
-					{@const color = context.cScale?.(key)}
-					<Area {data} fill={color} fillOpacity={0.3} line={{ class: 'stroke-2', stroke: color }} />
-				{/each}
-				<Highlight points lines />
-			</Svg>
+		<Svg>
+			<Axis placement="left" grid rule />
+			<Axis placement="bottom" rule />
 
-			<Tooltip.Root>
-				{#snippet children({ data })}
-					<Tooltip.Header>Coordinates</Tooltip.Header>
-					<Tooltip.List>
-						<Tooltip.Item label="(x, y): " value={'(' + data.input + ', ' + data.output + ')'} />
-					</Tooltip.List>
-				{/snippet}
-			</Tooltip.Root>
-		{/snippet}
+			<Spline y="activation" class="stroke-green-500" />
+			<Spline y="derivative" class="stroke-blue-500" />
+
+			<Highlight points lines />
+		</Svg>
+
+		<Tooltip.Root>
+			{#snippet children({ data })}
+				<Tooltip.Header>Data</Tooltip.Header>
+				<Tooltip.List>
+					<Tooltip.Item
+						label="Activation"
+						value={data.activation}
+						color="oklch(72.3% 0.219 149.579)"
+					/>
+					<Tooltip.Item
+						label="derivative"
+						value={data.derivative}
+						color="oklch(62.3% 0.214 259.815)"
+					/>
+				</Tooltip.List>
+			{/snippet}
+		</Tooltip.Root>
 	</Chart>
 </div>

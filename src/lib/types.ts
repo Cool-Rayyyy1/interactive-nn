@@ -113,7 +113,7 @@ export enum ActivationFunction {
 
 export interface SeriesData {
   input: number;
-  output: number;
-  key: string;
+  activation: number;
+  derivative: number;
 }
 
