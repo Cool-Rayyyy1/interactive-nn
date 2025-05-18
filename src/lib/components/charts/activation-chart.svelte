@@ -2,9 +2,7 @@
 	import type { SeriesData } from '$lib/types';
 	import { Axis, Chart, Svg, Highlight, Spline, Tooltip } from 'layerchart';
 
-	let { data, showDx }: { data: SeriesData[]; showDx: boolean } = $props();
-
-	const keys = ['activation', 'derivative'];
+	let { data, showDx, keys }: { data: SeriesData[]; showDx: boolean; keys: string[] } = $props();
 </script>
 
 <!--
@@ -21,7 +19,7 @@ Generates a 2d plot for the provided range and activation function
 	<Chart
 		{data}
 		x="input"
-		y={['activation']}
+		y={keys}
 		yNice
 		padding={{ left: 16, bottom: 24 }}
 		tooltip={{ mode: 'bisect-x' }}
