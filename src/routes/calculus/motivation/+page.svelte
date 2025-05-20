@@ -61,16 +61,16 @@
 		<input bind:value={layers} type="number" class="w-20 border border-black" min={1} max={50} />
 
 		Notice that the more layers there are in the unrolled circle rings, the more the bars start to
-		resemble a triangle! And we know that the area of a triangle is <Mathjax
-			math={`\\(\\frac{1}{2}*base*height\\)`}
-		/>. Here, our base is <span class="italic">x</span>, for the number of rings in our circle, and
-		the height is the combined area of all the rings, which is the area of the circle.
+		resemble a triangle! And we know that the area of a triangle is {#key layers}<Mathjax
+				math={`\\(\\frac{1}{2}*base*height\\)`}
+			/>{/key}. Here, our base is <span class="italic">x</span>, for the number of rings in our
+		circle, and the height is the combined area of all the rings, which is the area of the circle.
 		<div class="m-2">
 			<CalculusComposed {layers} {value} />
 		</div>
 
-		We can call the amount added added <Mathjax math={`\\(dx\\)`} /> for the
+		We can call the amount added added {#key layers}<Mathjax math={`\\(dx\\)`} />{/key} for the
 		<span class="italic">difference in x</span>. For everytime the layers are increased by 1,
-		<Mathjax math={`\\(dx = 1\\)`} />.
+		{#key layers}<Mathjax math={`\\( dx = 1\\)`} />{/key}.
 	</article>
 </div>

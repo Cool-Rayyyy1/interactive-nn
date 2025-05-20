@@ -10,7 +10,7 @@
 		document.head.append(script);
 
 		script.onload = () => {
-			MathJax = {
+			let MathJax = {
 				tex: {
 					inlineMath: [
 						['$', '$'],
