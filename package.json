@@ -31,6 +31,7 @@
 		"@types/d3-array": "^3.2.1",
 		"@types/d3-scale": "^4.0.9",
 		"@types/d3-shape": "^3.1.7",
+		"@types/mathjax": "^0.0.40",
 		"@types/node": "^22.14.0",
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "^1.3.19",
@@ -67,6 +68,7 @@
 		"d3-array": "^3.2.4",
 		"d3-scale": "^4.0.2",
 		"layerchart": "https://pkg.pr.new/layerchart@484",
+		"mathjax": "^3.2.2",
 		"three": "^0.175.0"
 	}
 }
