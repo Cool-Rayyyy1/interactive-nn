@@ -70,6 +70,10 @@
 			segment: 'Calculus',
 			path: '/calculus'
 		},
+		motivation: {
+			segment: 'Motivation',
+			path: '/calculus/motivation'
+		},
 		'derivative-of-activation-functions': {
 			segment: 'Derivative of Activation Functions',
 			path: '/calculus/derivative-of-activation-functions'

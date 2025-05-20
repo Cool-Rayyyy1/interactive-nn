@@ -90,6 +90,10 @@
 				url: '/calculus',
 				items: [
 					{
+						title: 'Motivation',
+						url: '/calculus/motivation'
+					},
+					{
 						title: 'Derivative of Activation Functions',
 						url: '/calculus/derivative-of-activation-functions'
 					},

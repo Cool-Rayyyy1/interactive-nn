@@ -117,3 +117,10 @@ export interface SeriesData {
   derivative: number;
 }
 
+
+export interface BarChartData {
+  layer: number,
+  value: number,
+  area: number,
+  cumulativeArea: number,
+}

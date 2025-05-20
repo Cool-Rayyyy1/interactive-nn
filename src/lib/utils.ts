@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ActivationFunction, type Layer, type Network, type Input2d, type Weight, type Input3d, type Input } from "./types";
+import { ActivationFunction, type Layer, type Network, type Input2d, type Weight, type Input3d, type Input, type BarChartData } from "./types";
 
 const BIAS = 1;
 
@@ -304,30 +304,19 @@ export function networkValue3d(network: Network): Input3d[] {
 }
 
 /**
- * Flatten arrays of arrays one level deep
- * @param list The list to flatten
- * @param accessor An optional accessor function or string property key
- * @returns Flattened array
+ * Generates BarChartData from number of layers and a radius value
+ * @param layers The number of layers
+ * @param value Default radius value offset for a layer
+ * @returns Array of BarChartData to pass to a graph
  */
-export default function flatten<T, U>(
-  list: T[],
-  accessor: string | ((item: T) => U[]) = (d: T) => d as unknown as U[]
-): U[] {
-  // type the accessor function based on input
-  const acc: (item: T) => U[] =
-    typeof accessor === 'string' ? (d: T) => d[accessor as keyof T] as U[] : accessor;
-
-  // check if list is array and first element through accessor is array
-  const firstElement = list[0] && acc(list[0]);
-  if (Array.isArray(list) && Array.isArray(firstElement)) {
-    let flat: U[] = [];
-    const l = list.length;
-    for (let i = 0; i < l; i += 1) {
-      flat = flat.concat(acc(list[i]));
-    }
-    return flat;
+export default function genBarChartData(layers: number, value: number): BarChartData[] {
+  let cumulativeArea: number = 0;
+  let generated: BarChartData[] = [];
+  for (let idx = 1; idx <= layers; idx++) {
+    const area = (idx * value) ** 2 * Math.PI - cumulativeArea;
+    cumulativeArea += area;
+    generated.push({ layer: idx, value: value, area, cumulativeArea });
   }
-
-  // type assertion here since we know list contains U[] if not flattened
-  return list as unknown as U[];
+  return generated;
 }
+
