@@ -94,8 +94,12 @@
 						url: '/calculus/motivation'
 					},
 					{
-						title: 'Derivative of Activation Functions',
-						url: '/calculus/derivative-of-activation-functions'
+						title: 'Derivatives',
+						url: '/calculus/derivatives'
+					},
+					{
+						title: 'Derivatives of Activation Functions',
+						url: '/calculus/derivatives-of-activation-functions'
 					},
 					{
 						title: 'Gradients',

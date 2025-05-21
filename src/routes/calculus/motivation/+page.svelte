@@ -69,8 +69,24 @@
 			<CalculusComposed {layers} {value} />
 		</div>
 
-		We can call the amount added added {#key layers}<Mathjax math={`\\(dx\\)`} />{/key} for the
-		<span class="italic">difference in x</span>. For everytime the layers are increased by 1,
-		{#key layers}<Mathjax math={`\\( dx = 1\\)`} />{/key}.
+		<div>
+			In this example, we have a base {#key layers}<Mathjax math={`\\(x = 10\\)`} />{/key}, which is
+			the radius in th example. We have 10 rings of width 1. We also know that the height of each of
+			the rings is equal to the circumference of the circle at that point, so {#key layers}<Mathjax
+					math={`\\(2 \\pi r = 2\\pi (10) = 62.83\\)`}
+				/>{/key}. We can now use these values to find the area of a triangle {#key layers}<Mathjax
+					math={`\\(\\frac{1}{2}*10* 62.83 = 314.16 \\)`}
+				/>{/key} which matches the value from our graph!
+		</div>
+
+		<div class="mt-2">
+			We can generalize this insight. If we turn the area of a circle into a rings, then unroll
+			those rings into rectangular shapes, we can easily find the area of each rectangle. If we
+			align each of these rectangles side by side, they start to resemble a triangle. The base of
+			this triangle is the radius, and the height is the circumference. And for a triangle, we want
+			half of that area. So, together, that combines to {#key layers}<Mathjax
+					math={`\\(\\frac{1}{2} * \\pi * r * r =  \\frac{1}{2} * \\pi * r^2 \\)`}
+				/>{/key}, which is the formula for the area of the triangle.
+		</div>
 	</article>
 </div>

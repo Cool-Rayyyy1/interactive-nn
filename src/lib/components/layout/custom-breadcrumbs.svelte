@@ -74,9 +74,13 @@
 			segment: 'Motivation',
 			path: '/calculus/motivation'
 		},
-		'derivative-of-activation-functions': {
-			segment: 'Derivative of Activation Functions',
-			path: '/calculus/derivative-of-activation-functions'
+		derivatives: {
+			segment: 'Derivatives',
+			path: '/calculus/derivative'
+		},
+		'derivatives-of-activation-functions': {
+			segment: 'Derivatives of Activation Functions',
+			path: '/calculus/derivatives-of-activation-functions'
 		},
 		gradients: {
 			segment: 'Gradients',

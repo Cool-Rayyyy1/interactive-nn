@@ -53,26 +53,26 @@
 <div class="flex justify-center">
 	<article class="prose lg:prose-xl">
 		<div id="derivative-of-activation-functions">
-			<h2>Derivatives of Activation Function?</h2>
+			<h2>Derivatives of Activation Function</h2>
 		</div>
 
 		<div id="step">
-			<img class="m-2" alt="The Sign Function" src={sign_fn} />
+			<h3>Step</h3>
 			<ActivationChart data={stepData} showDx={true} {keys} />
 		</div>
 
 		<div id="sigmoid">
-			<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
+			<h3>Sigmoid</h3>
 			<ActivationChart data={sigmoidData} showDx={true} {keys} />
 		</div>
 
 		<div id="tanh">
-			<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
+			<h3>TanH</h3>
 			<ActivationChart data={tanhData} showDx={true} {keys} />
 		</div>
 
 		<div id="relu">
-			<img class="m-2" alt="The ReLU Function" src={relu_fn} />
+			<h3>ReLU</h3>
 			<ActivationChart data={reluData} showDx={true} {keys} />
 		</div>
 	</article>
