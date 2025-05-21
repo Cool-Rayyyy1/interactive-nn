@@ -59,21 +59,25 @@
 		</div>
 
 		<div id="step">
+			<h3>Step</h3>
 			<img class="m-2" alt="The Sign Function" src={sign_fn} />
 			<ActivationChart data={stepData} showDx={false} {keys} />
 		</div>
 
 		<div id="sigmoid">
+			<h2>Sigmoid</h2>
 			<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
 			<ActivationChart data={sigmoidData} showDx={false} {keys} />
 		</div>
 
 		<div id="tanh">
+			<h3>TanH</h3>
 			<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
 			<ActivationChart data={tanhData} showDx={false} {keys} />
 		</div>
 
 		<div id="relu">
+			<h3>ReLU</h3>
 			<img class="m-2" alt="The ReLU Function" src={relu_fn} />
 			<ActivationChart data={reluData} showDx={false} {keys} />
 		</div>
