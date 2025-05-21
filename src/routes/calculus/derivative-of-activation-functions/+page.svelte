@@ -50,32 +50,30 @@
 	);
 </script>
 
-<div>
-	<h1>Activation Functions</h1>
+<div class="flex justify-center">
+	<article class="prose lg:prose-xl">
+		<div id="derivative-of-activation-functions">
+			<h2>Derivatives of Activation Function?</h2>
+		</div>
 
-	<div id="what-is-an-activation-function">
-		<h1>What is an Activation Function?</h1>
-		<p>Activation functions are non-linear transformations.</p>
-		<p>An Activation Function applies a non-linear transformation to some weighted input.</p>
-	</div>
+		<div id="step">
+			<img class="m-2" alt="The Sign Function" src={sign_fn} />
+			<ActivationChart data={stepData} showDx={true} {keys} />
+		</div>
 
-	<div id="step">
-		<img class="m-2" alt="The Sign Function" src={sign_fn} />
-		<ActivationChart data={stepData} showDx={true} {keys} />
-	</div>
+		<div id="sigmoid">
+			<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
+			<ActivationChart data={sigmoidData} showDx={true} {keys} />
+		</div>
 
-	<div id="sigmoid">
-		<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
-		<ActivationChart data={sigmoidData} showDx={true} {keys} />
-	</div>
+		<div id="tanh">
+			<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
+			<ActivationChart data={tanhData} showDx={true} {keys} />
+		</div>
 
-	<div id="tanh">
-		<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
-		<ActivationChart data={tanhData} showDx={true} {keys} />
-	</div>
-
-	<div id="relu">
-		<img class="m-2" alt="The ReLU Function" src={relu_fn} />
-		<ActivationChart data={reluData} showDx={true} {keys} />
-	</div>
+		<div id="relu">
+			<img class="m-2" alt="The ReLU Function" src={relu_fn} />
+			<ActivationChart data={reluData} showDx={true} {keys} />
+		</div>
+	</article>
 </div>
