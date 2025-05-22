@@ -75,10 +75,7 @@
 		mesh = ref;
 	}}
 	position.y={0.5}
->
-	<T.BoxGeometry />
-	<T.MeshBasicMaterial {color} wireframe />
-</T.Mesh>
+></T.Mesh>
 
 <Grid
 	sectionColor={color}
