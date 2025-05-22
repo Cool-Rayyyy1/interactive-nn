@@ -2,6 +2,7 @@
 	import CalculusBars from '$lib/components/charts/calculus-bars.svelte';
 	import CalculusCircle from '$lib/components/charts/calculus-circle.svelte';
 	import CalculusComposed from '$lib/components/charts/calculus-composed.svelte';
+	import TriangleAreaChart from '$lib/components/charts/triangle-area-chart.svelte';
 	import Mathjax from '$lib/mathjax/mathjax.svelte';
 
 	let layers: number = $state(10);
@@ -78,6 +79,8 @@
 					math={`\\(\\frac{1}{2}*10* 62.83 = 314.16 \\)`}
 				/>{/key} which matches the value from our graph!
 		</div>
+
+		<TriangleAreaChart />
 
 		<div class="mt-2">
 			We can generalize this insight. If we turn the area of a circle into a rings, then unroll
