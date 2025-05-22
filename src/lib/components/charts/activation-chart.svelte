@@ -48,7 +48,7 @@ Generates a 2d plot for the provided range and activation function
 						/>
 						{#if showDx}
 							<Tooltip.Item
-								label="derivative"
+								label="Derivative"
 								value={data.derivative}
 								color="oklch(62.3% 0.214 259.815)"
 							/>
