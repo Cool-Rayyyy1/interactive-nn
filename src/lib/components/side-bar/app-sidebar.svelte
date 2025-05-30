@@ -102,8 +102,8 @@
 						url: '/calculus/derivatives-of-activation-functions'
 					},
 					{
-						title: 'Gradients',
-						url: '/calculus/gradients'
+						title: 'Gradient Descent',
+						url: '/calculus/gradient-descent'
 					},
 					{
 						title: 'Backpropagation',

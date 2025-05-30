@@ -82,9 +82,9 @@
 			segment: 'Derivatives of Activation Functions',
 			path: '/calculus/derivatives-of-activation-functions'
 		},
-		gradients: {
-			segment: 'Gradients',
-			path: '/calculus/gradients'
+		'gradient-descent': {
+			segment: 'Gradient Descent',
+			path: '/calculus/gradient-descent'
 		},
 		backpropagation: {
 			segment: 'Backpropagation',
