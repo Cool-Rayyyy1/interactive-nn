@@ -9,6 +9,7 @@
 	type BreadcrumbObject = { segment: string; path: string };
 
 	let lookup: LookupMap = {
+		'': { segment: 'Welcome!', path: '/' },
 		'getting-started': { segment: 'Getting Started', path: '/getting-started' },
 		'what-is-a-neural-network': {
 			segment: 'What is a Neural Network?',
@@ -102,20 +103,27 @@ into a human-friendly format.
 -->
 <Breadcrumb.Root>
 	<Breadcrumb.List>
-		{@const segments = page.url.pathname
-			.split(/[/\#]/)
-			.concat([page.url.hash.replace('#', '')])
-			.filter((word) => word != '')}
-		{#each segments as segment, index}
-			{@const breadcrumb: BreadcrumbObject | undefined = lookup[segment]}
-			{#if breadcrumb}
-				<Breadcrumb.Item class="hidden md:block">
-					<Breadcrumb.Link href={breadcrumb.path}>{breadcrumb.segment}</Breadcrumb.Link>
-				</Breadcrumb.Item>
-				{#if index < segments.length - 1}
-					<Breadcrumb.Separator class="hidden md:block" />
+		{#if page.url.pathname === '/'}
+			<Breadcrumb.Item class="hidden md:block">
+				<Breadcrumb.Link href={'/'}>Welcome!</Breadcrumb.Link>
+			</Breadcrumb.Item>
+		{:else}
+			{@const segments = page.url.pathname
+				.split(/[/\#]/)
+				.concat([page.url.hash.replace('#', '')])
+				.filter((word) => word != '')}
+			{console.log(page.url.pathname)}
+			{#each segments as segment, index}
+				{@const breadcrumb: BreadcrumbObject | undefined = lookup[segment]}
+				{#if breadcrumb}
+					<Breadcrumb.Item class="hidden md:block">
+						<Breadcrumb.Link href={breadcrumb.path}>{breadcrumb.segment}</Breadcrumb.Link>
+					</Breadcrumb.Item>
+					{#if index < segments.length - 1}
+						<Breadcrumb.Separator class="hidden md:block" />
+					{/if}
 				{/if}
-			{/if}
-		{/each}
+			{/each}
+		{/if}
 	</Breadcrumb.List>
 </Breadcrumb.Root>
