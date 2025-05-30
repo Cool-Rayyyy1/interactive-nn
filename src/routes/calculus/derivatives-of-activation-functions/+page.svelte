@@ -1,8 +1,4 @@
 <script lang="ts">
-	import sign_fn from '$lib/assets/sign_fn.svg';
-	import sigmoid_fn from '$lib/assets/sigmoid_fn.svg';
-	import tanh_fn from '$lib/assets/tanh_fn.svg';
-	import relu_fn from '$lib/assets/relu_fn.svg';
 	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
 	import { ActivationFunction, type SeriesData } from '$lib/types';
 	import { activate, derive, range } from '$lib/utils';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { chartBlue, chartGreen } from '$lib/colors';
 	import { range } from '$lib/utils';
-	import { Axis, Chart, Svg, Highlight, Spline, Tooltip, Legend } from 'layerchart';
+	import { Axis, Chart, Svg, Highlight, Spline, Tooltip } from 'layerchart';
 
 	interface Data {
 		time: number;
