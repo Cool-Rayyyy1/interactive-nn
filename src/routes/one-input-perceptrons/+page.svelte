@@ -1,1 +1,21 @@
-<h1>Perceptrons</h1>
+<div class="mt-4 flex justify-center">
+	<article class="prose lg:prose-xl">
+		<h2>One Input Perceptrons</h2>
+		<p>
+			<span class="text-green-400">Perceptrons</span> are the classic building blocks of
+			<span class="text-blue-400">Neural Networks</span>. We will start by learning what
+			<span class="text-green-400">Perceptrons</span>
+			are, how they work, and some examples of <span class="text-green-400">Perceptrons</span> with
+			one input. This will help build our intuition before learning about
+			<span class="text-green-400">Perceptrons</span> with two inputs. This is covered in the
+			<a href="/two-input-perceptrons">next section</a>.
+		</p>
+
+		<h3>Section Content</h3>
+		<ul>
+			<li><a href="/one-input-perceptrons/what-is-a-perceptron">What is a Perceptron?</a></li>
+			<li><a href="/one-input-perceptrons/one-layer-perceptron">One Layer Perceptron</a></li>
+			<li><a href="/one-input-perceptrons/two-layer-perceptron">Two Layer Perceptron</a></li>
+		</ul>
+	</article>
+</div>

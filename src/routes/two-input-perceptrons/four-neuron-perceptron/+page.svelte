@@ -19,12 +19,25 @@
 	setNetworkContext(network);
 </script>
 
-<h1>Step Decision Function</h1>
-<div class="h-[750px] w-full">
-	<Canvas>
-		<DefaultScene bind:controls bind:mesh bind:data />
-	</Canvas>
-</div>
-<div class="m-2">
-	<TwoLayerTwoInputFourNeuron />
+<div class="flex w-full flex-col justify-center">
+	<div class="mt-4 flex max-w-prose flex-col justify-center">
+		<article class="prose lg:prose-xl">
+			<h2>Two Layer, Two Input, Four Neuron Perceptron</h2>
+			<p>This is a more advanced example with two layers, two inputs, and four neurons.</p>
+			<p>
+				It uses a <a href="/activation-functions#step">Step</a> function by default. Experiment with
+				the values!
+			</p>
+		</article>
+	</div>
+	<div class="max-w-4/5">
+		<div class="h-[500px] w-full border border-blue-400">
+			<Canvas>
+				<DefaultScene bind:controls bind:mesh bind:data />
+			</Canvas>
+		</div>
+		<div class="m-2">
+			<TwoLayerTwoInputFourNeuron />
+		</div>
+	</div>
 </div>
