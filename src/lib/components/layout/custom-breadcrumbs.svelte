@@ -90,6 +90,10 @@
 		backpropagation: {
 			segment: 'Backpropagation',
 			path: '/calculus/backpropagation'
+		},
+		about: {
+			segment: 'About',
+			path: '/about'
 		}
 	};
 </script>

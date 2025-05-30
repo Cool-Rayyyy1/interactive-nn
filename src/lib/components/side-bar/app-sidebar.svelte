@@ -150,5 +150,12 @@
 			</Sidebar.Group>
 		{/each}
 	</Sidebar.Content>
+	<Sidebar.Footer>
+		<Sidebar.Group>
+			<Sidebar.GroupLabel class="text-md font-bold text-blue-400 hover:bg-sidebar-accent"
+				><a href="/about">About</a></Sidebar.GroupLabel
+			>
+		</Sidebar.Group>
+	</Sidebar.Footer>
 	<Sidebar.Rail />
 </Sidebar.Root>
