@@ -28,7 +28,8 @@ can be passed as props.
 -->
 <div class="w-22 rounded-md border-2 border-stone-400 bg-stone-500 p-2 shadow-md">
 	<span class="text-gray-900"
-		>W: <input
+		>w<sub class="text-xs">{data.layer + data.neuron},{data.index + data.neuron}</sub>
+		<input
 			class="w-10 bg-gray-100 p-1"
 			value={weight.value}
 			type="number"
