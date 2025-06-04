@@ -15,9 +15,10 @@
 			segment: 'What is a Neural Network?',
 			path: '/getting-started/what-is-a-neural-network'
 		},
-		neurons: { segment: 'Neurons', path: '/getting-started/neurons' },
-		inputs: { segment: 'Inputs', path: '/getting-started/inputs' },
-		outputs: { segment: 'Outputs', path: '/getting-started/outputs' },
+		neurons: { segment: 'Neurons', path: '/getting-started#neurons' },
+		inputs: { segment: 'Inputs', path: '/getting-started#inputs' },
+		outputs: { segment: 'Outputs', path: '/getting-started#outputs' },
+		perceptrons: { segment: 'Perceptrons', path: '/getting-started#perceptrons' },
 		'activation-functions': { segment: 'Activation Functions', path: '/activation-functions' },
 		'what-is-an-activation-function': {
 			segment: 'What is an Activation Function?',
@@ -42,10 +43,6 @@
 		'one-input-perceptrons': {
 			segment: 'One Dimension Perceptrons',
 			path: '/one-input-perceptrons'
-		},
-		'what-is-a-perceptron': {
-			segment: 'What is a Perceptron?',
-			path: '/one-input-perceptrons/what-is-a-perceptron'
 		},
 		'one-input-perceptron': {
 			segment: 'One Layer',

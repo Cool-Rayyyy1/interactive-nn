@@ -13,7 +13,6 @@
 
 		<h3>Section Content</h3>
 		<ul>
-			<li><a href="/one-input-perceptrons/what-is-a-perceptron">What is a Perceptron?</a></li>
 			<li>
 				<a href="/one-input-perceptrons/one-layer-perceptron"
 					>One Dimension Perceptrons with One Layer</a

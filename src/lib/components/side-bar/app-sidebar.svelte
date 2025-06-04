@@ -20,6 +20,10 @@
 					{
 						title: 'Outputs',
 						url: '/getting-started#outputs'
+					},
+					{
+						title: 'Perceptrons',
+						url: '/getting-started#perceptrons'
 					}
 				]
 			},
@@ -53,10 +57,6 @@
 				title: 'One Dimension Perceptrons',
 				url: '/one-input-perceptrons',
 				items: [
-					{
-						title: 'What is a Perceptron?',
-						url: '/one-input-perceptrons/what-is-a-perceptron'
-					},
 					{
 						title: 'One Layer',
 						url: '/one-input-perceptrons/one-layer-perceptron'

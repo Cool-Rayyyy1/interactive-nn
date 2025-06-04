@@ -29,3 +29,9 @@ Inputs are what the inputs to the network are.
 ## Outputs
 
 Outputs are the transformed values from the network.
+
+<div id="perceptrons"></div>
+
+## Perceptrons
+
+These ideas combine to form perceptrons.
