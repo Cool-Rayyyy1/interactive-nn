@@ -37,10 +37,10 @@
 
 		<Tooltip.Root anchor="top-left" x="data" xOffset={10} y="data" yOffset={10} contained={false}>
 			{#snippet children({ data })}
-				<Tooltip.Header>Data</Tooltip.Header>
+				<Tooltip.Header>Response</Tooltip.Header>
 				<Tooltip.List>
-					<Tooltip.Item label="Input" value={data.x} />
-					<Tooltip.Item label="Output" value={data.y.toFixed(2)} />
+					<Tooltip.Item label="f(x)" value={data.x} />
+					<Tooltip.Item label="f'(x)" value={data.y.toFixed(2)} />
 				</Tooltip.List>
 			{/snippet}
 		</Tooltip.Root>

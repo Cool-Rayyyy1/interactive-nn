@@ -39,16 +39,12 @@ Generates a 2d plot for the provided range and activation function
 
 			<Tooltip.Root>
 				{#snippet children({ data })}
-					<Tooltip.Header>Data</Tooltip.Header>
+					<Tooltip.Header>Response</Tooltip.Header>
 					<Tooltip.List>
-						<Tooltip.Item
-							label="Activation"
-							value={data.activation}
-							color="oklch(72.3% 0.219 149.579)"
-						/>
+						<Tooltip.Item label="f(x)" value={data.activation} color="oklch(72.3% 0.219 149.579)" />
 						{#if showDx}
 							<Tooltip.Item
-								label="Derivative"
+								label="f'(x)"
 								value={data.derivative}
 								color="oklch(62.3% 0.214 259.815)"
 							/>
