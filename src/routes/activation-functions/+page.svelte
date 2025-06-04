@@ -1,11 +1,8 @@
 <script lang="ts">
-	import sign_fn from '$lib/assets/sign_fn.svg';
-	import sigmoid_fn from '$lib/assets/sigmoid_fn.svg';
-	import tanh_fn from '$lib/assets/tanh_fn.svg';
-	import relu_fn from '$lib/assets/relu_fn.svg';
 	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
 	import { ActivationFunction, type SeriesData } from '$lib/types';
 	import { activate, derive, range } from '$lib/utils';
+	import Mathjax from '$lib/mathjax/mathjax.svelte';
 
 	const keys = ['activation'];
 
@@ -48,6 +45,33 @@
 				derivative: +derive(ActivationFunction.ReLU, val).toFixed(4)
 			}
 	);
+
+	const step: string = `$$
+f(x) = 
+\\left \\{
+\\begin{aligned}
+  -1     &\\qquad \\text{if } x < 0   \\\\
+  0      &\\qquad \\text{if } x = 0   \\\\
+  1      &\\qquad \\text{if } x > 0
+\\end{aligned} \\right.
+$$`;
+
+	const sigmoid: string = `$$
+f(x) = \\frac{1}{1 + e^{-x}}
+$$`;
+
+	const tanh: string = `$$
+f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}
+$$`;
+
+	const relu: string = `$$
+f(x) = \\text{max}(0, x) = 
+\\left \\{
+\\begin{aligned}
+  x     &\\qquad \\text{if } x > 0   \\\\
+  0      &\\qquad \\text{if } x \\leq 0   \\\\
+\\end{aligned} \\right. 
+$$`;
 </script>
 
 <div class="flex justify-center">
@@ -60,25 +84,25 @@
 
 		<div id="step">
 			<h3>Step</h3>
-			<img class="m-2" alt="The Sign Function" src={sign_fn} />
+			<Mathjax math={step} />
 			<ActivationChart data={stepData} showDx={false} {keys} />
 		</div>
 
 		<div id="sigmoid">
 			<h2>Sigmoid</h2>
-			<img class="m-2" alt="The Sigmoid Function" src={sigmoid_fn} />
+			<Mathjax math={sigmoid} />
 			<ActivationChart data={sigmoidData} showDx={false} {keys} />
 		</div>
 
 		<div id="tanh">
 			<h3>TanH</h3>
-			<img class="m-2" alt="The Tanh Function" src={tanh_fn} />
+			<Mathjax math={tanh} />
 			<ActivationChart data={tanhData} showDx={false} {keys} />
 		</div>
 
 		<div id="relu">
 			<h3>ReLU</h3>
-			<img class="m-2" alt="The ReLU Function" src={relu_fn} />
+			<Mathjax math={relu} />
 			<ActivationChart data={reluData} showDx={false} {keys} />
 		</div>
 	</article>
