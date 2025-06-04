@@ -28,8 +28,6 @@ $$`;
 	const generalPolynomial: string = `$$
 f(x) = k_0 + k_1 x + k_2 x^2 + k_3 x^3 + k_4 x^4 + k_5 x^4
 $$`;
-
-	$inspect(k_0);
 </script>
 
 <div class="mt-4 flex justify-center">
@@ -177,13 +175,5 @@ $$`;
 			<KInput index="4" value={k_4} />
 			<KInput index="5" value={k_5} />
 		</div>
-
-		{#key k_0}
-			<Mathjax
-				math={`$$
-f(x) = ${k_0} + k_1 x + k_2 x^2 + k_3 x^3 + k_4 x^4 + k_5 x^4
-$$`}
-			/>
-		{/key}
 	</article>
 </div>
