@@ -1,0 +1,11 @@
+<script lang="ts">
+	import { Input } from '$lib/components/ui/input/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+
+	let { index, value }: { index: string; value: number } = $props();
+</script>
+
+<div class="m-2 flex w-full max-w-sm flex-col gap-1.5">
+	<Label for="k">k<sub>{index}</sub></Label>
+	<Input type="number" id="k" placeholder="k" bind:value />
+</div>
