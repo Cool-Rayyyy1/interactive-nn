@@ -22,8 +22,10 @@
 <div class="flex w-full flex-col justify-center">
 	<div class="mt-4 flex max-w-prose flex-col justify-center">
 		<article class="prose lg:prose-xl">
-			<h2>Two Layer, Two Input, Four Neuron Perceptron</h2>
-			<p>This is a more advanced example with two layers, two inputs, and four neurons.</p>
+			<h2>Two Dimension Perceptron with Two Layers and Four Neurons</h2>
+			<p>
+				This is a more advanced example with two input dimensions, two layers, and four neurons.
+			</p>
 			<p>
 				It uses a <a href="/activation-functions#step">Step</a> function by default. Experiment with
 				the values!

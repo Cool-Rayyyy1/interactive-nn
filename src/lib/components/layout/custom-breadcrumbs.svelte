@@ -40,7 +40,7 @@
 			path: '/activation-functions/relu'
 		},
 		'one-input-perceptrons': {
-			segment: 'One Imput Perceptrons',
+			segment: 'One Dimension Perceptrons',
 			path: '/one-input-perceptrons'
 		},
 		'what-is-a-perceptron': {
@@ -48,23 +48,23 @@
 			path: '/one-input-perceptrons/what-is-a-perceptron'
 		},
 		'one-input-perceptron': {
-			segment: 'One Layer Perceptron',
+			segment: 'One Layer',
 			path: '/one-input-perceptrons/one-layer-perceptron'
 		},
 		'two-layer-perceptron': {
-			segment: 'Two Layer Perceptron',
+			segment: 'Two Layer',
 			path: '/one-input-perceptrons/two-layer-perceptron'
 		},
 		'two-input-perceptrons': {
-			segment: 'Two Input Perceptrons',
+			segment: 'Two Dimension Perceptrons',
 			path: '/two-input-perceptrons'
 		},
 		'one-layer-perceptron': {
-			segment: 'One Layer Perceptron',
+			segment: 'One Layer',
 			path: '/one-layer-perceptron'
 		},
 		'four-neuron-perceptron': {
-			segment: 'Four Neuron Perceptron',
+			segment: 'Two Layer with Four Neurons',
 			path: '/four-neuron-perceptron'
 		},
 		calculus: {
@@ -116,7 +116,6 @@ into a human-friendly format.
 				.split(/[/\#]/)
 				.concat([page.url.hash.replace('#', '')])
 				.filter((word) => word != '')}
-			{console.log(page.url.pathname)}
 			{#each segments as segment, index}
 				{@const breadcrumb: BreadcrumbObject | undefined = lookup[segment]}
 				{#if breadcrumb}

@@ -1,19 +1,29 @@
 <div class="mt-4 flex justify-center">
 	<article class="prose lg:prose-xl">
-		<h2>Two Input Perceptrons</h2>
+		<h2>Two Dimension Perceptrons</h2>
 		<p>
-			Two input <span class="text-green-400">Perceptrons</span> build on the same concepts and
-			intuition as one input <span class="text-green-400">Perceptrons</span>, but they add an
-			additional input. This makes the network 3d now, instead of 2d. This also makes the model more
-			expressive, and so it is able to capture more complex patterns.
+			<span class="text-green-400">Perceptrons</span> with two dimensions of input build on the same
+			concepts and intuition as the one input dimension
+			<span class="text-green-400">Perceptrons</span>. As the name suggests, they add an additional
+			input dimension. This makes the network visually 3d now. With the extra dimension, the model
+			is more expressive and is able to capture more complex patterns.
 		</p>
 
 		<h3>Section Content</h3>
 		<ul>
-			<li><a href="/two-input-perceptrons/one-layer-perceptron">One Layer Perceptron</a></li>
-			<li><a href="/two-input-perceptrons/two-layer-perceptron">Two Layer Perceptron</a></li>
 			<li>
-				<a href="/two-input-perceptrons/four-neuron-perceptron">Two Layer, Four Neuron Perceptron</a
+				<a href="/two-input-perceptrons/one-layer-perceptron"
+					>Two Dimension Perceptrons with One Layer</a
+				>
+			</li>
+			<li>
+				<a href="/two-input-perceptrons/two-layer-perceptron"
+					>Two Dimension Perceptrons with Two Layers</a
+				>
+			</li>
+			<li>
+				<a href="/two-input-perceptrons/four-neuron-perceptron"
+					>Two Dimension Perceptrons with Two Layers and Four Neurons</a
 				>
 			</li>
 		</ul>
