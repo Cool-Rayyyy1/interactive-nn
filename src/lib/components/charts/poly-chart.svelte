@@ -1,25 +1,38 @@
 <script lang="ts">
 	import { Legend, LineChart, Spline, Tooltip } from 'layerchart';
-	import { range } from '$lib/utils';
+
+	let {
+		coefficient = $bindable(),
+		range,
+		yMin,
+		yMax,
+		exp
+	}: { coefficient: number; range: number[]; yMin: number; yMax: number; exp: number } = $props();
 
 	interface Data {
 		x: number;
 		y: number;
 	}
 
-	const dataRange = range(-5, 5, 0.1);
-
-	const data: Data[] = dataRange.map(
-		(val): Data =>
-			<Data>{
-				x: val,
-				y: val ** 3
-			}
+	const data: Data[] = $derived(
+		range.map(
+			(val): Data =>
+				<Data>{
+					x: val,
+					y: coefficient * val ** exp
+				}
+		)
 	);
 </script>
 
 <div class="h-[300px] w-full rounded-sm border border-blue-400 p-2">
-	<LineChart {data} x="x" y="y" padding={{ top: 0, right: 0, bottom: 40, left: 70 }}>
+	<LineChart
+		{data}
+		x="x"
+		y="y"
+		yDomain={[yMin, yMax]}
+		padding={{ top: 0, right: 0, bottom: 40, left: 70 }}
+	>
 		{#snippet spline()}
 			<Spline class="stroke-blue-400 stroke-2" />
 		{/snippet}
@@ -62,7 +75,7 @@
 				contained={false}
 			>
 				{#snippet children({ data })}
-					{context.x(data)}
+					{context.x(data).toFixed(2)}
 				{/snippet}
 			</Tooltip.Root>
 
@@ -70,7 +83,7 @@
 				{#snippet children({ data })}
 					<Tooltip.Header>Response</Tooltip.Header>
 					<Tooltip.List>
-						<Tooltip.Item label="x" value={data.x} />
+						<Tooltip.Item label="x" value={data.x.toFixed(2)} />
 						<Tooltip.Item label="f(x)" value={data.y.toFixed(2)} />
 					</Tooltip.List>
 				{/snippet}

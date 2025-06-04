@@ -1,227 +1,55 @@
 <script lang="ts">
 	import { Legend, ScatterChart, Tooltip } from 'layerchart';
 
-	const data = [
-		// 0
-		{
-			x: 0,
-			y: 0
-		},
-		{
-			x: 0.3,
-			y: 2
-		},
-		{
-			x: 0.5,
-			y: 5
-		},
-		{
-			x: 0.7,
-			y: 7
-		},
-		{
-			x: 0.9,
-			y: 8
-		},
-		// 1
-		{
-			x: 1,
-			y: 10
-		},
-		{
-			x: 1.1,
-			y: 11
-		},
-		{
-			x: 1.4,
-			y: 13
-		},
-		{
-			x: 1.5,
-			y: 13
-		},
-		{
-			x: 1.8,
-			y: 14
-		},
-		// 2
-		{
-			x: 2.2,
-			y: 12
-		},
-		{
-			x: 2.3,
-			y: 6
-		},
-		{
-			x: 2.5,
-			y: -1
-		},
-		{
-			x: 2.9,
-			y: -5
-		},
-		{
-			x: 2,
-			y: 15
-		},
-		// 3
-		{
-			x: 3,
-			y: -10
-		},
-		{
-			x: 3.1,
-			y: -9
-		},
-		{
-			x: 3.4,
-			y: -2
-		},
-		{
-			x: 3.7,
-			y: 3
-		},
-		{
-			x: 3.9,
-			y: 4
-		},
-		// 4
-		{
-			x: 4,
-			y: 5
-		},
-		{
-			x: 4.1,
-			y: 7
-		},
-		{
-			x: 4.4,
-			y: 10
-		},
-		{
-			x: 4.5,
-			y: 10
-		},
-		{
-			x: 4.8,
-			y: 11
-		},
-		// 5
-		{
-			x: 5,
-			y: 12
-		},
-		{
-			x: 5.3,
-			y: 13
-		},
-		{
-			x: 5.4,
-			y: 15
-		},
-		{
-			x: 5.5,
-			y: 16
-		},
-		{
-			x: 5.8,
-			y: 16
-		},
-		// 6
-		{
-			x: 6,
-			y: 17
-		},
-		{
-			x: 6.3,
-			y: 13
-		},
-		{
-			x: 6.4,
-			y: 7
-		},
-		{
-			x: 6.5,
-			y: 6
-		},
-		{
-			x: 6.8,
-			y: 3
-		},
-		// 7
-		{
-			x: 7,
-			y: 0
-		},
-		{
-			x: 7.1,
-			y: -1
-		},
-		{
-			x: 7.2,
-			y: -3
-		},
-		{
-			x: 7.5,
-			y: -3
-		},
-		{
-			x: 7.9,
-			y: -4
-		},
-		// 8
-		{
-			x: 8,
-			y: -3
-		},
-		{
-			x: 8.2,
-			y: -1
-		},
-		{
-			x: 8.5,
-			y: 0
-		},
-		{
-			x: 8.6,
-			y: 3
-		},
-		{
-			x: 8.9,
-			y: 3
-		},
-		// 9
-		{
-			x: 9,
-			y: 4
-		},
-		{
-			x: 9.1,
-			y: 3
-		},
-		{
-			x: 9.4,
-			y: 2
-		},
-		{
-			x: 9.6,
-			y: 0
-		},
-		{
-			x: 9.9,
-			y: -2
-		},
-		// 10
-		{
-			x: 10,
-			y: -4
-		}
-	];
+	let {
+		k_0 = $bindable(),
+		k_1 = $bindable(),
+		k_2 = $bindable(),
+		k_3 = $bindable(),
+		range,
+		yMin,
+		yMax
+	}: {
+		k_0: number;
+		k_1: number;
+		k_2: number;
+		k_3: number;
+		range: number[];
+		yMin: number;
+		yMax: number;
+	} = $props();
+
+	interface Data {
+		x: number;
+		y: number;
+	}
+
+	function polynomial(x: number, k_0: number, k_1: number, k_2: number, k_3: number): number {
+		return k_0 + k_1 * x + k_2 * x ** 2 + k_3 * x ** 3;
+	}
+
+	const data: Data[] = $derived(
+		range.map((val): Data => {
+			const x = val;
+			const y = polynomial(x, k_0, k_1, k_2, k_3);
+			const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+			const noise = (Math.random() / 10) * plusOrMinus;
+			return <Data>{
+				x,
+				y: y + noise * Math.floor(yMax / 2)
+			};
+		})
+	);
 </script>
 
 <div class="h-[400px] rounded-sm border border-blue-400 p-4">
-	<ScatterChart {data} x="x" y="y" padding={{ top: 0, right: 0, bottom: 50, left: 50 }}>
+	<ScatterChart
+		{data}
+		x="x"
+		y="y"
+		padding={{ top: 0, right: 0, bottom: 50, left: 50 }}
+		yDomain={[yMin, yMax]}
+	>
 		{#snippet legend()}
 			<Legend
 				placement="bottom"
@@ -248,7 +76,7 @@
 				class="mr-[2px] whitespace-nowrap rounded-sm border border-primary bg-surface-100 px-1 py-[2px] text-[10px] font-semibold text-primary"
 			>
 				{#snippet children({ data })}
-					{context.y(data)}
+					{context.y(data).toFixed(2)}
 				{/snippet}
 			</Tooltip.Root>
 
