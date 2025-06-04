@@ -73,7 +73,7 @@ f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}
 $$`;
 
 	const dx_tanh: string = `$$
-f^{\\prime}(x) = 1 - \\left( \\frac{e^x - e^{-x}}{e^x + e^{-x}} \\right) = 1 - \\text{tanh}(x)^2
+f^{\\prime}(x) = 1 - \\left( \\frac{e^x - e^{-x}}{e^x + e^{-x}} \\right)^2 = 1 - \\text{tanh}(x)^2
 $$`;
 
 	const relu: string = `$$
