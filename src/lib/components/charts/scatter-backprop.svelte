@@ -8,7 +8,8 @@
 		k_3 = $bindable(),
 		range,
 		yMin,
-		yMax
+		yMax,
+		noise
 	}: {
 		k_0: number;
 		k_1: number;
@@ -17,12 +18,15 @@
 		range: number[];
 		yMin: number;
 		yMax: number;
+		noise: boolean;
 	} = $props();
 
 	interface Data {
 		x: number;
 		y: number;
 	}
+
+	const on = noise == true ? 1 : 0;
 
 	function polynomial(x: number, k_0: number, k_1: number, k_2: number, k_3: number): number {
 		return k_0 + k_1 * x + k_2 * x ** 2 + k_3 * x ** 3;
@@ -33,10 +37,10 @@
 			const x = val;
 			const y = polynomial(x, k_0, k_1, k_2, k_3);
 			const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-			const noise = (Math.random() / 10) * plusOrMinus;
+			const noise = (Math.random() / 10) * plusOrMinus * Math.floor(yMax / 2) * on;
 			return <Data>{
 				x,
-				y: y + noise * Math.floor(yMax / 2)
+				y: y + noise
 			};
 		})
 	);

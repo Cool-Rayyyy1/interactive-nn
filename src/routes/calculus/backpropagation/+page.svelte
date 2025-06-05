@@ -6,6 +6,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { range } from '$lib/utils';
 	import PolyChart from '$lib/components/charts/poly-chart.svelte';
+	import ScatterLineComposedBackprop from '$lib/components/charts/scatter-line-composed-backprop.svelte';
 
 	let k_0 = $state(1);
 	let k_1 = $state(1);
@@ -17,7 +18,7 @@ x^3 + x^2 + x + 1
 $$`;
 
 	const basicPolynomialCoefficients: string = `$$
-4x^3 - 2x^2 + 7x + 8
+2x^3 - 2x^2 + 7x + 8
 $$`;
 
 	const generalPolynomial: string = `$$
@@ -51,17 +52,20 @@ $$`;
 			to represent this line.
 		</p>
 
-		<div>
-			<ScatterBackprop
-				k_0={3}
-				k_1={-2}
-				k_2={3}
-				k_3={-5}
-				range={range(-3, 3, 0.25)}
-				yMin={-200}
-				yMax={200}
-			/>
-		</div>
+		<Card.Root>
+			<Card.Content>
+				<ScatterBackprop
+					k_0={3}
+					k_1={-2}
+					k_2={3}
+					k_3={-5}
+					range={range(-3, 3.25, 0.25)}
+					yMin={-200}
+					yMax={200}
+					noise={true}
+				/>
+			</Card.Content>
+		</Card.Root>
 
 		<p>
 			Think of drawing some curvy line that will connect all of these dots. It is easy to do by
@@ -76,11 +80,43 @@ $$`;
 			-1, 0, 1, 2, etc.). This is a basic example of a polynomial:
 		</p>
 
-		<Mathjax math={basicPolynomial} />
+		<Card.Root class="mb-2">
+			<Card.Header>
+				<Mathjax math={basicPolynomial} />
+			</Card.Header>
+			<Card.Content>
+				<ScatterBackprop
+					k_0={1}
+					k_1={1}
+					k_2={1}
+					k_3={1}
+					range={range(-3, 3.25, 0.25)}
+					yMin={-100}
+					yMax={100}
+					noise={false}
+				/>
+			</Card.Content>
+		</Card.Root>
 
 		<p>And a more advanced one that has coefficients other than 1:</p>
 
-		<Mathjax math={basicPolynomialCoefficients} />
+		<Card.Root class="mb-2">
+			<Card.Header>
+				<Mathjax math={basicPolynomialCoefficients} />
+			</Card.Header>
+			<Card.Content>
+				<ScatterBackprop
+					k_0={8}
+					k_1={7}
+					k_2={-2}
+					k_3={2}
+					range={range(-3, 3.25, 0.25)}
+					yMin={-100}
+					yMax={100}
+					noise={false}
+				/>
+			</Card.Content>
+		</Card.Root>
 
 		<p>
 			Polynomials are useful in finding curves for complicated functions because we can combine the
@@ -92,41 +128,57 @@ $$`;
 			coefficient for each term is 1:
 		</p>
 
-		<div class=" flex w-full">
-			<div class="w-1/4">
-				<Mathjax math={`$$f(x) = 1$$`} />
-			</div>
-			<div class="w-3/4">
-				<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-5} yMax={5} exp={0} />
-			</div>
-		</div>
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<div class=" flex w-full">
+					<div class="w-1/4">
+						<Mathjax math={`$$f(x) = 1$$`} />
+					</div>
+					<div class="w-3/4">
+						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-5} yMax={5} exp={0} />
+					</div>
+				</div>
+			</Card.Content>
+		</Card.Root>
 
-		<div class="mt-2 flex w-full">
-			<div class="w-1/4">
-				<Mathjax math={`$$f(x) = x$$`} />
-			</div>
-			<div class="w-3/4">
-				<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-5} yMax={5} exp={1} />
-			</div>
-		</div>
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<div class="mt-2 flex w-full">
+					<div class="w-1/4">
+						<Mathjax math={`$$f(x) = x$$`} />
+					</div>
+					<div class="w-3/4">
+						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-5} yMax={5} exp={1} />
+					</div>
+				</div>
+			</Card.Content>
+		</Card.Root>
 
-		<div class="mt-2 flex w-full">
-			<div class="w-1/4">
-				<Mathjax math={`$$f(x) = x^2$$`} />
-			</div>
-			<div class="w-3/4">
-				<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-25} yMax={25} exp={2} />
-			</div>
-		</div>
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<div class="mt-2 flex w-full">
+					<div class="w-1/4">
+						<Mathjax math={`$$f(x) = x^2$$`} />
+					</div>
+					<div class="w-3/4">
+						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-25} yMax={25} exp={2} />
+					</div>
+				</div>
+			</Card.Content>
+		</Card.Root>
 
-		<div class="mt-2 flex w-full">
-			<div class="w-1/4">
-				<Mathjax math={`$$f(x) = x^3$$`} />
-			</div>
-			<div class="w-3/4">
-				<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-125} yMax={125} exp={3} />
-			</div>
-		</div>
+		<Card.Root>
+			<Card.Content>
+				<div class="mt-2 flex w-full">
+					<div class="w-1/4">
+						<Mathjax math={`$$f(x) = x^3$$`} />
+					</div>
+					<div class="w-3/4">
+						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-125} yMax={125} exp={3} />
+					</div>
+				</div>
+			</Card.Content>
+		</Card.Root>
 
 		<p>
 			We can generalize this to the following formula, where each <math>k</math> is a <Tooltip.Provider
@@ -145,7 +197,11 @@ $$`;
 			</Tooltip.Provider>on the number line:
 		</p>
 
-		<Mathjax math={generalPolynomial} />
+		<Card.Root>
+			<Card.Content>
+				<Mathjax math={generalPolynomial} />
+			</Card.Content>
+		</Card.Root>
 
 		<h3>Finding Coefficients Randomly</h3>
 
@@ -155,12 +211,16 @@ $$`;
 			with each of these values:
 		</p>
 
-		<div class="flex">
-			<KInput index="0" bind:value={k_0} min={-10} max={10} />
-			<KInput index="1" bind:value={k_1} min={-10} max={10} />
-			<KInput index="2" bind:value={k_2} min={-5} max={5} />
-			<KInput index="3" bind:value={k_3} min={-5} max={5} />
-		</div>
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<div class="flex">
+					<KInput index="0" bind:value={k_0} min={-10} max={10} />
+					<KInput index="1" bind:value={k_1} min={-10} max={10} />
+					<KInput index="2" bind:value={k_2} min={-5} max={5} />
+					<KInput index="3" bind:value={k_3} min={-5} max={5} />
+				</div>
+			</Card.Content>
+		</Card.Root>
 
 		<div>
 			<Card.Root class="mb-2">
@@ -168,14 +228,15 @@ $$`;
 					<div class="flex justify-center">{@render polynomialStatement()}</div>
 				</Card.Header>
 				<Card.Content>
-					<ScatterBackprop
+					<ScatterLineComposedBackprop
 						bind:k_0
 						bind:k_1
 						bind:k_2
 						bind:k_3
-						range={range(-3, 3, 0.25)}
+						dataRange={range(-3, 3, 0.25)}
 						yMin={-200}
 						yMax={200}
+						noise={true}
 					/>
 				</Card.Content>
 			</Card.Root>
