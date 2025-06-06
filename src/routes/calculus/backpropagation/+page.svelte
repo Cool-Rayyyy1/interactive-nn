@@ -8,6 +8,7 @@
 	import PolyChart from '$lib/components/charts/poly-chart.svelte';
 	import ScatterLineComposedBackprop from '$lib/components/charts/scatter-line-composed-backprop.svelte';
 	import ScatterLineComposedBackpropAnnotated from '$lib/components/charts/scatter-line-composed-backprop-annotated.svelte';
+	import ScatterBackpropFiveTerms from '$lib/components/charts/scatter-backprop-five-terms.svelte';
 
 	let k_0 = $state(1);
 	let k_1 = $state(1);
@@ -26,6 +27,13 @@ $$`;
 	const generalPolynomial: string = `$$
 f(x) = k_0 + k_1 x + k_2 x^2 + k_3 x^3
 $$`;
+
+	const fiveTermPolynomial: string = `$$
+f(x) = k_0 + k_1 x + k_2 x^2 + k_3 x^3 + k_4 x^4 + k_5 x^5
+$$`;
+
+	const mse: string = `$$
+\\text{Mean Squared Error (MSE)} = \\frac{\\sum_{i=1}^{n}{f(x_i)}}{n}$$`;
 </script>
 
 <div class="mt-4 flex justify-center">
@@ -316,13 +324,24 @@ $$`;
 			correct. This is what a <span class="text-green-400">Loss Function</span> tells us.
 		</p>
 
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<div class="flex">
+					<KInput index="0" bind:value={k_0} min={-10} max={10} />
+					<KInput index="1" bind:value={k_1} min={-10} max={10} />
+					<KInput index="2" bind:value={k_2} min={-5} max={5} />
+					<KInput index="3" bind:value={k_3} min={-5} max={5} />
+				</div>
+			</Card.Content>
+		</Card.Root>
+
 		<div>
 			<Card.Root class="mb-2">
 				<Card.Header class="flex justify-center">
 					<div class="flex justify-center">
 						<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
 					</div>
-					<div class="flex justify-center">Total Loss: {loss}</div>
+					<div class="flex justify-center"><math>Total Loss: {loss.toFixed(2)}</math></div>
 				</Card.Header>
 				<Card.Content>
 					<ScatterLineComposedBackpropAnnotated
@@ -339,5 +358,45 @@ $$`;
 				</Card.Content>
 			</Card.Root>
 		</div>
+
+		<p>
+			This loss is calculated using <a
+				href="https://en.wikipedia.org/wiki/Mean_squared_error"
+				target="_blank">Mean Squared Error</a
+			>. This Loss Function sums the squared value of each error (the difference between the actual
+			point and the predicted point on the curve), and then it divides it by the total number of
+			points to get the mean.
+		</p>
+
+		<Card.Root>
+			<Card.Content>
+				<Mathjax math={mse} />
+			</Card.Content>
+		</Card.Root>
+
+		<p>
+			As the curve gets closer and closer to fitting the points, the Loss gets closer to 0. The goal
+			is to make this Loss as small as possible! Try to find values <math>k</math> that have a Loss of
+			less than 50.
+		</p>
+
+		<p>
+			While it is possible to find good <math>k</math> values with low loss when fitting the curve manually,
+			how can we be sure this is the best possible curve and the lowest possible Loss? What if we have
+			a complicated five-term polynomial that we are trying to fit a curve to:
+		</p>
+
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<Mathjax math={fiveTermPolynomial} />
+			</Card.Content>
+		</Card.Root>
+
+		<ScatterBackpropFiveTerms />
+
+		<p>
+			This is where our tools like Derivitives and Gradient Descent become very important and
+			useful!
+		</p>
 	</article>
 </div>
