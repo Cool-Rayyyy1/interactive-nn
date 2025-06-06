@@ -7,11 +7,13 @@
 	import { range } from '$lib/utils';
 	import PolyChart from '$lib/components/charts/poly-chart.svelte';
 	import ScatterLineComposedBackprop from '$lib/components/charts/scatter-line-composed-backprop.svelte';
+	import ScatterLineComposedBackpropAnnotated from '$lib/components/charts/scatter-line-composed-backprop-annotated.svelte';
 
 	let k_0 = $state(1);
 	let k_1 = $state(1);
 	let k_2 = $state(1);
 	let k_3 = $state(1);
+	let loss = $state(0);
 
 	const basicPolynomial: string = `$$
 x^3 + x^2 + x + 1
@@ -25,10 +27,6 @@ $$`;
 f(x) = k_0 + k_1 x + k_2 x^2 + k_3 x^3
 $$`;
 </script>
-
-{#snippet polynomialStatement()}
-	<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
-{/snippet}
 
 <div class="mt-4 flex justify-center">
 	<article class="prose lg:prose-xl">
@@ -225,7 +223,7 @@ $$`;
 		<div>
 			<Card.Root class="mb-2">
 				<Card.Header>
-					<div class="flex justify-center">{@render polynomialStatement()}</div>
+					<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
 				</Card.Header>
 				<Card.Content>
 					<ScatterLineComposedBackprop
@@ -233,7 +231,7 @@ $$`;
 						bind:k_1
 						bind:k_2
 						bind:k_3
-						dataRange={range(-3, 3, 0.25)}
+						dataRange={range(-3, 3.25, 0.25)}
 						yMin={-200}
 						yMax={200}
 						noise={true}
@@ -309,6 +307,37 @@ $$`;
 					</Card.Root>
 				</div>
 			</div>
+		</div>
+
+		<h3>Loss Function</h3>
+
+		<p>
+			One issue is knowing when exactly the best curve has been found, as many curves look about
+			correct. This is what a <span class="text-green-400">Loss Function</span> tells us.
+		</p>
+
+		<div>
+			<Card.Root class="mb-2">
+				<Card.Header class="flex justify-center">
+					<div class="flex justify-center">
+						<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
+					</div>
+					<div class="flex justify-center">Total Loss: {loss}</div>
+				</Card.Header>
+				<Card.Content>
+					<ScatterLineComposedBackpropAnnotated
+						bind:k_0
+						bind:k_1
+						bind:k_2
+						bind:k_3
+						dataRange={range(-3, 3.25, 0.25)}
+						yMin={-200}
+						yMax={200}
+						noise={true}
+						bind:loss
+					/>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	</article>
 </div>
