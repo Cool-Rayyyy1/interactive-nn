@@ -56,7 +56,6 @@
 
 	$effect(() => {
 		let sum = data.reduce((acc, curr) => acc + (curr.y - curr.line) ** 2, 0);
-		console.log(sum);
 		loss = sum / data.length;
 	});
 </script>
