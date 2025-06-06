@@ -32,27 +32,32 @@
 
 	const on = noise == true ? 1 : 0;
 
+	const noiseData: number[] = dataRange.map(() => {
+		const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+		return (Math.random() / 10) * plusOrMinus * Math.floor(yMax / 2) * on;
+	});
+
 	function polynomial(x: number, k_0: number, k_1: number, k_2: number, k_3: number): number {
 		return k_0 + k_1 * x + k_2 * x ** 2 + k_3 * x ** 3;
 	}
 
 	const data: Data[] = $derived(
-		dataRange.map((val): Data => {
+		dataRange.map((val, i): Data => {
 			const x = val;
 			const y = polynomial(x, k_0, k_1, k_2, k_3);
 			const line = polynomial(x, 3, -2, 3, -5);
-			const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-			const noise = (Math.random() / 10) * plusOrMinus * Math.floor(yMax / 2) * on;
 			return <Data>{
 				x,
 				y,
-				line: line + noise
+				line: line + noiseData[i]
 			};
 		})
 	);
 
 	$effect(() => {
-		loss = data.reduce((acc, curr) => acc + (curr.y + curr.line), 0);
+		let sum = data.reduce((acc, curr) => acc + (curr.y - curr.line) ** 2, 0);
+		console.log(sum);
+		loss = sum / data.length;
 	});
 </script>
 
@@ -115,8 +120,8 @@
 							color="oklch(79.2% 0.209 151.711)"
 						/>
 						<Tooltip.Item
-							label="Loss"
-							value={Math.abs(Math.abs(data.line) - Math.abs(data.y)).toFixed(2)}
+							label="Error"
+							value={Math.abs(data.y - data.line).toFixed(2)}
 							color="oklch(70.4% 0.191 22.216)"
 						/>
 					</Tooltip.List>
