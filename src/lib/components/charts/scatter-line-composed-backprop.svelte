@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
-	import { Axis, Chart, Points, Spline, Svg } from 'layerchart';
+	import { Axis, Chart, Points, Spline, Svg, Tooltip, Highlight } from 'layerchart';
 
 	let {
 		k_0 = $bindable(),
@@ -62,6 +62,7 @@
 		y1Domain={[yMin, yMax]}
 		y1Scale={scaleLinear()}
 		y1Range={({ yScale }) => yScale.domain()}
+		tooltip={{ mode: 'bisect-x' }}
 	>
 		{#snippet children({ context })}
 			<Svg>
@@ -69,7 +70,41 @@
 				<Axis placement="bottom" rule grid />
 				<Spline class="stroke-blue-400 stroke-2" />
 				<Points y={(d) => context.y1Scale?.(d.line)} />
+				<Highlight points={{ class: 'fill-blue-400' }} lines />
+				<Highlight points={{ class: 'fill-green-400' }} y={(d) => context.y1Scale?.(d.line)} />
 			</Svg>
+
+			<Tooltip.Root {context}>
+				{#snippet children({ data })}
+					<Tooltip.Header value={'Response'} />
+					<Tooltip.List>
+						<Tooltip.Item label="x" value={data.x.toFixed(2)} color="oklch(67.3% 0.182 276.935)" />
+						<Tooltip.Item
+							label="f(x)"
+							value={data.y.toFixed(2)}
+							color="oklch(70.7% 0.165 254.624)"
+						/>
+						<Tooltip.Item
+							label="Point"
+							value={data.line.toFixed(2)}
+							color="oklch(79.2% 0.209 151.711)"
+						/>
+					</Tooltip.List>
+				{/snippet}
+			</Tooltip.Root>
+
+			<Tooltip.Root
+				{context}
+				x="data"
+				y={context.height}
+				anchor="top"
+				class="mt-[1px] whitespace-nowrap rounded-sm border border-primary bg-indigo-300 px-2 py-[1px] text-[10px] font-semibold text-primary"
+				contained={false}
+			>
+				{#snippet children({ data })}
+					{context.x(data)}
+				{/snippet}
+			</Tooltip.Root>
 		{/snippet}
 	</Chart>
 </div>
