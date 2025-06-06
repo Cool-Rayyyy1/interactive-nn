@@ -6,11 +6,12 @@
 		index,
 		value = $bindable(),
 		min,
-		max
-	}: { index: string; value: number; min: number; max: number } = $props();
+		max,
+		disabled
+	}: { index: string; value: number; min: number; max: number; disabled: boolean } = $props();
 </script>
 
 <div class="m-2 flex w-full max-w-sm flex-col gap-1.5">
 	<Label for="k">k<sub>{index}</sub></Label>
-	<Input type="number" id="k" placeholder="k" bind:value {min} {max} />
+	<Input {disabled} type="number" id="k" placeholder="k" bind:value {min} {max} />
 </div>

@@ -14,7 +14,12 @@
 	let k_1 = $state(1);
 	let k_2 = $state(1);
 	let k_3 = $state(1);
+
+	let k_1_min = $state(1);
+	// let k_1_range = range(-10, 11, 1);
+
 	let loss = $state(0);
+	let min_loss = $state(0);
 
 	const basicPolynomial: string = `$$
 x^3 + x^2 + x + 1
@@ -220,10 +225,10 @@ $$`;
 		<Card.Root class="mb-2">
 			<Card.Content>
 				<div class="flex">
-					<KInput index="0" bind:value={k_0} min={-10} max={10} />
-					<KInput index="1" bind:value={k_1} min={-10} max={10} />
-					<KInput index="2" bind:value={k_2} min={-5} max={5} />
-					<KInput index="3" bind:value={k_3} min={-5} max={5} />
+					<KInput index="0" bind:value={k_0} min={-10} max={10} disabled={false} />
+					<KInput index="1" bind:value={k_1} min={-10} max={10} disabled={false} />
+					<KInput index="2" bind:value={k_2} min={-5} max={5} disabled={false} />
+					<KInput index="3" bind:value={k_3} min={-5} max={5} disabled={false} />
 				</div>
 			</Card.Content>
 		</Card.Root>
@@ -327,10 +332,10 @@ $$`;
 		<Card.Root class="mb-2">
 			<Card.Content>
 				<div class="flex">
-					<KInput index="0" bind:value={k_0} min={-10} max={10} />
-					<KInput index="1" bind:value={k_1} min={-10} max={10} />
-					<KInput index="2" bind:value={k_2} min={-5} max={5} />
-					<KInput index="3" bind:value={k_3} min={-5} max={5} />
+					<KInput index="0" bind:value={k_0} min={-10} max={10} disabled={false} />
+					<KInput index="1" bind:value={k_1} min={-10} max={10} disabled={false} />
+					<KInput index="2" bind:value={k_2} min={-5} max={5} disabled={false} />
+					<KInput index="3" bind:value={k_3} min={-5} max={5} disabled={false} />
 				</div>
 			</Card.Content>
 		</Card.Root>
@@ -395,8 +400,51 @@ $$`;
 		<ScatterBackpropFiveTerms />
 
 		<p>
-			This is where our tools like Derivitives and Gradient Descent become very important and
+			This is where our tools like Derivatives and Gradient Descent become very important and
 			useful!
 		</p>
+
+		<h3>Finding Minimum Loss</h3>
+
+		<p>
+			Let's start by focusing only on <math>k<sub>1</sub></math>, and keeping
+			<math>k<sub>0</sub></math>, <math>k<sub>2</sub></math>, and <math>k<sub>3</sub></math> fixed.
+			For every <math>k<sub>1</sub></math> value tried, it's corresponding loss will be plotted.
+		</p>
+
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<div class="flex">
+					<KInput index="0" value={3} min={-10} max={10} disabled={true} />
+					<KInput index="1" bind:value={k_1_min} min={-10} max={10} disabled={false} />
+					<KInput index="2" value={2} min={-5} max={5} disabled={true} />
+					<KInput index="3" value={-5} min={-5} max={5} disabled={true} />
+				</div>
+			</Card.Content>
+		</Card.Root>
+
+		<div>
+			<Card.Root class="mb-2">
+				<Card.Header class="flex justify-center">
+					<div class="flex justify-center">
+						<math>f(x) = 3 - (22)x + (2)x<sup>2</sup> + (-5)x<sup>3</sup></math>
+					</div>
+					<div>{min_loss.toFixed(2)}</div>
+				</Card.Header>
+				<Card.Content>
+					<ScatterLineComposedBackpropAnnotated
+						k_0={3}
+						bind:k_1={k_1_min}
+						k_2={3}
+						k_3={-5}
+						dataRange={range(-3, 3.25, 0.25)}
+						yMin={-200}
+						yMax={200}
+						noise={true}
+						bind:loss={min_loss}
+					/>
+				</Card.Content>
+			</Card.Root>
+		</div>
 	</article>
 </div>
