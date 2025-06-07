@@ -9,17 +9,47 @@
 	import ScatterLineComposedBackprop from '$lib/components/charts/scatter-line-composed-backprop.svelte';
 	import ScatterLineComposedBackpropAnnotated from '$lib/components/charts/scatter-line-composed-backprop-annotated.svelte';
 	import ScatterBackpropFiveTerms from '$lib/components/charts/scatter-backprop-five-terms.svelte';
+	import { untrack } from 'svelte';
+	import LossPlot from '$lib/components/charts/loss-plot.svelte';
+
+	const OFFSET = 0.0001;
+
+	interface Data {
+		x: number;
+		y: number;
+		x_prime: number;
+		y_prime: number;
+	}
 
 	let k_0 = $state(1);
 	let k_1 = $state(1);
 	let k_2 = $state(1);
 	let k_3 = $state(1);
 
-	let k_1_min = $state(1);
-	// let k_1_range = range(-10, 11, 1);
+	let k_1_min: number = $state(1);
+	let k_1_min_prime: number = $derived(k_1_min + OFFSET);
+
+	let k_1_data: Data[] = $state([]);
 
 	let loss = $state(0);
 	let min_loss = $state(0);
+	let min_loss_prime = $state(0);
+
+	$effect(() => {
+		const x = k_1_min;
+		const y = min_loss;
+
+		const x_prime = k_1_min_prime;
+		const y_prime = min_loss_prime;
+
+		const point: Data = { x, y, x_prime, y_prime };
+
+		untrack(() => {
+			if (!k_1_data.some((obj) => obj.x === point.x)) k_1_data.push({ x, y, x_prime, y_prime });
+			k_1_data.filter((obj) => obj.y == 0);
+			k_1_data.sort((a, b) => a.x - b.x);
+		});
+	});
 
 	const basicPolynomial: string = `$$
 x^3 + x^2 + x + 1
@@ -93,7 +123,9 @@ $$`;
 
 		<Card.Root class="mb-2">
 			<Card.Header>
-				<Mathjax math={basicPolynomial} />
+				<Card.Title>
+					<Mathjax math={basicPolynomial} />
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<ScatterBackprop
@@ -113,7 +145,9 @@ $$`;
 
 		<Card.Root class="mb-2">
 			<Card.Header>
-				<Mathjax math={basicPolynomialCoefficients} />
+				<Card.Title>
+					<Mathjax math={basicPolynomialCoefficients} />
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<ScatterBackprop
@@ -236,7 +270,9 @@ $$`;
 		<div>
 			<Card.Root class="mb-2">
 				<Card.Header>
-					<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
+					<Card.Title>
+						<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
+					</Card.Title>
 				</Card.Header>
 				<Card.Content>
 					<ScatterLineComposedBackprop
@@ -343,9 +379,11 @@ $$`;
 		<div>
 			<Card.Root class="mb-2">
 				<Card.Header class="flex justify-center">
-					<div class="flex justify-center">
-						<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
-					</div>
+					<Card.Title>
+						<div class="flex justify-center">
+							<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
+						</div>
+					</Card.Title>
 					<div class="flex justify-center"><math>Total Loss: {loss.toFixed(2)}</math></div>
 				</Card.Header>
 				<Card.Content>
@@ -359,6 +397,7 @@ $$`;
 						yMax={200}
 						noise={true}
 						bind:loss
+						lossPrime={0}
 					/>
 				</Card.Content>
 			</Card.Root>
@@ -397,7 +436,11 @@ $$`;
 			</Card.Content>
 		</Card.Root>
 
-		<ScatterBackpropFiveTerms />
+		<Card.Root class="mb-2">
+			<Card.Content>
+				<ScatterBackpropFiveTerms />
+			</Card.Content>
+		</Card.Root>
 
 		<p>
 			This is where our tools like Derivatives and Gradient Descent become very important and
@@ -417,7 +460,7 @@ $$`;
 				<div class="flex">
 					<KInput index="0" value={3} min={-10} max={10} disabled={true} />
 					<KInput index="1" bind:value={k_1_min} min={-10} max={10} disabled={false} />
-					<KInput index="2" value={2} min={-5} max={5} disabled={true} />
+					<KInput index="2" value={3} min={-5} max={5} disabled={true} />
 					<KInput index="3" value={-5} min={-5} max={5} disabled={true} />
 				</div>
 			</Card.Content>
@@ -426,10 +469,12 @@ $$`;
 		<div>
 			<Card.Root class="mb-2">
 				<Card.Header class="flex justify-center">
-					<div class="flex justify-center">
-						<math>f(x) = 3 - (22)x + (2)x<sup>2</sup> + (-5)x<sup>3</sup></math>
-					</div>
-					<div>{min_loss.toFixed(2)}</div>
+					<Card.Title>
+						<div class="flex justify-center">
+							<math>f(x) = 3 - (22)x + (2)x<sup>2</sup> + (-5)x<sup>3</sup></math>
+						</div>
+						<div>{min_loss.toFixed(2)}</div>
+					</Card.Title>
 				</Card.Header>
 				<Card.Content>
 					<ScatterLineComposedBackpropAnnotated
@@ -442,9 +487,57 @@ $$`;
 						yMax={200}
 						noise={true}
 						bind:loss={min_loss}
+						bind:lossPrime={min_loss_prime}
 					/>
 				</Card.Content>
 			</Card.Root>
 		</div>
+
+		<div>
+			<Card.Root class="mb-2">
+				<Card.Header class="flex justify-center">
+					<Card.Title>
+						<div class="flex justify-center">
+							<math>k<sub>1</sub> Plotted Against Loss </math>
+						</div>
+					</Card.Title>
+				</Card.Header>
+				<Card.Content>
+					<LossPlot data={k_1_data} showDerivative={false} />
+				</Card.Content>
+			</Card.Root>
+		</div>
+
+		<p>
+			We can see clearly from this example that <math>k<sub>1</sub></math> has the lowest loss when
+			<math>k<sub>1</sub> = -2</math>, but only when <math>k<sub>0</sub> = 3</math>,
+			<math>k<sub>2</sub> = 3</math>, and <math>k<sub>3</sub> = -5</math>.
+		</p>
+
+		<p>
+			To help us know if we should increase or decrease <math>k<sub>1</sub></math> for our next
+			guess, we can take the derivative of that point. The slope of this derivative tells us if our
+			next guess for <math>k<sub>1</sub></math> should be bigger or smaller:
+		</p>
+
+		<div>
+			<Card.Root class="mb-2">
+				<Card.Header class="flex justify-center">
+					<Card.Title>
+						<div class="flex justify-center">
+							<math>k<sub>1</sub> Plotted Against Loss with Derivatives </math>
+						</div>
+					</Card.Title>
+				</Card.Header>
+				<Card.Content>
+					<LossPlot data={k_1_data} showDerivative={true} />
+				</Card.Content>
+			</Card.Root>
+		</div>
+
+		Now we can make smarter predictions! If the derivative is negative, we want to make our next
+		guess to the right. If it's positive. We want make our next guess to the left. Review the
+		derivatives of the points in the above graph to check your understanding. We know that we have
+		reached the minimum loss when the derivative is 0.
 	</article>
 </div>

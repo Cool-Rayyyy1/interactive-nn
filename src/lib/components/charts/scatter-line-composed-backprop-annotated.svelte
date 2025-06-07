@@ -11,7 +11,8 @@
 		yMin,
 		yMax,
 		noise,
-		loss = $bindable()
+		loss = $bindable(),
+		lossPrime = $bindable()
 	}: {
 		k_0: number;
 		k_1: number;
@@ -22,6 +23,7 @@
 		yMax: number;
 		noise: boolean;
 		loss: number;
+		lossPrime: number;
 	} = $props();
 
 	interface Data {
@@ -29,6 +31,8 @@
 		y: number;
 		line: number;
 	}
+
+	const OFFSET = 0.0001;
 
 	const on = noise == true ? 1 : 0;
 
@@ -54,9 +58,27 @@
 		})
 	);
 
+	const dataPrime: Data[] = $derived(
+		dataRange.map((val, i): Data => {
+			const x = val + OFFSET;
+			const y = polynomial(x, k_0, k_1, k_2, k_3);
+			const line = polynomial(x, 3, -2, 3, -5);
+			return <Data>{
+				x,
+				y,
+				line: line + noiseData[i]
+			};
+		})
+	);
+
 	$effect(() => {
 		let sum = data.reduce((acc, curr) => acc + (curr.y - curr.line) ** 2, 0);
 		loss = sum / data.length;
+	});
+
+	$effect(() => {
+		let sum = dataPrime.reduce((acc, curr) => acc + (curr.y - curr.line) ** 2, 0);
+		lossPrime = sum / dataPrime.length;
 	});
 </script>
 
