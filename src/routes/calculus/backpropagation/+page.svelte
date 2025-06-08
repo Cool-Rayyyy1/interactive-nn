@@ -458,7 +458,7 @@ $$`;
 			useful!
 		</p>
 
-		<h3>Finding Minimum Loss</h3>
+		<h3>Finding Minimum Loss in One Dimension</h3>
 
 		<p>
 			Let's start by focusing only on <math>k<sub>1</sub></math>, and keeping
@@ -556,7 +556,7 @@ $$`;
 			<math>k<sub>1</sub></math>!
 		</p>
 
-		<h3>Descent with Multiple Dimensions</h3>
+		<h3>Minimum Loss with Multiple Dimensions</h3>
 
 		<!-- TODO: Show example of computing gradients with partial derivatives for 2d, then explain how it extends to nd  -->
 
