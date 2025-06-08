@@ -45,7 +45,10 @@
 		const point: Data = { x, y, x_prime, y_prime };
 
 		untrack(() => {
-			if (!k_1_data.some((obj) => obj.x === point.x)) k_1_data.push({ x, y, x_prime, y_prime });
+			if (!k_1_data.some((obj) => obj.x === point.x)) {
+				k_1_data.filter((obj) => obj.x === point.x);
+				k_1_data.push({ x, y, x_prime, y_prime });
+			}
 			k_1_data.filter((obj) => obj.y == 0);
 			k_1_data.sort((a, b) => a.x - b.x);
 		});
