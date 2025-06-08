@@ -69,6 +69,14 @@ $$`;
 
 	const mse: string = `$$
 \\text{Mean Squared Error (MSE)} = \\frac{\\sum_{i=1}^{n}{f(x_i)}}{n}$$`;
+
+	const stepSize: string = `
+$$
+\\text{Learning Rate} = \\eta
+$$
+$$
+\\text{Step Size} = f'(x) \\times \\eta
+$$`;
 </script>
 
 <div class="mt-4 flex justify-center">
@@ -535,9 +543,49 @@ $$`;
 			</Card.Root>
 		</div>
 
-		Now we can make smarter predictions! If the derivative is negative, we want to make our next
-		guess to the right. If it's positive. We want make our next guess to the left. Review the
-		derivatives of the points in the above graph to check your understanding. We know that we have
-		reached the minimum loss when the derivative is 0.
+		<p>
+			Now we can make smarter predictions! If the derivative is negative, we want to make our next
+			guess to the right - a bigger number <math>k<sub>1</sub></math>. If it's positive, we want
+			make our next guess to the left - a smaller number <math>k<sub>1</sub></math>. Review the
+			derivatives of the points in the above graph to check your understanding. We know that we have
+			reached the minimum loss when the derivative is 0, and that is when we stop checking new
+			values
+			<math>k<sub>1</sub></math>!
+		</p>
+
+		<h3>Descent with Multiple Dimensions</h3>
+
+		<!-- TODO: Show example of computing gradients with partial derivatives for 2d, then explain how it extends to nd  -->
+
+		<h3>Putting the Pieces Together</h3>
+
+		<p>
+			These are all the components of <span class="text-green-400">Gradient Descent</span>!. The one
+			additional piece is to know how much bigger or smaller the <math>k<sub>1</sub></math> guess
+			should be. This difference between the last guess and the next one is called the
+			<span class="text-blue-400">Step Size</span>.
+			<span class="text-blue-400">Step Size</span>
+			is found by multiplying the slope by a value called the
+			<span class="text-blue-400">Learning Rate</span>, which is chosen by the researcher and
+			controls how big the steps are. The <span class="text-blue-400">Learning Rate</span> is usually
+			denoted by the lowercase Greek letter Eta &eta;.
+		</p>
+
+		<p>
+			We want to choose a value that's big enough that our guesses quickly move downhill, but not
+			too big that they jump past the minimum.
+		</p>
+
+		<Card.Root>
+			<Card.Content>
+				<Mathjax math={stepSize} />
+			</Card.Content>
+		</Card.Root>
+
+		<p>
+			By multiplying the derivative of the output by some fixed <span class="text-blue-400"
+				>Learning Rate</span
+			> &eta; value, we take smaller and smaller steps as we get closer to the minimum.
+		</p>
 	</article>
 </div>
