@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { OrbitControls } from '@threlte/extras';
-	import { DoubleSide, PlaneGeometry } from 'three';
+	import { PlaneGeometry } from 'three';
 	import { SimplexNoise } from 'three/examples/jsm/Addons.js';
 	import { T } from '@threlte/core';
+	import Plane from './plane.svelte';
 
 	let { autoRotate = false, flatness = 10 }: { autoRotate?: boolean; flatness?: number } = $props();
 
@@ -27,10 +28,8 @@
 
 <T.DirectionalLight position={[10, 10, 10]} />
 
-<T.PerspectiveCamera makeDefault position={10}>
+<T.PerspectiveCamera makeDefault position={25}>
 	<OrbitControls {autoRotate} autoRotateSpeed={0.5} />
 </T.PerspectiveCamera>
 
-<T.Mesh {geometry} rotation.x={-1 * 0.5 * Math.PI}>
-	<T.MeshStandardMaterial side={DoubleSide} color="skyblue" />
-</T.Mesh>
+<Plane />
