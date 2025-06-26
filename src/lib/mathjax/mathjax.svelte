@@ -1,40 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let { math = $bindable() } = $props();
+	let { math = $bindable() }: { math: string } = $props();
+
+	let svg = math;
 
 	onMount(() => {
-		let script = document.createElement('script');
-		script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
-		script.id = 'mathjax';
-		document.head.append(script);
-
-		script.onload = () => {
-			let MathJax = {
-				tex: {
-					inlineMath: [
-						['$', '$'],
-						['\\(', '\\)']
-					]
-				},
-				svg: { fontCache: 'global' }
-			};
-		};
-	});
-
-	$effect(() => {
-		MathJax = {
-			tex: {
-				inlineMath: [
-					['$', '$'],
-					['\\(', '\\)']
-				]
-			},
-			svg: { fontCache: 'global' }
-		};
+		window.MathJax.typeset();
 	});
 </script>
 
-<div class="inline">
-	{math}
-</div>
+<div class="inline">{@html svg}</div>

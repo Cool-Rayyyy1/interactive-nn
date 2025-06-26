@@ -1,12 +1,7 @@
 <script lang="ts">
 	import SimpleMinimum from '$lib/components/charts/simple-minimum.svelte';
 
-	import GradientDescentScene from '$lib/components/scenes/gradient-descent-scene.svelte';
 	import Mathjax from '$lib/mathjax/mathjax.svelte';
-	import { Canvas } from '@threlte/core';
-
-	let autoRotate = $state(true);
-	let flatness = $state(4);
 </script>
 
 <div class="flex justify-center">
@@ -43,13 +38,7 @@
 			point and you can't go any lower!
 		</p>
 
-		<div class="h-96 rounded-sm border-2 border-blue-400">
-			<Canvas>
-				<GradientDescentScene {autoRotate} {flatness} />
-			</Canvas>
-		</div>
-
-		<p>
+		<div>
 			From calculus, the <span class="font-bold text-blue-400">Gradient</span>
 			<Mathjax math={'\\(\\nabla C(x, y)\\)'} /> of a function gives the direction of steepest increase.
 			In other words, this is the steepest way uphill. We want to find the lowest point, so we move the
@@ -57,7 +46,7 @@
 			negative of that value, which decreases the function most quickly to the minimum. So, our
 			formula for finding the steepest decrease is thus <Mathjax math={'\\(-\\nabla C(x, y)\\)'} />.
 			A Neural Network learns by making this value as small as possible!
-		</p>
+		</div>
 
 		<p>
 			This value is then used to update the weights in the network, so that the inputs can be tuned

@@ -53,6 +53,17 @@
 	let backgroundOpacity = $state(0);
 	let fadeStrength = $state(1);
 
+	let testPositions: number[] = [];
+
+	for (let i = 0; i < 30; i += 1) {
+		for (let i = 0; i < 30; i += 1) {
+			const x = positions.getX(i);
+			const y = positions.getY(i);
+			const z = (x ** 2 + y ** 2) / 25;
+			positions.setZ(i, height);
+		}
+	}
+
 	const geometry = new PlaneGeometry(terrainSize, terrainSize, segments, segments);
 
 	const positions = geometry.getAttribute('position');

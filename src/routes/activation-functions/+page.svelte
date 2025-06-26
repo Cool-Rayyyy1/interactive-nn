@@ -46,32 +46,24 @@
 			}
 	);
 
-	const step: string = `$$
-f(x) = 
+	const step: string = `$$f(x) = 
 \\left \\{
 \\begin{aligned}
   -1     &\\qquad \\text{if } x < 0   \\\\
   0      &\\qquad \\text{if } x = 0   \\\\
   1      &\\qquad \\text{if } x > 0
-\\end{aligned} \\right.
-$$`;
+\\end{aligned} \\right.$$`;
 
-	const sigmoid: string = `$$
-f(x) = \\frac{1}{1 + e^{-x}}
-$$`;
+	const sigmoid: string = `$$f(x) = \\frac{1}{1 + e^{-x}}$$`;
 
-	const tanh: string = `$$
-f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}
-$$`;
+	const tanh: string = `$$f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}$$`;
 
-	const relu: string = `$$
-f(x) = \\text{max}(0, x) = 
+	const relu: string = `$$f(x) = \\text{max}(0, x) = 
 \\left \\{
 \\begin{aligned}
   x     &\\qquad \\text{if } x > 0   \\\\
   0      &\\qquad \\text{if } x \\leq 0   \\\\
-\\end{aligned} \\right. 
-$$`;
+\\end{aligned} \\right. $$`;
 </script>
 
 <div class="flex justify-center">
