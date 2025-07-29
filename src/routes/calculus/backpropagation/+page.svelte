@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ScatterBackprop from '$lib/components/charts/scatter-backprop.svelte';
-	import Mathjax from '$lib/mathjax/mathjax.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import KInput from '$lib/components/inputs/k-input.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -11,6 +10,15 @@
 	import ScatterBackpropFiveTerms from '$lib/components/charts/scatter-backprop-five-terms.svelte';
 	import { untrack } from 'svelte';
 	import LossPlot from '$lib/components/charts/loss-plot.svelte';
+	import {
+		basicPolynomial,
+		basicPolynomialCoefficients,
+		fiveTermPolynomial,
+		generalPolynomial,
+		mse,
+		stepSize
+	} from '$lib/math/latex';
+	import { Math } from 'svelte-math';
 
 	const OFFSET = 0.0001;
 
@@ -53,19 +61,6 @@
 			k_1_data.sort((a, b) => a.x - b.x);
 		});
 	});
-
-	const basicPolynomial: string = `$$x^3 + x^2 + x + 1$$`;
-
-	const basicPolynomialCoefficients: string = `$$2x^3 - 2x^2 + 7x + 8$$`;
-
-	const generalPolynomial: string = `$$f(x) = k_0 + k_1 x + k_2 x^2 + k_3 x^3$$`;
-
-	const fiveTermPolynomial: string = `$$f(x) = k_0 + k_1 x + k_2 x^2 + k_3 x^3 + k_4 x^4 + k_5 x^5$$`;
-
-	const mse: string = `$$\\text{Mean Squared Error (MSE)} = \\frac{\\sum_{i=1}^{n}{f(x_i)}}{n}$$`;
-
-	const stepSize: string = `$$\\text{Learning Rate} = \\eta$$
-$$\\text{Step Size} = f'(x) \\times \\eta$$`;
 </script>
 
 <div class="mt-4 flex justify-center">
@@ -110,8 +105,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 		<div class="mt-2">
 			Think of drawing some curvy line that will connect all of these dots. It is easy to do by
 			hand, but how do we do it with math? This is called a "Curve Fitting Problem." The goal is to
-			find some function <Mathjax math={'\\(f(x)\\)'}></Mathjax> that most closely represents the dots
-			in this chart.
+			find some function <Math latex={'f(x)'}></Math> that most closely represents the dots in this chart.
 		</div>
 
 		<h3>Polynomials</h3>
@@ -125,7 +119,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 		<Card.Root class="mb-2">
 			<Card.Header>
 				<Card.Title>
-					<Mathjax math={basicPolynomial} />
+					<Math latex={basicPolynomial} />
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
@@ -147,7 +141,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 		<Card.Root class="mb-2">
 			<Card.Header>
 				<Card.Title>
-					<Mathjax math={basicPolynomialCoefficients} />
+					<Math latex={basicPolynomialCoefficients} displayMode />
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
@@ -178,7 +172,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 			<Card.Content>
 				<div class=" flex w-full">
 					<div class="w-1/4">
-						<Mathjax math={`$$f(x) = 1$$`} />
+						<Math latex={`f(x) = 1`} displayMode />
 					</div>
 					<div class="w-3/4">
 						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-5} yMax={5} exp={0} />
@@ -191,7 +185,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 			<Card.Content>
 				<div class="mt-2 flex w-full">
 					<div class="w-1/4">
-						<Mathjax math={`$$f(x) = x$$`} />
+						<Math latex={`f(x) = x`} displayMode />
 					</div>
 					<div class="w-3/4">
 						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-5} yMax={5} exp={1} />
@@ -204,7 +198,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 			<Card.Content>
 				<div class="mt-2 flex w-full">
 					<div class="w-1/4">
-						<Mathjax math={`$$f(x) = x^2$$`} />
+						<Math latex={`f(x) = x^2`} displayMode />
 					</div>
 					<div class="w-3/4">
 						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-25} yMax={25} exp={2} />
@@ -217,7 +211,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 			<Card.Content>
 				<div class="mt-2 flex w-full">
 					<div class="w-1/4">
-						<Mathjax math={`$$f(x) = x^3$$`} />
+						<Math latex={`f(x) = x^3`} displayMode />
 					</div>
 					<div class="w-3/4">
 						<PolyChart coefficient={1} range={range(-5, 5, 0.1)} yMin={-125} yMax={125} exp={3} />
@@ -227,8 +221,8 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 		</Card.Root>
 
 		<div>
-			We can generalize this to the following formula, where each <Mathjax math={'\\(k\\)'}
-			></Mathjax> is a <Tooltip.Provider>
+			We can generalize this to the following formula, where each <Math latex={'k'} /> is a <Tooltip.Provider
+			>
 				<Tooltip.Root>
 					<Tooltip.Trigger class="text-green-400 underline">Real Number</Tooltip.Trigger>
 					<Tooltip.Content>
@@ -245,16 +239,16 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 
 		<Card.Root>
 			<Card.Content>
-				<Mathjax math={generalPolynomial} />
+				<Math latex={generalPolynomial} displayMode />
 			</Card.Content>
 		</Card.Root>
 
 		<h3>Finding Coefficients Randomly</h3>
 
 		<div>
-			The first thing we can try is to find all of the coefficients <Mathjax math={'\\(k\\)'}
-			></Mathjax> randomly, tweaking each value manually to try and find the best curve. Let's see how
-			this works by playing around with each of these values:
+			The first thing we can try is to find all of the coefficients <Math latex={'k'} />
+			randomly, tweaking each value manually to try and find the best curve. Let's see how this works
+			by playing around with each of these values:
 		</div>
 
 		<Card.Root class="mb-2">
@@ -272,7 +266,9 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 			<Card.Root class="mb-2">
 				<Card.Header>
 					<Card.Title>
-						<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
+						<div class="flex place-content-center">
+							<Math latex={'f(x) = {k_0} + ({k_1})x + ({k_2})x^2 + ({k_3})x^3'} />
+						</div>
 					</Card.Title>
 				</Card.Header>
 				<Card.Content>
@@ -294,7 +290,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 			<div>
 				<Card.Root class="mb-2">
 					<Card.Header>
-						<Card.Title><math>f(x) = k<sub>0</sub> = ({k_0})</math></Card.Title>
+						<Card.Title><Math latex={`f(x) = k_0 = (${k_0})`} /></Card.Title>
 					</Card.Header>
 					<Card.Content>
 						<PolyChart
@@ -308,9 +304,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 				</Card.Root>
 				<Card.Root>
 					<Card.Header>
-						<Card.Title
-							><math>f(x) = (k<sub>2</sub>)x<sup>2</sup> = ({k_2})x<sup>2</sup></math></Card.Title
-						>
+						<Card.Title><Math latex={`f(x) = k_2 = (${k_2})`} /></Card.Title>
 					</Card.Header>
 					<Card.Content>
 						<PolyChart
@@ -327,7 +321,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 				<div>
 					<Card.Root class="mb-2">
 						<Card.Header>
-							<Card.Title><math>f(x) = (k<sub>1</sub>)x = ({k_1})x</math></Card.Title>
+							<Card.Title><Math latex={`f(x) = k_1 = (${k_1})`} /></Card.Title>
 						</Card.Header>
 						<Card.Content>
 							<PolyChart
@@ -341,9 +335,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 					</Card.Root>
 					<Card.Root>
 						<Card.Header>
-							<Card.Title
-								><math>f(x) = (k<sub>3</sub>)x<sup>3</sup> = ({k_3})x<sup>3</sup></math></Card.Title
-							>
+							<Card.Title><Math latex={`f(x) = k_3 = (${k_3})`} /></Card.Title>
 						</Card.Header>
 						<Card.Content>
 							<PolyChart
@@ -382,10 +374,12 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 				<Card.Header class="flex justify-center">
 					<Card.Title>
 						<div class="flex justify-center">
-							<math>f(x) = {k_0} + ({k_1})x + ({k_2})x<sup>2</sup> + ({k_3})x<sup>3</sup></math>
+							<Card.Title
+								><Math latex={`f(x) = ${k_0} + (${k_1}+ (${k_2}))+ (${k_3})`} /></Card.Title
+							>
 						</div>
 					</Card.Title>
-					<div class="flex justify-center"><math>Total Loss: {loss.toFixed(2)}</math></div>
+					<div class="flex justify-center"><Math latex={`Total Loss: ${loss.toFixed(2)}`} /></div>
 				</Card.Header>
 				<Card.Content>
 					<ScatterLineComposedBackpropAnnotated
@@ -415,25 +409,25 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 
 		<Card.Root>
 			<Card.Content>
-				<Mathjax math={mse} />
+				<Math latex={mse} displayMode />
 			</Card.Content>
 		</Card.Root>
 
 		<div>
 			As the curve gets closer and closer to fitting the points, the Loss gets closer to 0. The goal
-			is to make this Loss as small as possible! Try to find values <Mathjax math={'\\(k\\)'}
-			></Mathjax> that have a Loss of less than 50.
+			is to make this Loss as small as possible! Try to find values <Math latex={'k'} /> that have a
+			Loss of less than 50.
 		</div>
 
 		<div>
-			While it is possible to find good <Mathjax math={'\\(k\\)'}></Mathjax> values with low loss when
-			fitting the curve manually, how can we be sure this is the best possible curve and the lowest possible
-			Loss? What if we have a complicated five-term polynomial that we are trying to fit a curve to:
+			While it is possible to find good <Math latex={'k'} /> values with low loss when fitting the curve
+			manually, how can we be sure this is the best possible curve and the lowest possible Loss? What
+			if we have a complicated five-term polynomial that we are trying to fit a curve to:
 		</div>
 
 		<Card.Root class="mb-2">
 			<Card.Content>
-				<Mathjax math={fiveTermPolynomial} />
+				<Math latex={fiveTermPolynomial} displayMode />
 			</Card.Content>
 		</Card.Root>
 
@@ -451,11 +445,10 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 		<h3>Finding Minimum Loss in One Dimension</h3>
 
 		<div>
-			Let's start by focusing only on <Mathjax math={'\\(k_1\\)'}></Mathjax>, and keeping
-			<Mathjax math={'\\(k_0\\)'}></Mathjax>, <Mathjax math={'\\(k_2\\)'}></Mathjax>, and <Mathjax
-				math={'\\(k_3\\)'}
-			></Mathjax> fixed. For every <Mathjax math={'\\(k_1\\)'}></Mathjax> value tried, it's corresponding
-			loss will be plotted.
+			Let's start by focusing only on <Math latex={'k_1'} />, and keeping
+			<Math latex={'k_0'} />, <Math latex={'k_2'} />, and <Math latex={'k_3'} /> fixed. For every <Math
+				latex={'k_1'}
+			/> value tried, it's corresponding loss will be plotted.
 		</div>
 
 		<Card.Root class="mb-2">
@@ -474,7 +467,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 				<Card.Header class="flex justify-center">
 					<Card.Title>
 						<div class="flex justify-center">
-							<math>f(x) = 3 - (22)x + (2)x<sup>2</sup> + (-5)x<sup>3</sup></math>
+							<Math latex={`f(x) = 3 - (22)x + (2)x^2 + (-5)x^3`} />
 						</div>
 						<div>{min_loss.toFixed(2)}</div>
 					</Card.Title>
@@ -501,7 +494,8 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 				<Card.Header class="flex justify-center">
 					<Card.Title>
 						<div class="flex justify-center">
-							<math>k<sub>1</sub> Plotted Against Loss </math>
+							<Math latex={`k_2`} />
+							Plotted Against Loss
 						</div>
 					</Card.Title>
 				</Card.Header>
@@ -512,15 +506,15 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 		</div>
 
 		<div>
-			We can see clearly from this example that <math>k<sub>1</sub></math> has the lowest loss when
-			<math>k<sub>1</sub> = -2</math>, but only when <math>k<sub>0</sub> = 3</math>,
-			<math>k<sub>2</sub> = 3</math>, and <math>k<sub>3</sub> = -5</math>.
+			We can see clearly from this example that <Math latex={`k_1`} /> has the lowest loss when
+			<Math latex={`k_1 = -2`} />, but only when <Math latex={`k_0 = 3`} />,
+			<Math latex={`k_2 = 3`} />, and <Math latex={`k_3 = -5`} />.
 		</div>
 
 		<div>
-			To help us know if we should increase or decrease <Mathjax math={'\\(k_1\\)'}></Mathjax> for our
-			next guess, we can take the derivative of that point. The slope of this derivative tells us if
-			our next guess for <Mathjax math={'\\(k_1\\)'}></Mathjax> should be bigger or smaller:
+			To help us know if we should increase or decrease <Math latex={'k_1'} /> for our next guess, we
+			can take the derivative of that point. The slope of this derivative tells us if our next guess
+			for <Math latex={'k_1'} /> should be bigger or smaller:
 		</div>
 
 		<div>
@@ -528,7 +522,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 				<Card.Header class="flex justify-center">
 					<Card.Title>
 						<div class="flex justify-center font-normal">
-							<Mathjax math={'\\(k_1\\)'}></Mathjax> Plotted Against Loss with Derivatives
+							<Math latex={'k_1'} /> Plotted Against Loss with Derivatives
 						</div>
 					</Card.Title>
 				</Card.Header>
@@ -540,12 +534,11 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 
 		<div>
 			Now we can make smarter predictions! If the derivative is negative, we want to make our next
-			guess to the right - a bigger number <Mathjax math={'\\(k_1\\)'}></Mathjax>. If it's positive,
-			we want make our next guess to the left - a smaller number <Mathjax math={'\\(k_1\\)'}
-			></Mathjax>. Review the derivatives of the points in the above graph to check your
-			understanding. We know that we have reached the minimum loss when the derivative is 0, and
-			that is when we stop checking new values
-			<Mathjax math={'\\(k_1\\)'}></Mathjax>!
+			guess to the right - a bigger number <Math latex={'k_1'} />. If it's positive, we want make
+			our next guess to the left - a smaller number <Math latex={'k_1'} />. Review the derivatives
+			of the points in the above graph to check your understanding. We know that we have reached the
+			minimum loss when the derivative is 0, and that is when we stop checking new values
+			<Math latex={'k_1'} />!
 		</div>
 
 		<h3>Minimum Loss with Multiple Dimensions</h3>
@@ -556,9 +549,8 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 
 		<div>
 			These are all the components of <span class="text-green-400">Gradient Descent</span>!. The one
-			additional piece is to know how much bigger or smaller the <Mathjax math={'\\(k_1\\)'}
-			></Mathjax> guess should be. This difference between the last guess and the next one is called
-			the
+			additional piece is to know how much bigger or smaller the <Math latex={'k_1'} /> guess should
+			be. This difference between the last guess and the next one is called the
 			<span class="text-blue-400">Step Size</span>.
 			<span class="text-blue-400">Step Size</span>
 			is found by multiplying the slope by a value called the
@@ -574,7 +566,7 @@ $$\\text{Step Size} = f'(x) \\times \\eta$$`;
 
 		<Card.Root>
 			<Card.Content>
-				<Mathjax math={stepSize} />
+				<Math latex={stepSize} displayMode />
 			</Card.Content>
 		</Card.Root>
 

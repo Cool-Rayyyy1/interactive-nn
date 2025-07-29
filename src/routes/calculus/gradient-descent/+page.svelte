@@ -1,7 +1,6 @@
 <script lang="ts">
+	import { Math } from 'svelte-math';
 	import SimpleMinimum from '$lib/components/charts/simple-minimum.svelte';
-
-	import Mathjax from '$lib/mathjax/mathjax.svelte';
 </script>
 
 <div class="flex justify-center">
@@ -40,12 +39,12 @@
 
 		<div>
 			From calculus, the <span class="font-bold text-blue-400">Gradient</span>
-			<Mathjax math={'\\(\\nabla C(x, y)\\)'} /> of a function gives the direction of steepest increase.
-			In other words, this is the steepest way uphill. We want to find the lowest point, so we move the
-			opposite way of the <span class="font-bold text-blue-400">Gradient</span>. This is just the
-			negative of that value, which decreases the function most quickly to the minimum. So, our
-			formula for finding the steepest decrease is thus <Mathjax math={'\\(-\\nabla C(x, y)\\)'} />.
-			A Neural Network learns by making this value as small as possible!
+			<Math latex={'\\nabla C(x, y)'} /> of a function gives the direction of steepest increase. In other
+			words, this is the steepest way uphill. We want to find the lowest point, so we move the opposite
+			way of the <span class="font-bold text-blue-400">Gradient</span>. This is just the negative of
+			that value, which decreases the function most quickly to the minimum. So, our formula for
+			finding the steepest decrease is thus <Math latex={'-\\nabla C(x, y)'} />. A Neural Network
+			learns by making this value as small as possible!
 		</div>
 
 		<p>

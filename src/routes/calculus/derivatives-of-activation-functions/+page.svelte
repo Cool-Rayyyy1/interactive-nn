@@ -1,8 +1,18 @@
 <script lang="ts">
 	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
-	import Mathjax from '$lib/mathjax/mathjax.svelte';
+	import {
+		dx_relu,
+		dx_sigmoid,
+		dx_step,
+		dx_tanh,
+		relu,
+		sigmoid,
+		step,
+		tanh
+	} from '$lib/math/latex';
 	import { ActivationFunction, type SeriesData } from '$lib/types';
 	import { activate, derive, range } from '$lib/utils';
+	import { Math } from 'svelte-math';
 
 	const keys = ['activation', 'derivative'];
 
@@ -45,54 +55,6 @@
 				derivative: +derive(ActivationFunction.ReLU, val).toFixed(4)
 			}
 	);
-
-	const step: string = `$$
-f(x) = 
-\\left \\{
-\\begin{aligned}
-  -1     &\\qquad \\text{if } x < 0   \\\\
-  0      &\\qquad \\text{if } x = 0   \\\\
-  1      &\\qquad \\text{if } x > 0
-\\end{aligned} \\right.
-$$`;
-
-	const dx_step: string = `$$
-f^{\\prime}(x) = 0
-$$`;
-
-	const sigmoid: string = `$$
-f(x) = \\frac{1}{1 + e^{-x}}
-$$`;
-
-	const dx_sigmoid: string = `$$
-f^{\\prime}(x) = \\frac{1}{1 + e^{-x}} \\times \\left( 1 - \\frac{1}{1 + e^{-x}}) \\right)
-$$`;
-
-	const tanh: string = `$$
-f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}
-$$`;
-
-	const dx_tanh: string = `$$
-f^{\\prime}(x) = 1 - \\left( \\frac{e^x - e^{-x}}{e^x + e^{-x}} \\right)^2 = 1 - \\text{tanh}(x)^2
-$$`;
-
-	const relu: string = `$$
-f(x) = \\text{max}(0, x) = 
-\\left \\{
-\\begin{aligned}
-  x     &\\qquad \\text{if } x > 0   \\\\
-  0      &\\qquad \\text{if } x \\leq 0   \\\\
-\\end{aligned} \\right. 
-$$`;
-
-	const dx_relu: string = `$$
-f^{\\prime}(x) =  
-\\left \\{
-\\begin{aligned}
-  1     &\\qquad \\text{if } x \\geq 0   \\\\
-  0      &\\qquad \\text{if } x < 0   \\\\
-\\end{aligned} \\right. 
-$$`;
 </script>
 
 <div class="flex justify-center">
@@ -103,29 +65,29 @@ $$`;
 
 		<div id="step">
 			<h3>Step</h3>
-			<Mathjax math={step} />
-			<Mathjax math={dx_step} />
+			<Math latex={step} displayMode />
+			<Math latex={dx_step} displayMode />
 			<ActivationChart data={stepData} showDx={true} {keys} />
 		</div>
 
 		<div id="sigmoid">
 			<h3>Sigmoid</h3>
-			<Mathjax math={sigmoid} />
-			<Mathjax math={dx_sigmoid} />
+			<Math latex={sigmoid} displayMode />
+			<Math latex={dx_sigmoid} displayMode />
 			<ActivationChart data={sigmoidData} showDx={true} {keys} />
 		</div>
 
 		<div id="tanh">
 			<h3>TanH</h3>
-			<Mathjax math={tanh} />
-			<Mathjax math={dx_tanh} />
+			<Math latex={tanh} displayMode />
+			<Math latex={dx_tanh} displayMode />
 			<ActivationChart data={tanhData} showDx={true} {keys} />
 		</div>
 
 		<div id="relu">
 			<h3>ReLU</h3>
-			<Mathjax math={relu} />
-			<Mathjax math={dx_relu} />
+			<Math latex={relu} displayMode />
+			<Math latex={dx_relu} displayMode />
 			<ActivationChart data={reluData} showDx={true} {keys} />
 		</div>
 	</article>

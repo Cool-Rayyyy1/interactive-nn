@@ -1,8 +1,9 @@
 <script lang="ts">
 	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
+	import { step, sigmoid, tanh, relu } from '$lib/math/latex';
 	import { ActivationFunction, type SeriesData } from '$lib/types';
 	import { activate, derive, range } from '$lib/utils';
-	import Mathjax from '$lib/mathjax/mathjax.svelte';
+	import { Math } from 'svelte-math';
 
 	const keys = ['activation'];
 
@@ -45,25 +46,6 @@
 				derivative: +derive(ActivationFunction.ReLU, val).toFixed(4)
 			}
 	);
-
-	const step: string = `$$f(x) = 
-\\left \\{
-\\begin{aligned}
-  -1     &\\qquad \\text{if } x < 0   \\\\
-  0      &\\qquad \\text{if } x = 0   \\\\
-  1      &\\qquad \\text{if } x > 0
-\\end{aligned} \\right.$$`;
-
-	const sigmoid: string = `$$f(x) = \\frac{1}{1 + e^{-x}}$$`;
-
-	const tanh: string = `$$f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}$$`;
-
-	const relu: string = `$$f(x) = \\text{max}(0, x) = 
-\\left \\{
-\\begin{aligned}
-  x     &\\qquad \\text{if } x > 0   \\\\
-  0      &\\qquad \\text{if } x \\leq 0   \\\\
-\\end{aligned} \\right. $$`;
 </script>
 
 <div class="flex justify-center">
@@ -76,25 +58,33 @@
 
 		<div id="step">
 			<h3>Step</h3>
-			<Mathjax math={step} />
+			<div class="m-2 p-2">
+				<Math latex={step} />
+			</div>
 			<ActivationChart data={stepData} showDx={false} {keys} />
 		</div>
 
 		<div id="sigmoid">
 			<h2>Sigmoid</h2>
-			<Mathjax math={sigmoid} />
+			<div class="m-2 p-2">
+				<Math latex={sigmoid} />
+			</div>
 			<ActivationChart data={sigmoidData} showDx={false} {keys} />
 		</div>
 
 		<div id="tanh">
 			<h3>TanH</h3>
-			<Mathjax math={tanh} />
+			<div class="m-2 p-2">
+				<Math latex={tanh} />
+			</div>
 			<ActivationChart data={tanhData} showDx={false} {keys} />
 		</div>
 
 		<div id="relu">
 			<h3>ReLU</h3>
-			<Mathjax math={relu} />
+			<div class="m-2 p-2">
+				<Math latex={relu} />
+			</div>
 			<ActivationChart data={reluData} showDx={false} {keys} />
 		</div>
 	</article>
