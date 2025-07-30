@@ -1,51 +1,12 @@
 <script lang="ts">
 	import ActivationChart from '$lib/components/charts/activation-chart.svelte';
 	import { step, sigmoid, tanh, relu } from '$lib/math/latex';
-	import { ActivationFunction, type SeriesData } from '$lib/types';
-	import { activate, derive, range } from '$lib/utils';
 	import { Math } from 'svelte-math';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
 
 	const keys = ['activation'];
-
-	const inputRange = range(-3, 3, 0.01);
-
-	let stepData: SeriesData[] = inputRange.map(
-		(val): SeriesData =>
-			<SeriesData>{
-				input: val,
-				activation: +activate(ActivationFunction.Step, val).toFixed(4),
-				derivative: +derive(ActivationFunction.Step, val).toFixed(4)
-			}
-	);
-
-	const smallInputRange = range(-3, 3, 0.1);
-
-	let sigmoidData: SeriesData[] = smallInputRange.map(
-		(val): SeriesData =>
-			<SeriesData>{
-				input: val,
-				activation: +activate(ActivationFunction.Sigmoid, val).toFixed(4),
-				derivative: +derive(ActivationFunction.Sigmoid, val).toFixed(4)
-			}
-	);
-
-	let tanhData: SeriesData[] = smallInputRange.map(
-		(val): SeriesData =>
-			<SeriesData>{
-				input: val,
-				activation: +activate(ActivationFunction.Tanh, val).toFixed(4),
-				derivative: +derive(ActivationFunction.Tanh, val).toFixed(4)
-			}
-	);
-
-	let reluData: SeriesData[] = inputRange.map(
-		(val): SeriesData =>
-			<SeriesData>{
-				input: val,
-				activation: +activate(ActivationFunction.ReLU, val).toFixed(4),
-				derivative: +derive(ActivationFunction.ReLU, val).toFixed(4)
-			}
-	);
 </script>
 
 <div class="flex justify-center">
@@ -61,7 +22,7 @@
 			<div class="m-2 p-2">
 				<Math latex={step} />
 			</div>
-			<ActivationChart data={stepData} showDx={false} {keys} />
+			<ActivationChart data={data.stepData} showDx={false} {keys} />
 		</div>
 
 		<div id="sigmoid">
@@ -69,7 +30,7 @@
 			<div class="m-2 p-2">
 				<Math latex={sigmoid} />
 			</div>
-			<ActivationChart data={sigmoidData} showDx={false} {keys} />
+			<ActivationChart data={data.sigmoidData} showDx={false} {keys} />
 		</div>
 
 		<div id="tanh">
@@ -77,7 +38,7 @@
 			<div class="m-2 p-2">
 				<Math latex={tanh} />
 			</div>
-			<ActivationChart data={tanhData} showDx={false} {keys} />
+			<ActivationChart data={data.tanhData} showDx={false} {keys} />
 		</div>
 
 		<div id="relu">
@@ -85,7 +46,7 @@
 			<div class="m-2 p-2">
 				<Math latex={relu} />
 			</div>
-			<ActivationChart data={reluData} showDx={false} {keys} />
+			<ActivationChart data={data.reluData} showDx={false} {keys} />
 		</div>
 	</article>
 </div>
