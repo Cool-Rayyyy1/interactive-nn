@@ -1,8 +1,20 @@
 <script lang="ts">
+	import * as ShadChart from '$lib/components/ui/chart/index.js';
 	import type { SeriesData } from '$lib/types';
-	import { Axis, Chart, Svg, Highlight, Spline, Tooltip } from 'layerchart';
+	import { Axis, Chart, Layer, Highlight, Spline, Tooltip } from 'layerchart';
 
 	let { data, showDx, keys }: { data: SeriesData[]; showDx: boolean; keys: string[] } = $props();
+
+	const chartConfig = {
+		desktop: {
+			label: 'Desktop',
+			color: '#2563eb'
+		},
+		mobile: {
+			label: 'Mobile',
+			color: '#60a5fa'
+		}
+	} satisfies ShadChart.ChartConfig;
 </script>
 
 <!--
@@ -14,28 +26,23 @@ Generates a 2d plot for the provided range and activation function
 <ActivationChart {data} />
   ```
 -->
-
-<div class="h-[300px] rounded-sm border p-4">
+<ShadChart.Container config={chartConfig} class="min-h-[300px] w-full">
 	<Chart
 		{data}
 		x="input"
 		y={keys}
-		yNice
 		padding={{ left: 16, bottom: 24 }}
 		tooltip={{ mode: 'bisect-x' }}
 	>
 		{#snippet children({ context })}
-			<Svg>
-				<Axis placement="left" grid rule />
-				<Axis placement="bottom" rule />
-
+			<Layer type="svg">
 				<Spline y="activation" class="stroke-green-500" motion="tween" />
 				{#if showDx}
 					<Spline y="derivative" class="stroke-blue-500" motion="tween" />
 				{/if}
 
 				<Highlight points lines />
-			</Svg>
+			</Layer>
 
 			<Tooltip.Root>
 				{#snippet children({ data })}
@@ -57,7 +64,7 @@ Generates a 2d plot for the provided range and activation function
 				x="data"
 				y={context.height + context.padding.top + 2}
 				anchor="top"
-				class="whitespace-nowrap rounded-sm border border-primary bg-surface-100 px-2 py-[2px] text-[10px] font-semibold text-primary"
+				class="border-primary bg-surface-100 text-primary rounded-sm border px-2 py-[2px] text-[10px] font-semibold whitespace-nowrap"
 			>
 				{#snippet children({ data })}
 					{data.input}
@@ -65,4 +72,4 @@ Generates a 2d plot for the provided range and activation function
 			</Tooltip.Root>
 		{/snippet}
 	</Chart>
-</div>
+</ShadChart.Container>
