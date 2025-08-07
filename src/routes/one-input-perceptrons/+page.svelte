@@ -1,3 +1,4 @@
+pnpm i -D svelte-math
 <div class="mt-4 flex justify-center">
 	<article class="prose lg:prose-xl">
 		<h2>One Dimension Perceptrons</h2>

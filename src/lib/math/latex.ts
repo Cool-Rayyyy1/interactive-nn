@@ -30,16 +30,14 @@ const mse: string = `\\text{Mean Squared Error (MSE)} = \\frac{\\sum_{i=1}^{n}{f
 const stepSize: string = `\\text{Learning Rate} = \\eta
 \\text{Step Size} = f'(x) \\times \\eta`;
 
-const dx_step: string = `
-f^{\\prime}(x) = 0
-`;
+const dx_step: string = `f^{\\prime}(x) = 0`;
 
 const dx_sigmoid: string = `
 f^{\\prime}(x) = \\frac{1}{1 + e^{-x}} \\times \\left( 1 - \\frac{1}{1 + e^{-x}}) \\right)
 `;
 
 const dx_tanh: string = `
-f^{\\prime}(x) = 1 - \\left( \\frac{e^x - e^{-x}}{e^x + e^{-x}} \\right)^2 = 1 - \\text{tanh}(x)^2
+f^{\\prime}(x) = 1 - \\left( \\frac{e^x - e^{-x}}{e^x + e^{-x}} \\right)^2
 `;
 
 const dx_relu: string = `
