@@ -6,6 +6,14 @@ const step: string = `f(x) =
   1      &\\qquad \\text{if } x > 0
 \\end{aligned} \\right.`;
 
+const binary_step: string = `f(x) = 
+\\left \\{
+\\begin{aligned}
+  0      &\\qquad \\text{if } x \\leq 0 \\\\
+  1      &\\qquad \\text{if } x >  0
+\\end{aligned} \\right.`;
+
+
 const sigmoid: string = `f(x) = \\frac{1}{1 + e^{-x}}`;
 
 const tanh: string = `f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}`;
@@ -49,4 +57,11 @@ f^{\\prime}(x) =
 \\end{aligned} \\right. 
 `;
 
-export { step, sigmoid, tanh, relu, basicPolynomial, basicPolynomialCoefficients, generalPolynomial, fiveTermPolynomial, mse, stepSize, dx_step, dx_sigmoid, dx_tanh, dx_relu }
+const weighted_sum: string = `\\sum_{i=0}^n x_i \\times w_i`;
+
+const weighted_sum_example: string = `\\sum_{i=0}^n x_i \\times w_i = 
+(0 \\times 1.5) + (1 \\times 0) + (1 \\times 3) = 0 + 0 + 3 = 3
+`;
+
+
+export { step, binary_step, sigmoid, tanh, relu, basicPolynomial, basicPolynomialCoefficients, generalPolynomial, fiveTermPolynomial, mse, stepSize, dx_step, dx_sigmoid, dx_tanh, dx_relu, weighted_sum, weighted_sum_example }

@@ -10,20 +10,12 @@
 						url: '/getting-started#what-is-a-neural-network'
 					},
 					{
-						title: 'Neurons',
-						url: '/getting-started#neurons'
-					},
-					{
-						title: 'Inputs',
-						url: '/getting-started#inputs'
-					},
-					{
-						title: 'Outputs',
-						url: '/getting-started#outputs'
-					},
-					{
 						title: 'Perceptrons',
 						url: '/getting-started#perceptrons'
+					},
+					{
+						title: 'Building on Perceptrons',
+						url: '/getting-started#building-on-perceptrons'
 					}
 				]
 			},
