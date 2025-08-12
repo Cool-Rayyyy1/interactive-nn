@@ -59,7 +59,7 @@ f^{\\prime}(x) =
 
 const weighted_sum: string = `\\sum_{i=0}^n x_i \\times w_i`;
 
-const weighted_sum_example: string = `\\sum_{i=0}^n x_i \\times w_i = 
+const weighted_sum_example: string = `\\sum_{i=0}^2 x_i \\times w_i = 
 (0 \\times 1.5) + (1 \\times 0) + (1 \\times 3) = 0 + 0 + 3 = 3
 `;
 

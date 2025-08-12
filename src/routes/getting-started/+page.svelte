@@ -11,10 +11,10 @@
 	<article class="prose lg:prose-xl">
 		<h2>Getting Started with Neural Networks</h2>
 		<p>
-			Neural Networks, sometimes abbrevaited "NN," are an important tool in Machine Learning that
-			are used in a variety of applications, such as automatically recognizing handwritten letters
-			and digits on letters, generating recommendations on social media, playing chess, and even
-			predicting the stock market!
+			Neural Networks, sometimes abbreviated "NN," are an important tool in Machine Learning that
+			are used in a variety of applications. These include: automatically recognizing handwritten
+			letters and digits on letters, generating recommendations on social media, playing chess, and
+			even predicting the stock market!
 		</p>
 
 		<p>
@@ -45,10 +45,9 @@
 
 		<p>
 			Learning about the different components of Neural Networks and developing an intuition of the
-			concepts, structure, and mathematical concepts that underpin it is an important step in
-			advancing machine learning skills. Interactive NN seeks to introduce these concepts and ideas
-			visually and intereactively so that students can build this intuition and background knowledge
-			naturally.
+			concepts, structure, and math that underpin it is an important step in advancing machine
+			learning skills. Interactive NN seeks to introduce these concepts and ideas visually and
+			intereactively so that students can build this intuition and background knowledge naturally.
 		</p>
 
 		<h3 id="what-is-a-neural-network">What is a Neural Network?</h3>
@@ -58,18 +57,18 @@
 				href="https://en.wikipedia.org/wiki/Neural_network_(biology)"
 				target="_blank">biological neural networks</a
 			> in neuroscience, although their modern interpretation and application have diverged since these
-			original ideas even if they share many vocabulary terms.
+			original ideas, even if they share many vocabulary terms.
 		</p>
 
 		<p>
-			Fundamentally, neurons are networks of different components, each connected together and
-			serving a different function in the overall network to accomplish a task, such as providing
-			social media recommendations. To better understand the overall function of a Neural Network,
-			these different components will be broken down and studied individually. They include:
+			Each neuron in a Neural Network is connected with others, and each serves a different function
+			in the overall network. This helps the network accomplish its task. To better understand the
+			overall function of a Neural Network, these different components will be broken down and
+			studied individually. They include:
 		</p>
 
 		<ul>
-			<li>Artificial Neurons, such as Perceptrons</li>
+			<li>Artificial Neurons</li>
 			<li>
 				Inputs, which are <a href="https://en.wikipedia.org/wiki/Real_number" target="_blank"
 					>real numbers</a
@@ -77,13 +76,16 @@
 			</li>
 			<li>Activation Functions</li>
 			<li>Hidden Layers</li>
+			<li>Interpreting Outputs</li>
 		</ul>
 
-		If a neural network contains three or more hidden layers, it is often called a "deep" Neural
-		Network, which gives rise to the term<a
-			href="https://en.wikipedia.org/wiki/Deep_learning"
-			target="_blank">deep learning</a
-		>!
+		<p>
+			If a neural network contains three or more hidden layers, it is often called a "deep" Neural
+			Network, which gives rise to the term <a
+				href="https://en.wikipedia.org/wiki/Deep_learning"
+				target="_blank">deep learning</a
+			>!
+		</p>
 
 		<h3 id="perceptrons">Perceptrons</h3>
 
@@ -97,7 +99,7 @@
 				target="_blank">1943</a
 			>, and it was succesfully simulated with early computers in
 			<a href="https://en.wikipedia.org/wiki/Frank_Rosenblatt#perceptron" target="_blank">1957</a>.
-			Therefore, the percpetron is not a new idea, but it still forms the basis for other, more
+			Therefore, the perceptron is not a new idea, but it still forms the basis for other, more
 			modern methods!
 		</p>
 
@@ -112,7 +114,7 @@
 		<p>These components are combined as follows:</p>
 
 		<ul>
-			<li>A weighted sum of the inputs and weights produces a value.</li>
+			<li>The weighted sum of the inputs and weights produces a single value.</li>
 			<li>
 				That value is compared to the threshold value. If it is bigger than the threshold value, the
 				ouput is 1. If it is less than the threshold, the ouput is 0.
@@ -229,7 +231,7 @@
 
 		<p>
 			If we set the <Math latex={'\\text{Threshold } =  0'} />, the step function is defined as
-			follows, where <Math latex={'x'} /> is the weigted sum:
+			follows, where <Math latex={'x'} /> is the weighted sum:
 		</p>
 
 		<Card.Root class="flex items-center">
@@ -253,7 +255,7 @@
 			previous days. The input will be 1 if it rained, and 0 otherwise. The threshold is 1, and if
 			the output is greater than 1, the model predicts rain. We can adjust the weights so that rain
 			yesterday is weighted higher than rain seven days ago. In practical terms, this suggests that
-			if rain yesterday is a better indicataor of rain today than than rain from several days ago.
+			if rain yesterday is a better indicator of rain today than than rain from several days ago.
 		</p>
 
 		<p>Here is our example:</p>
