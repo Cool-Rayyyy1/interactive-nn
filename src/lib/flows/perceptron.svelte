@@ -36,13 +36,13 @@
 			id: '4',
 			type: 'simplePerceptronNeuron',
 			position: { x: 100, y: 38 },
-			data: {}
+			data: { size: 15 }
 		},
 		{
 			id: '5',
 			type: 'simplePerceptronOutput',
 			position: { x: 200, y: 50 },
-			data: {}
+			data: { output: 'Output' }
 		}
 	]);
 

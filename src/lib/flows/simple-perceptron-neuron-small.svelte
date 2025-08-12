@@ -6,7 +6,7 @@
 
 <div>
 	<div
-		class="size-{data.size} rounded-full border-2 border-blue-500 bg-blue-300 flex justify-center items-center p-2 scale-110"
+		class="size-10 rounded-full border-2 border-blue-500 bg-blue-300 flex justify-center items-center p-2 scale-115"
 	>
 		<p class="justify-self-center">{data.content}</p>
 	</div>

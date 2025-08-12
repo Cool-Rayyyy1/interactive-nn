@@ -2,7 +2,9 @@
 	import Perceptron from '$lib/flows/perceptron.svelte';
 	import { Math } from 'svelte-math';
 	import * as Card from '$lib/components/ui/card/index.js';
-	import { binary_step, step, weighted_sum, weighted_sum_example } from '$lib/math/latex';
+	import { binary_step, weighted_sum, weighted_sum_example } from '$lib/math/latex';
+	import WeatherPerceptron from '$lib/flows/weather-perceptron.svelte';
+	import Mlp from '$lib/flows/mlp.svelte';
 </script>
 
 <div class="mt-4 flex justify-center">
@@ -225,8 +227,10 @@
 			conversion is called a Step Function.
 		</p>
 
-		If we set the <Math latex={'\\text{Threshold } =  0'} />, the step function is defined as
-		follows, where <Math latex={'x'} /> is the weigted sum:
+		<p>
+			If we set the <Math latex={'\\text{Threshold } =  0'} />, the step function is defined as
+			follows, where <Math latex={'x'} /> is the weigted sum:
+		</p>
 
 		<Card.Root class="flex items-center">
 			<Math latex={binary_step} displayMode />
@@ -236,18 +240,85 @@
 			latex={'3 > 0'}
 		/>. Thus, the binary output from this perceptron example is 1!
 
-		<h3 id="building-on-perceptrons">Building on Perceptrons</h3>
+		<h4>Binary Outputs</h4>
 
 		<p>
-			The power and innovation behind Neural Networks combines these individual perceptron
-			components into linear groups, called layers. Neural Networks also use real number inputs and
-			many other types of functions to determine the final output besides. So, the fundamental idea
-			stays the same, but different pieces are swapped or repeated in order to build a full Neural
-			Network!
+			There is a limit on what binary outputs -- 0 or 1 -- can tell us. A binary output is True or
+			False, Yes or No, On or Off. There is only two possible outcomes.
 		</p>
 
 		<p>
-			Continue with Interactive NN to learn about and experiment with these different components!
+			Binary outputs can still be useful, though. A practical example is creating a perceptron model
+			to predict whether it will rain today. We could have seven inputs for each of the seven
+			previous days. The input will be 1 if it rained, and 0 otherwise. The threshold is 1, and if
+			the output is greater than 1, the model predicts rain. We can adjust the weights so that rain
+			yesterday is weighted higher than rain seven days ago. In practical terms, this suggests that
+			if rain yesterday is a better indicataor of rain today than than rain from several days ago.
+		</p>
+
+		<p>Here is our example:</p>
+
+		<WeatherPerceptron />
+
+		<p>Let's walk through the steps:</p>
+
+		<ul>
+			<li>Calculate the weighted sum of the inputs and their weights.</li>
+			<li>Compare the weighted sum to the threshold value of the step function.</li>
+			<li>Interpret the output! This perceptron's output is 0, so this predicts no rain today!</li>
+		</ul>
+
+		<p>The details of the math are left to you as an exercise!</p>
+
+		<p>
+			Even though it rained last Monday, Tuesday, and Wednesday, they are weighted less than more
+			recent days, like Saturday or Sunday. So, the weighted sum does not meet the threshold, and
+			our perceptron model predicts no rain.
+		</p>
+
+		<p>This is cool! But we have some questions:</p>
+
+		<ul>
+			<li>How do we find the weights? Are they random, or guesses?</li>
+			<li>Can we change the weights if needed, such as for different seasons or locations?</li>
+			<li>
+				How do we choose the threshold value? What if a threshold of 0 or 2 is better at predicting
+				rain in our model?
+			</li>
+			<li>
+				What if we want to predict something other than rain, like if it will be rainy, cloudy,
+				sunny? That is three choices, so it doesn't fit into the binary model where we only have two
+				options!
+			</li>
+		</ul>
+
+		<h3 id="building-on-perceptrons">Building on Perceptrons</h3>
+
+		<p>
+			Perceptrons are just the building block for Neural Networks. The power and innovation behind
+			Neural Networks uses many groups of perceptron and different variations of the math. There is
+			a lot of creativity in developing Neural Networks! Some innovations on this simple perceptron
+			model include:
+		</p>
+		<ul>
+			<li>Using real number inputs, instead of only binary inputs.</li>
+			<li>Organizing groups of perceptrons into layers.</li>
+			<li>Using the output of one layer of neurons as the input to the next layer.</li>
+			<li>New activation functions besides the simple step function.</li>
+			<li>
+				Being able to predict the most likely output from a group, instead of answering simple
+				binary questions.
+			</li>
+		</ul>
+
+		<p>Here is a visual of a Neural Network, building on the perceptron model:</p>
+
+		<Mlp />
+
+		<p>
+			This may look complicated, but we already have all of the skills needed to build and interpret
+			a Neural Network like this. Continue with Interactive NN to learn about and experiment with
+			these different components!
 		</p>
 	</article>
 </div>

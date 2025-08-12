@@ -6,6 +6,6 @@
 </script>
 
 <div>
-	<Math latex={`Output`} />
+	<Math latex={`\\text{${data.output}}`} />
 	<Handle type="target" position={Position.Left} style="opacity: 0%; left: 2px;" />
 </div>
