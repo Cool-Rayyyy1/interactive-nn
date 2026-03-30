@@ -56,6 +56,10 @@
           {
             title: 'Two Layer',
             url: '/one-input-perceptrons/two-layer-perceptron'
+          },
+          {
+            title: "ML Playground", 
+            url: '/playground'
           }
         ]
       },
