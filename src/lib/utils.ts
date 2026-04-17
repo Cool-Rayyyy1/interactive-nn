@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { ActivationFunction, type Layer, type Network, type Input2d, type Weight, type Input3d, type Input, type BarChartData } from "./types";
 
+
 const BIAS = 1;
 
 /**
@@ -326,4 +327,7 @@ export default function genBarChartData(layers: number, value: number): BarChart
   }
   return generated;
 }
+
+
+
 

@@ -124,3 +124,38 @@ export interface BarChartData {
   area: number,
   cumulativeArea: number,
 }
+
+export interface NeuronValues {
+  val: number;
+  raw: number;
+  error: number;
+}
+
+export interface GradientState {
+  weights: Record<string, number>;
+  biases: Record<string, number>;
+}
+
+export type TrainingStep = 'idle' | 'forward' | 'backward' | 'update';
+
+export type ActivationType = 'sigmoid' | 'tanh' | 'relu';
+
+
+export interface HistoryItem {
+  epoch: number;
+  loss: number;
+}
+
+export interface NetworkState {
+  weights: Record<string, number>;
+  biases: Record<string, number>;
+  neuronValues: Record<string, NeuronValues>;
+  gradients: GradientState;
+  step: TrainingStep;
+  subStep: number;
+  activeElement: string | null;
+  mathDetails: string | null;
+  symbolicMath: string | null;
+  numericMath: string | null;
+  epoch: number;
+}
