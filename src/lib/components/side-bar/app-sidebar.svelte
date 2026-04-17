@@ -61,11 +61,10 @@
             title: "ML Playground", 
             url: '/playground'
           },
-    {
-  title: "backpropagation demo",
-  // url: 'http://localhost:3000/'
-  url: 'backpropagation/'
-}
+          {
+            title: "backpropagation demo",
+            url: 'backpropagation/'
+          }
         ]
       },
       {
