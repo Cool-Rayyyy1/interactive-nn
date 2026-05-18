@@ -29,7 +29,6 @@ let points = $derived(
   <div class="p-6 h-64">
     <div class="h-40 w-full relative group">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full overflow-visible">
-        <!-- Grid lines -->
         <line x1="0" y1="25" x2="100" y2="25" stroke="#f1f5f9" stroke-width="0.5" />
         <line x1="0" y1="50" x2="100" y2="50" stroke="#f1f5f9" stroke-width="0.5" />
         <line x1="0" y1="75" x2="100" y2="75" stroke="#f1f5f9" stroke-width="0.5" />

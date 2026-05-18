@@ -62,8 +62,13 @@
             url: '/playground'
           },
           {
-            title: "backpropagation demo",
+            title: "Backpropagation Playground",
             url: 'backpropagation/'
+          },
+
+          {
+            title: "Derivative Playground",
+            url: 'derivative/'
           }
         ]
       },

@@ -50,8 +50,8 @@
   });
 </script>
 
-<div class="w-full flex justify-center items-center py-4">
-  <svg width="100%" height="100%" viewBox="0 0 800 500" class="overflow-visible max-w-4xl">
+<div class="w-full flex justify-center items-center ">
+  <svg width="73%" height="100%" viewBox="120 0 600 500" class="overflow-visible max-w-4xl">
     {#each Object.entries(weights) as [key, weight]}
       {@const [fromId, toId] = key.split('-')}
       {@const x1 = layerX[getLayerIdx(fromId)]}
