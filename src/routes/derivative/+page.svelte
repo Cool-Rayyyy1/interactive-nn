@@ -407,7 +407,7 @@
         </div>
       </div>
 
-      <!-- New Optimization Panel -->
+      <!-- Panel -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 shrink-0">
         <!-- The Update Tool -->
         <div class="bg-slate-800 text-white p-4 rounded-2xl shadow-lg shadow-slate-200 flex flex-col justify-between group overflow-hidden">
