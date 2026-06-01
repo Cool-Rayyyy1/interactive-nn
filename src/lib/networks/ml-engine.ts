@@ -1,3 +1,5 @@
+
+
 export type ActivationType = 'relu' | 'sigmoid' | 'tanh';
 
 export interface LayerConfig {
@@ -6,9 +8,9 @@ export interface LayerConfig {
 }
 
 export interface NetworkState {
-  weights: number[][][];
-  biases: number[][];    
-  layers: number[];      
+  weights: number[][][]; // [layer][to][from]
+  biases: number[][];    // [layer][neuron]
+  layers: number[];      // [input, hidden1, ..., output]
   activations: ActivationType[];
 }
 
@@ -119,8 +121,8 @@ export class NeuralNetwork {
     // Cross-entropy loss
     const loss = -target.reduce((sum, t, i) => sum + t * Math.log(finalOutput[i] + 1e-15), 0);
 
-    // backpropagation
-    let deltas: number[] = finalOutput.map((o, i) => o - target[i]); // softmax and Cross-Entropy derivative
+    // Backpropagation
+    let deltas: number[] = finalOutput.map((o, i) => o - target[i]); // Softmax + Cross-Entropy derivative
 
     for (let i = this.weights.length - 1; i >= 0; i--) {
       const layerWeights = this.weights[i];
@@ -133,11 +135,11 @@ export class NeuralNetwork {
       for (let j = 0; j < layerWeights.length; j++) {
         const delta = deltas[j];
         
-        // update bias
+        // Update bias
         layerBiases[j] -= this.learningRate * delta;
 
         for (let k = 0; k < layerWeights[j].length; k++) {
-          // accumulate delta for next layer
+          // Accumulate delta for next layer
           nextDeltas[k] += layerWeights[j][k] * delta;
           
           // Update weight
@@ -155,8 +157,8 @@ export class NeuralNetwork {
 
   getState(): NetworkState {
     return {
-      weights: JSON.parse(JSON.stringify(this.weights)),
-      biases: JSON.parse(JSON.stringify(this.biases)),
+      weights: this.weights.map(layer => layer.map(neuron => [...neuron])),
+      biases: this.biases.map(layer => [...layer]),
       layers: [...this.layers],
       activations: [...this.activations]
     };

@@ -47,11 +47,11 @@
       },
       {
         title: 'Perceptrons',
-        url: '/one-input-perceptrons',
+        // url: '/one-input-perceptrons',
         items: [
           {
-            title: "Perceptron Strcture",
-            url: "/overview/"
+            title: "Perceptron Structure",
+            url: "/overview"
           },
           // {
           //   title: 'One Layer',
@@ -64,7 +64,7 @@
           {
             title: "ML Playground", 
             // url: '/playground'
-            url: "http://localhost:4000"
+            url: "/classification/"
           },
           
 
