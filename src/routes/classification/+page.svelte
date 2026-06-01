@@ -474,14 +474,4 @@
     />
   </main>
 
-  <!-- Footer / Status Bar -->
-  <footer class="h-[40px] border-t border-[#141414] bg-[#141414] text-[#E4E3E0] px-6 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest">
-    <div class="flex gap-6">
-      <span>Status: {isPlaying ? 'Training' : 'Idle'}</span>
-      <span>Engine: Custom Backprop</span>
-    </div>
-    <div>
-      Frank Zhang • Machine Learning Visualizer v1.0
-    </div>
-  </footer>
 </div>

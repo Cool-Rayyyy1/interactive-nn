@@ -93,8 +93,7 @@
 
              {
             title: "Derivative Playground",
-            // url: 'derivative/'
-            url: "http://localhost:5001"
+            url: '/derivative'
           },
 
           {

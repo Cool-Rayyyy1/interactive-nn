@@ -1,19 +1,26 @@
 <script lang="ts">
   import katex from 'katex';
   import 'katex/dist/katex.min.css';
-  import { onMount } from 'svelte';
 
-  let { math = '', block = false } = $props();
-  let container = $state<HTMLElement>();
+  interface Props {
+    math: string;
+    inline?: boolean;
+  }
 
-  $effect(() => {
-    if (container) {
-      katex.render(math, container, {
+  let { math, inline = false }: Props = $props();
+
+  let html = $derived(() => {
+    try {
+      return katex.renderToString(math, {
         throwOnError: false,
-        displayMode: block
+        displayMode: !inline
       });
+    } catch (e) {
+      return math;
     }
   });
 </script>
 
-<span bind:this={container}></span>
+<span class="inline-block max-w-full overflow-x-auto text-[#141414]">
+  {@html html()}
+</span>

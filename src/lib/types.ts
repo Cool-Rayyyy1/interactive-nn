@@ -140,7 +140,6 @@ export type TrainingStep = 'idle' | 'forward' | 'backward' | 'update';
 
 export type ActivationType = 'sigmoid' | 'tanh' | 'relu';
 
-
 export interface HistoryItem {
   epoch: number;
   loss: number;
