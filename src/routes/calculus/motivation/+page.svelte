@@ -11,83 +11,204 @@
 </script>
 
 <div class="flex justify-center">
-	<article class="prose lg:prose-xl">
-		<div>
-			<h2>Motivation</h2>
-			<p>To motivate the study of Calculus, let's first review circles.</p>
-			<div>
-				We know the area of a circle is equal to <Math latex={'\\pi r^2'} />. But how do we find
-				that formula? What is the intuition that can lead us to deriving this formula?
-			</div>
+	<article class="prose lg:prose-xl max-w-4xl space-y-10">
+		<!-- INTRO -->
+		<section class="space-y-4">
+			<h1>Motivation</h1>
+
 			<p>
-				To solve hard problems like this one, the first step is to break it down into smaller,
-				easier problems.
+				To motivate the study of Calculus, let's first review circles.
 			</p>
-			<div>
-				Consider a normal circle, with radius
-				<Math latex={`r = 10`} />
+
+			<div class="rounded-2xl border bg-slate-50 p-6">
+				<p>
+					We know the area of a circle is
+					<Math latex={'\\pi r^2'} />.
+				</p>
+
+				<p class="mb-0">
+					But where does this formula come from?
+				</p>
 			</div>
+
+			<p>
+				To solve difficult problems, we often break them into many
+				smaller and simpler pieces.
+			</p>
+
 			<div>
-				Therefore, its formula is
-				<Math latex={`\\pi(${layers})^2 = ${(layers ** 2 * PI).toFixed(2)}`} />.
+				Consider a circle with radius
+				<Math latex={`r = ${layers}`} />.
 			</div>
-		</div>
 
-		<div class="m-2">
-			<CalculusCircle layers={1} value={layers} />
-		</div>
+			<div class="rounded-xl border bg-slate-50 p-4">
+				<div class="flex justify-center text-lg">
+					<Math
+						latex={`A = \\pi r^2 = \\pi(${layers})^2 = ${(layers ** 2 * PI).toFixed(2)}`}
+					/>
+				</div>
+			</div>
+		</section>
 
-		<p>
-			It is hard to figure out the area of a circle without breaking the problem down further. Let's
-			try turning a circle into a series of rings:
-		</p>
+		<!-- CIRCLE -->
+		<section class="space-y-4">
+			<div class="m-2 flex justify-center">
+				<CalculusCircle layers={1} value={layers} />
+			</div>
 
-		<div class="m-2">
-			<CalculusCircle layers={10} value={1} />
-		</div>
+			<p>
+				It is difficult to directly understand the area of a circle.
+			</p>
 
-		Each of these rings can be unravelled into their own bar, and plotted in a bar chart. The
-		<span class="text-green-500">green</span>
-		is the area of a ring, and the <span class="text-blue-500">blue</span> is the cumulative area of
-		the circle up until that point. What shape do these bars resemble?
+			<p>
+				Instead, let's break the circle into many thin rings.
+			</p>
+		</section>
 
-		<div class="m-2">
-			<CalculusBars layers={10} value={1} />
-		</div>
+		<!-- RINGS -->
+		<section class="space-y-4">
+			<h2>Breaking the Circle into Rings</h2>
 
-		It resembles a triangle! Try adjusting the number of layers with the input:
+			<div class="m-2 flex justify-center">
+				<CalculusCircle layers={10} value={1} />
+			</div>
 
-		<input bind:value={layers} type="number" class="w-20 border border-black" min={1} max={50} />
+			<p>
+				Each ring represents a small part of the circle.
+			</p>
 
-		Notice that the more layers there are in the unrolled circle rings, the more the bars start to
-		resemble a triangle! And we know that the area of a triangle is <Math
-			latex={`\\frac{1}{2}*base*height`}
-		/>. Here, our base is <span class="italic">x</span>, for the number of rings in our circle, and
-		the height is the combined area of all the rings, which is the area of the circle.
-		<div class="m-2">
-			<CalculusComposed {layers} {value} />
-		</div>
+			<p>
+				Now imagine unrolling each ring into a rectangle.
+			</p>
+		</section>
 
-		<div>
-			In this example, we have a base <Math latex={`x = 10`} />, which is the radius in th example.
-			We have 10 rings of width 1. We also know that the height of each of the rings is equal to the
-			circumference of the circle at that point, so <Math
-				latex={`2 \\pi r = 2\\pi (10) = 62.83`}
-			/>. We can now use these values to find the area of a triangle <Math
-				latex={`\\frac{1}{2}*10* 62.83 = 314.16 `}
-			/> which matches the value from our graph!
-		</div>
+		<!-- BARS -->
+		<section class="space-y-4">
+			<h2>Turning Rings into Rectangles</h2>
 
-		<TriangleAreaChart />
+			<div class="rounded-xl border bg-slate-50 p-4">
+				<p>
+					The <span class="text-green-500 font-medium">green</span>
+					bars represent the area of each ring.
+				</p>
 
-		<div class="mt-2">
-			We can generalize this insight. If we turn the area of a circle into a rings, then unroll
-			those rings into rectangular shapes, we can easily find the area of each rectangle. If we
-			align each of these rectangles side by side, they start to resemble a triangle. The base of
-			this triangle is the radius, and the height is the circumference. And for a triangle, we want
-			half of that area. So, together, that combines to <Math
-				latex={`\\frac{1}{2} * \\pi * r * r =  \\frac{1}{2} * \\pi * r^2 `}
-			/>, which is the formula for the area of the triangle.
-		</div>
+				<p class="mb-0">
+					The <span class="text-blue-500 font-medium">blue</span>
+					shape represents the total area built from all the rings together.
+				</p>
+			</div>
+
+			<div class="m-2">
+				<CalculusBars layers={10} value={1} />
+			</div>
+
+			<p>
+				Notice that the bars begin to resemble a triangle.
+			</p>
+
+			<div class="flex items-center gap-3 rounded-xl border bg-slate-50 p-4 w-fit">
+				<label for="layers" class="font-medium">
+					Number of Rings
+				</label>
+
+				<input
+					id="layers"
+					bind:value={layers}
+					type="number"
+					class="w-20 rounded border border-slate-300 px-2 py-1"
+					min={1}
+					max={50}
+				/>
+			</div>
+
+			<p>
+				As the number of rings increases, the shape looks more and more
+				like a smooth triangle.
+			</p>
+		</section>
+
+		<!-- COMPOSED -->
+		<section class="space-y-4">
+			<h2>Forming a Triangle</h2>
+
+			<div class="m-2">
+				<CalculusComposed {layers} {value} />
+			</div>
+
+			<p>
+				The base of this triangle is the radius
+				<Math latex={'r'} />,
+				and the height is the circumference
+				<Math latex={'2\\pi r'} />.
+			</p>
+
+			<div class="rounded-xl border bg-slate-50 p-6">
+				<p>
+					The area of a triangle is:
+				</p>
+
+				<div class="flex justify-center text-xl">
+					<Math latex={'\\frac{1}{2} \\times base \\times height'} />
+				</div>
+			</div>
+		</section>
+
+		<!-- EXAMPLE -->
+		<section class="space-y-4">
+			<h2>Example Calculation</h2>
+
+			<div class="rounded-2xl border bg-slate-50 p-6 space-y-4">
+				<p>
+					In this example:
+				</p>
+
+				<ul>
+					<li>
+						Radius:
+						<Math latex={`r = 10`} />
+					</li>
+
+					<li>
+						Circumference:
+						<Math latex={`2\\pi r = 2\\pi(10) = 62.83`} />
+					</li>
+				</ul>
+
+				<p>
+					Using the triangle area formula:
+				</p>
+
+				<div class="flex justify-center text-xl">
+					<Math
+						latex={`\\frac{1}{2} \\times 10 \\times 62.83 = 314.16`}
+					/>
+				</div>
+
+				<p class="mb-0">
+					This matches the area of the circle.
+				</p>
+			</div>
+
+			<div class="m-2">
+				<TriangleAreaChart />
+			</div>
+		</section>
+
+		<!-- CONCLUSION -->
+		<section class="space-y-4">
+			<h2>Conclusion</h2>
+
+			<div class="rounded-2xl border bg-slate-50 p-6">
+				<p>
+					By breaking a circle into many smaller pieces,
+					we transformed a difficult problem into a simpler one.
+				</p>
+
+				<p class="mb-0">
+					This idea of breaking complex problems into tiny parts
+					is one of the central ideas behind Calculus.
+				</p>
+			</div>
+		</section>
 	</article>
 </div>

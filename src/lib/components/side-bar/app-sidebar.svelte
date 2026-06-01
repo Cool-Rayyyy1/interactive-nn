@@ -50,26 +50,28 @@
         url: '/one-input-perceptrons',
         items: [
           {
-            title: 'One Layer',
-            url: '/one-input-perceptrons/one-layer-perceptron-new'
+            title: "Perceptron Strcture",
+            url: "/overview/"
           },
-          {
-            title: 'Two Layer',
-            url: '/one-input-perceptrons/two-layer-perceptron'
-          },
+          // {
+          //   title: 'One Layer',
+          //   url: '/one-input-perceptrons/one-layer-perceptron-new'
+          // },
+          // {
+          //   title: 'Two Layer',
+          //   url: '/one-input-perceptrons/two-layer-perceptron'
+          // },
           {
             title: "ML Playground", 
-            url: '/playground'
+            // url: '/playground'
+            url: "http://localhost:4000"
           },
-          {
-            title: "Backpropagation Playground",
-            url: 'backpropagation/'
-          },
+          
 
-          {
-            title: "Derivative Playground",
-            url: 'derivative/'
-          }
+          // {
+          //   title: "Derivative Playground",
+          //   url: 'derivative/'
+          // }
         ]
       },
       {
@@ -88,6 +90,13 @@
             title: 'Derivatives of Activation Functions',
             url: '/calculus/derivatives-of-activation-functions'
           },
+
+             {
+            title: "Derivative Playground",
+            // url: 'derivative/'
+            url: "http://localhost:5001"
+          },
+
           {
             title: 'Gradient Descent',
             url: '/calculus/gradient-descent'
@@ -95,6 +104,10 @@
           {
             title: 'Backpropagation',
             url: '/calculus/backpropagation'
+          },
+          {
+            title: "Backpropagation Playground",
+            url: '/backpropagationPlay/'
           }
         ]
       }

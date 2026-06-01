@@ -159,3 +159,84 @@ export interface NetworkState {
   numericMath: string | null;
   epoch: number;
 }
+
+export type Act = "sign" | "step" | "tanh" | "sigmoid" | "relu";
+
+export interface ONeuron {
+  w1: number;
+  w2: number;
+  act: Act;
+}
+
+export interface Layer2Neuron {
+  v1: number;
+  v2: number;
+  v3: number;
+  act: Act;
+}
+
+export interface TrainingPoint {
+  id: string;
+  x: number; // in range [-5, 5]
+  y: number; // in range [-5, 5]
+  label: 1 | -1; // 1 = Blue/Class A, -1 = Red/Class B
+}
+
+export interface ONetworkState {
+  neuronCount: number;
+  neurons: ONeuron[];
+  bias: number;
+  outputActivation: Act;
+  points: TrainingPoint[];
+}
+
+export interface ChatMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  timestamp: string;
+}
+
+export const ACTIVATION_FUNCTIONS: {
+  value: Act;
+  name: string;
+  formula: string;
+  description: string;
+  range: string;
+}[] = [
+  {
+    value: "sign",
+    name: "Sign (Signum)",
+    formula: "f(x) = x < 0 ? -1 : 1",
+    description: "Outputs -1 or 1. Creates sharp binary classifiers.",
+    range: "[-1, 1]",
+  },
+  {
+    value: "step",
+    name: "Step (Heaviside)",
+    formula: "f(x) = x >= 0 ? 1 : 0",
+    description: "Outputs 0 or 1. Classical perceptron activation.",
+    range: "[0, 1]",
+  },
+  {
+    value: "tanh",
+    name: "Hyperbolic Tangent (tanh)",
+    formula: "f(x) = tanh(x)",
+    description: "Smooth S-curve centered at 0. [-1, 1] output range.",
+    range: "[-1, 1]",
+  },
+  {
+    value: "sigmoid",
+    name: "Sigmoid (Logistic)",
+    formula: "f(x) = 1 / (1 + e^-x)",
+    description: "Smooth probability squashing function between 0 and 1.",
+    range: "[0, 1]",
+  },
+  {
+    value: "relu",
+    name: "Rectified Linear (ReLU)",
+    formula: "f(x) = max(0, x)",
+    description: "Passes positive inputs; outputs 0 for negatives. Promotes sparsity.",
+    range: "[0, inf)",
+  },
+];

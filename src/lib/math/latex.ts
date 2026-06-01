@@ -38,8 +38,13 @@ const mse: string = `\\text{Mean Squared Error (MSE)} = \\frac{\\sum_{i=1}^{n}{f
 const stepSize: string = `\\text{Learning Rate} = \\eta
 \\text{Step Size} = f'(x) \\times \\eta`;
 
-const dx_step: string = `f^{\\prime}(x) = 0`;
-
+const dx_step: string = `
+f^{\\prime}(x)=
+\\begin{cases}
+0 & x \\ne 0 \\\\
+\\text{undefined} & x = 0
+\\end{cases}
+`;
 const dx_sigmoid: string = `
 f^{\\prime}(x) = \\frac{1}{1 + e^{-x}} \\times \\left( 1 - \\frac{1}{1 + e^{-x}}) \\right)
 `;
@@ -49,12 +54,12 @@ f^{\\prime}(x) = 1 - \\left( \\frac{e^x - e^{-x}}{e^x + e^{-x}} \\right)^2
 `;
 
 const dx_relu: string = `
-f^{\\prime}(x) =  
-\\left \\{
-\\begin{aligned}
-  1     &\\qquad \\text{if } x \\geq 0   \\\\
-  0      &\\qquad \\text{if } x < 0   \\\\
-\\end{aligned} \\right. 
+f^{\\prime}(x)=
+\\begin{cases}
+1 & x > 0 \\\\
+0 & x < 0 \\\\
+\\text{undefined} & x = 0
+\\end{cases}
 `;
 
 const weighted_sum: string = `\\sum_{i=0}^n x_i \\times w_i`;
