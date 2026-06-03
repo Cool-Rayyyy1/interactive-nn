@@ -142,7 +142,7 @@
   let isVisible = $derived(currentX >= minX && currentX <= maxX);
 </script>
 
-<div class="relative bg-white border-2 border-[#141414] overflow-hidden w-full h-full">
+<div class="relative bg-white border-2 bg-[#f5f5f5] overflow-hidden w-full h-full">
   <svg 
     width="100%" 
     height="100%" 

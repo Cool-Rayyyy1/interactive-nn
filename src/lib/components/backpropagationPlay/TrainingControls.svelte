@@ -64,7 +64,7 @@
         <button 
           onclick={() => setIsTraining(!isTraining)}
           class={cn(
-            "flex-1 py-3 px-4 font-mono text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border border-[#141414] shadow-[2px_2px_0px_#141414] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#141414] cursor-pointer",
+            "flex-1 py-3 px-4  text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border border-[#141414] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer rounded-2xl",
             isTraining 
               ? "bg-[#141414] text-[#E4E3E0] hover:bg-[#141414]/90" 
               : "bg-[#F27D26] text-white hover:bg-[#F27D26]/90"
@@ -80,7 +80,7 @@
         
         <button 
           onclick={reset}
-          class="p-3 border border-[#141414] bg-white text-[#141414] hover:bg-[#E4E3E0] shadow-[2px_2px_0px_#141414] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#141414] transition-all cursor-pointer"
+          class="p-3 border border-[#141414] bg-white text-[#141414] hover:bg-[#E4E3E0] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer rounded-2xl"
           title="Reset Model Weights"
         >
           <RotateCcw class="w-4 h-4" />
@@ -91,7 +91,7 @@
         <button 
           onclick={handlePrevStep}
           disabled={isTraining || stepHistoryLen === 0}
-          class="p-3 border border-[#141414] bg-white text-[#141414] hover:bg-[#E4E3E0] disabled:opacity-30 disabled:pointer-events-none shadow-[2px_2px_0px_#141414] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#141414] transition-all cursor-pointer"
+          class="p-3 border border-[#141414] bg-white text-[#141414] hover:bg-[#E4E3E0] disabled:opacity-30 disabled:pointer-events-none active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer rounded-2xl"
           title="Step Backward"
         >
           <ChevronLeft class="w-4 h-4" />
@@ -100,7 +100,7 @@
         <button 
           onclick={handleStep}
           disabled={isTraining}
-          class="flex-1 py-3 px-4 border border-[#141414] bg-white text-[#141414] font-mono text-xs uppercase tracking-wider hover:bg-[#E4E3E0] disabled:opacity-50 flex items-center justify-center gap-2 shadow-[2px_2px_0px_#141414] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#141414] transition-all cursor-pointer"
+          class="flex-1 py-3 px-4 border border-[#141414] bg-white text-[#141414]  rounded-2xl text-xs uppercase tracking-wider hover:bg-[#E4E3E0] disabled:opacity-50 flex items-center justify-center gap-2  active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
         >
           <ChevronRight class="w-4 h-4" />
           <span>
@@ -114,8 +114,8 @@
     <div class="lg:col-span-11 xl:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
       
       <div>
-        <span class="tech-label mb-1.5 flex justify-between font-mono text-[10px] text-[#141414]/70">
-          Learning Rate (η) <span class="font-bold text-[#F27D26] tabular-nums font-mono">{learningRate.toFixed(2)}</span>
+        <span class="tech-label mb-1.5 flex justify-between  text-[10px] text-[#141414]/70">
+          Learning Rate (η) <span class="font-bold text-[#F27D26] tabular-nums ">{learningRate.toFixed(2)}</span>
         </span>
         <input 
           type="range" min="0.01" max="1" step="0.01" 
@@ -126,8 +126,8 @@
       </div>
 
       <div>
-        <span class="tech-label mb-1.5 flex justify-between font-mono text-[10px] text-[#141414]/70">
-          Target (y) <span class="font-bold text-[#F27D26] tabular-nums font-mono">{target.toFixed(2)}</span>
+        <span class="tech-label mb-1.5 flex justify-between  text-[10px] text-[#141414]/70">
+          Target (y) <span class="font-bold text-[#F27D26] tabular-nums ">{target.toFixed(2)}</span>
         </span>
         <input 
           type="range" min="0" max="1" step="0.05" 
@@ -138,8 +138,8 @@
       </div>
 
       <div>
-        <span class="tech-label mb-1.5 flex justify-between font-mono text-[10px] text-[#141414]/70">
-          Input x₁ <span class="font-bold text-[#F27D26] tabular-nums font-mono">{x1.toFixed(2)}</span>
+        <span class="tech-label mb-1.5 flex justify-between  text-[10px] text-[#141414]/70">
+          Input x₁ <span class="font-bold text-[#F27D26] tabular-nums ">{x1.toFixed(2)}</span>
         </span>
         <input 
           type="range" min="0" max="1" step="0.05" 
@@ -150,8 +150,8 @@
       </div>
 
       <div>
-        <span class="tech-label mb-1.5 flex justify-between font-mono text-[10px] text-[#141414]/70">
-          Input x₂ <span class="font-bold text-[#F27D26] tabular-nums font-mono">{x2.toFixed(2)}</span>
+        <span class="tech-label mb-1.5 flex justify-between  text-[10px] text-[#141414]/70">
+          Input x₂ <span class="font-bold text-[#F27D26] tabular-nums ">{x2.toFixed(2)}</span>
         </span>
         <input 
           type="range" min="0" max="1" step="0.05" 
@@ -162,8 +162,8 @@
       </div>
 
       <div>
-        <span class="tech-label mb-1.5 flex justify-between font-mono text-[10px] text-[#141414]/70">
-          Max Epoch Limit <span class="font-bold text-[#F27D26] tabular-nums font-mono">{maxEpoch}</span>
+        <span class="tech-label mb-1.5 flex justify-between  text-[10px] text-[#141414]/70">
+          Max Epoch Limit <span class="font-bold text-[#F27D26] tabular-nums ">{maxEpoch}</span>
         </span>
         <input 
           type="range" min="1" max="100" step="1" 
@@ -174,12 +174,12 @@
       </div>
 
       <div>
-        <span class="tech-label mb-1.5 block font-mono text-[10px] text-[#141414]/70">Activation transfer</span>
+        <span class="tech-label mb-1.5 block  text-[10px] text-[#141414]/70 ">Activation transfer</span>
         <div class="relative">
           <select
             value={activationType}
             onchange={(e) => setActivationType(e.currentTarget.value as ActivationType)}
-            class="w-full py-1.5 px-3 border border-[#141414] bg-white text-[#141414] font-mono text-[11px] uppercase font-bold tracking-wider rounded-none appearance-none cursor-pointer focus:outline-none focus:bg-[#E4E3E0]"
+            class="w-full py-1.5 px-3 border border-[#141414] bg-white text-[#141414]  text-[11px] uppercase font-bold tracking-wider rounded-none appearance-none cursor-pointer focus:outline-none focus:bg-[#E4E3E0]"
           >
             <option value="sigmoid">sigmoid</option>
             <option value="tanh">tanh</option>

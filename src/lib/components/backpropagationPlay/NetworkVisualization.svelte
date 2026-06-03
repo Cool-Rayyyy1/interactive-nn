@@ -103,7 +103,7 @@
             x={lx} y={ly + offset} 
             text-anchor="middle" 
             stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"
-            class="text-[14px] font-mono font-bold select-none opacity-90"
+            class="text-[14px]  font-bold select-none opacity-90"
           >
             {#if parts.sub}
               {parts.base}<tspan baseline-shift="sub" font-size="75%">{parts.sub}</tspan>
@@ -115,7 +115,7 @@
             x={lx} y={ly + offset} 
             text-anchor="middle" 
             class={cn(
-              "text-[14px] font-mono select-none transition-all duration-300",
+              "text-[14px]  select-none transition-all duration-300",
               isUpdating ? 'fill-[#F27D26] font-bold' : 'fill-[#141414]/80 font-bold'
             )}
           >
@@ -141,7 +141,7 @@
 
       <g>
         <circle
-          class="transition-all duration-300 shadow-[1px_1px_0px_#141414]"
+          class="transition-all duration-300"
           cx={x} cy={y}
           r="35"
           fill="#FFFFFF"
@@ -152,7 +152,7 @@
           x={x} y={y + 5} 
           text-anchor="middle" 
           class={cn(
-            "text-[14px] font-mono font-bold select-none transition-all duration-300",
+            "text-[14px]  font-bold select-none transition-all duration-300",
             isActive ? 'fill-[#F27D26]' : 'fill-[#141414]'
           )}
         >
@@ -164,7 +164,7 @@
             x={x} y={y + 54} 
             text-anchor="middle" 
             class={cn(
-              "text-[11px] font-mono font-bold select-none",
+              "text-[11px]  font-bold select-none",
               isActive && step === 'backward' ? 'fill-[#F27D26]' : 'fill-[#141414]/60'
             )}
           >
@@ -189,7 +189,7 @@
     <!-- Target Marker -->
     <g transform={`translate(${layerX[3] + 80}, ${neuronY['o0']})`}>
       <rect x="-25" y="-25" width="50" height="50" fill="white" stroke="#141414" stroke-width="1.5" stroke-dasharray="3 1.5" />
-      <text text-anchor="middle" y="5" class="text-[14px] font-mono font-bold fill-[#F27D26]">
+      <text text-anchor="middle" y="5" class="text-[14px]  font-bold fill-[#F27D26]">
         {target.toFixed(2)}
       </text>
       <text text-anchor="middle" y="-40" class="tech-label text-[#141414]/60 italic font-serif text-[13px] lowercase">target (y)</text>

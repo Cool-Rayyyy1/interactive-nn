@@ -163,39 +163,39 @@
   });
 </script>
 
-<div class="flex flex-col h-screen bg-brut-bg font-sans text-brut-ink border-2 border-brut-ink select-none overflow-hidden">
+<div class="flex flex-col h-screen   text-brut-ink border-2 border-black/30 select-none overflow-hidden">
   <!-- Top Header -->
-  <header class="h-14 bg-white border-b-2 border-brut-ink flex items-center justify-between px-6 z-10 shrink-0 select-none">
+  <header class="h-14 bg-white border-b-2 border-black/30 flex items-center justify-between px-6 z-10 shrink-0 select-none">
     <div class="flex items-center gap-3">
-      <div class="w-8 h-8 bg-brut-ink flex items-center justify-center border border-brut-ink">
+      <div class="w-8 h-8 -ink flex items-center justify-center border border-black/30">
         <TrendingDown class="text-white w-4 h-4" />
       </div>
       <div>
-        <h1 class="text-lg font-serif font-black text-brut-ink leading-none">
-          Gradient Descent <span class="font-serif italic font-normal text-brut-orange">lab</span>
+        <h1 class="text-lg rif font-black text-brut-ink leading-none">
+          Gradient Descent <span class="rif italic font-normal text-brut-orange">lab</span>
         </h1>
-        <p class="text-[9px] text-[#141414]/60 font-mono uppercase tracking-widest mt-0.5">Optimization Sandbox</p>
+        <p class="text-[9px] text-[#141414]/60 no uppercase tracking-widest mt-0.5">Optimization Sandbox</p>
       </div>
     </div>
     <div class="flex items-center gap-4">
       {#if Math.abs(lossGradient) < 0.001 && iteration > 0}
-        <div class="flex items-center gap-1.5 bg-brut-orange text-white px-2.5 py-1 border border-brut-ink font-mono text-[9px] uppercase tracking-wider font-bold shadow-[1px_1px_0px_#141414]">
+        <div class="flex items-center gap-1.5 -orange text-white px-2.5 py-1 border border-black/30 no text-[9px] uppercase tracking-wider font-bold -[1px_1px_0px_#141414]">
           <Zap class="w-3 h-3 fill-current" />
           <span>Converged</span>
         </div>
       {/if}
-      <div class="flex items-center gap-4 text-xs font-mono">
-        <div class="flex items-center gap-1.5 bg-white border border-brut-ink px-2 py-0.5">
+      <div class="flex items-center gap-4 text-xs no">
+        <div class="flex items-center gap-1.5 bg-[#f5f5f5] border border-black/30 px-2 py-0.5 rounded-2xl">
           <span class="text-brut-ink/55 uppercase text-[9px]">Iter:</span>
           <span class="font-bold text-brut-ink">{iteration}</span>
         </div>
-        <div class="flex items-center gap-1.5 bg-white border border-brut-ink px-2 py-0.5">
+        <div class="flex items-center gap-1.5 bg-[#f5f5f5] border border-black/30 px-2 py-0.5 rounded-2xl">
           <span class="text-brut-ink/55 uppercase text-[9px]">Loss L(θ):</span>
           <span class="font-bold text-brut-orange">{isNaN(currentLoss) ? '—' : currentLoss.toFixed(4)}</span>
         </div>
       </div>
       <button 
-         class="bg-white hover:bg-brut-orange hover:text-white hover:border-[#141414] text-brut-ink border-2 border-brut-ink shadow-[2px_2px_0px_#141414] hover:shadow-[3px_3px_0px_#141414] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#141414] px-3 py-1 text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center gap-2 cursor-pointer"
+         class="bg-[#f5f5f5] hover:-orange hover:text-white hover:border-[#141414] text-brut-ink border-2 border-black/30 -[2px_2px_0px_#141414] hover:-[3px_3px_0px_#141414] active:translate-x-[1px] active:translate-y-[1px] active:-[1px_1px_0px_#141414] px-3 py-1 text-xs no uppercase tracking-wider font-bold transition-all flex items-center gap-2 cursor-pointer rounded-2xl"
          onclick={resetOptimization}
       >
         <RotateCcw class="w-3 h-3" />
@@ -204,20 +204,20 @@
     </div>
   </header>
 
-  <div class="flex flex-1 overflow-hidden">
+  <div class="flex flex-1 overflow-hidden bg-white  ">
     <!-- Sidebar Controls -->
-    <aside class="w-80 bg-brut-bg border-r-2 border-brut-ink p-5 flex flex-col gap-5 overflow-y-auto shrink-0 antialiased">
+    <aside class="w-80 p-5 flex flex-col gap-5 overflow-y-auto shrink-0  ">
       
-      <section class="bg-white border-2 border-brut-ink p-4 shadow-[3px_3px_0px_#141414] flex flex-col gap-3">
-        <label class="text-[9px] font-mono font-black text-brut-ink uppercase tracking-wider">1. Model Configuration</label>
+      <section class="bg-[#f5f5f5] border-2 border-black/30 p-4 -[3px_3px_0px_#141414] flex flex-col gap-3 rounded-2xl">
+        <label class="text-[9px] no font-black text-brut-ink uppercase tracking-wider">1. Model Configuration</label>
         <div class="grid grid-cols-2 gap-1.5">
           {#each PRESETS as p (p.name)}
             <button
               onclick={() => handlePreset(p)}
-              class="py-2 text-[10px] font-mono font-bold border-2 border-brut-ink transition-all cursor-pointer shadow-[1.5px_1.5px_0px_#141414] hover:shadow-[2.5px_2.5px_0px_#141414] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#141414] {
+              class="py-2 text-[10px] no font-bold border-2 border-black/30 transition-all cursor-pointer -[1.5px_1.5px_0px_#141414] hover:-[2.5px_2.5px_0px_#141414] active:translate-x-[1px] active:translate-y-[1px] active:-[1px_1px_0px_#141414] rounded-2xl {
                 expression === p.expr 
-                  ? 'bg-brut-ink text-white' 
-                  : 'bg-white text-brut-ink hover:bg-brut-orange hover:text-white'
+                  ? 'bg-brut-ink text-white rounded-2xl' 
+                  : 'bg-white text-brut-ink hover:bg-brut-orange hover:text-white rounded-2xl'
               }"
             >
               {p.name}
@@ -225,36 +225,29 @@
           {/each}
         </div>
 
-        <div class="p-2 bg-brut-bg/30 border border-dashed border-brut-ink/20 mt-1">
-          <div class="flex justify-between items-center mb-1">
-            <span class="text-[9px] font-mono font-black text-brut-ink uppercase tracking-wider">Learning Rate (η)</span>
-            <span class="text-[10px] font-mono font-bold text-brut-orange">{isNaN(learningRate) ? '—' : learningRate.toFixed(3)}</span>
+        <div class="p-2 /30 border border-dashed border-black/30/20 mt-1 rounded-2xl bg-[#f5f5f5]">
+          <div class="flex justify-between items-center mb-1 rounded-2xl">
+            <span class="text-[9px] no font-black text-brut-ink uppercase tracking-wider rounded-2xl">Learning Rate (η)</span>
+            <span class="text-[10px] no font-bold text-brut-orange">{isNaN(learningRate) ? '—' : learningRate.toFixed(3)}</span>
           </div>
-          <input 
-            type="range" 
-            min="0.001" 
-            max="0.8" 
-            step="0.001" 
-            bind:value={learningRate}
-            class="w-full cursor-col-resize"
-          />
+        
 
-          <div class="mt-2 pt-2 border-t border-dashed border-brut-ink/15">
+          <div class="mt-2 pt-2 border-t border-dashed border-black/30/15">
             <button 
               onclick={() => useDecay = !useDecay}
-              class="w-full flex items-center justify-between p-1.5 border-2 border-brut-ink transition-all font-mono cursor-pointer shadow-[1.5px_1.5px_0px_#141414] hover:shadow-[2.5px_2.5px_0px_#141414] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#141414] {
+              class="w-full flex items-center justify-between p-1.5 border-2 border-black/30 transition-all no cursor-pointer -[1.5px_1.5px_0px_#141414] hover:-[2.5px_2.5px_0px_#141414] active:translate-x-[1px] active:translate-y-[1px] active:-[1px_1px_0px_#141414] rounded-2xl {
                 useDecay ? 'bg-brut-ink text-white hover:bg-brut-orange hover:text-white' : 'bg-white text-brut-ink hover:bg-brut-ink hover:text-white'
               }"
             >
               <span class="text-[8px] uppercase tracking-wider font-bold">LR Decay (γ)</span>
-              <div class="w-5 h-2.5 bg-white border border-brut-ink relative transition-colors">
+              <div class="w-5 h-2.5 bg-white border border-black/30 relative transition-colors">
                 <div class="absolute top-0.5 w-1.5 h-1.5 bg-brut-orange transition-all {useDecay ? 'right-0.5' : 'left-0.5'}" />
               </div>
             </button>
 
             {#if useDecay}
               <div class="space-y-1 mt-2">
-                <div class="flex justify-between items-center text-[8px] font-mono text-brut-ink/70">
+                <div class="flex justify-between items-center text-[8px] no text-brut-ink/70">
                   <span>Decay Factor</span>
                   <span>{decayRate.toFixed(2)}</span>
                 </div>
@@ -272,28 +265,28 @@
         </div>
       </section>
 
-      <section class="bg-white border-2 border-brut-ink p-4 shadow-[3px_3px_0px_#141414] flex flex-col gap-3">
-        <label class="text-[9px] font-mono font-black text-brut-ink uppercase tracking-wider">2. Control Optimization</label>
+      <section class="bg-[#f5f5f5] border-2 border-black/30 p-4 -[3px_3px_0px_#141414] flex flex-col gap-3 rounded-2xl">
+        <label class="text-[9px] no font-black text-brut-ink uppercase tracking-wider">2. Control Optimization</label>
         <div class="flex gap-1.5">
           <button
             onclick={() => isOptimizing = !isOptimizing}
-            class="flex-1 py-1.5 font-mono font-bold text-[10px] uppercase tracking-wider transition-all border-2 border-brut-ink cursor-pointer flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#141414] hover:shadow-[3.5px_3.5px_0px_#141414] active:translate-x-[1.5px] active:translate-y-[1.5px] active:shadow-[1px_1px_0px_#141414] {
+            class="flex-1 py-1.5 no font-bold text-[10px] uppercase tracking-wider transition-all border-2 border-black/30 cursor-pointer flex items-center justify-center gap-1.5 -[2px_2px_0px_#141414] hover:-[3.5px_3.5px_0px_#141414] active:translate-x-[1.5px] active:translate-y-[1.5px] active:-[1px_1px_0px_#141414] rounded-2xl {
               isOptimizing 
-                ? 'bg-brut-orange text-white hover:bg-red-500 hover:border-[#141414]' 
-                : 'bg-white text-brut-ink hover:bg-brut-orange hover:text-white'
+                ? 'bg-brut-orange text-white hover:bg-red-500 hover:border-black/30 rounded-2xl' 
+                : 'bg-white text-brut-ink hover:bg-brut-orange hover:text-white rounded-2xl'
             }"
           >
             {#if isOptimizing}
-              <Square class="w-3.5 h-3.5 fill-current" /> Stop
+              <Square class="w-3.5 h-3.5 fill-current rounded-2xl" /> Stop
             {:else}
-              <Play class="w-3.5 h-3.5 fill-current" /> Auto Step
+              <Play class="w-3.5 h-3.5 fill-current rounded-2xl" /> Auto Step
             {/if}
           </button>
           
           <button
             onclick={takeStep}
             disabled={isOptimizing}
-            class="w-12 h-9 bg-white border-2 border-brut-ink shadow-[2px_2px_0px_#141414] hover:shadow-[3.5px_3.5px_0px_#141414] flex items-center justify-center hover:bg-brut-orange hover:text-white active:translate-x-[1.5px] active:translate-y-[1.5px] active:shadow-[1px_1px_0px_#141414] disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
+            class="w-12 h-9 bg-white border-2 border-black/30 -[2px_2px_0px_#141414] hover:-[3.5px_3.5px_0px_#141414] flex items-center justify-center hover:bg-brut-orange hover:text-white active:translate-x-[1.5px] active:translate-y-[1.5px] active:-[1px_1px_0px_#141414] disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer rounded-2xl"
             title="Step Forward"
           >
             <ArrowRight class="w-4 h-4" />
@@ -302,15 +295,15 @@
           <button
             onclick={stepBack}
             disabled={isOptimizing || history.length === 0}
-            class="w-12 h-9 bg-white border-2 border-brut-ink shadow-[2px_2px_0px_#141414] hover:shadow-[3.5px_3.5px_0px_#141414] flex items-center justify-center hover:bg-brut-ink hover:text-white active:translate-x-[1.5px] active:translate-y-[1.5px] active:shadow-[1px_1px_0px_#141414] disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
+            class="w-12 h-9 bg-white border-2 border-black/30 -[2px_2px_0px_#141414] hover:-[3.5px_3.5px_0px_#141414] flex items-center justify-center hover:bg-brut-ink hover:text-white active:translate-x-[1.5px] active:translate-y-[1.5px] active:-[1px_1px_0px_#141414] disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer rounded-2xl"
             title="Step Back"
           >
             <RotateCcw class="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div class="p-2.5 bg-brut-bg/30 border border-dashed border-brut-ink/20 mt-1">
-          <div class="flex justify-between text-[9px] font-mono font-black uppercase mb-1">
+        <div class="p-2.5 /30 border border-dashed border-black/30/20 mt-1 rounded-2xl">
+          <div class="flex justify-between text-[9px] no font-black uppercase mb-1 ">
             <span>Value of θ</span>
             <span class="text-brut-orange italic font-bold">{isNaN(currentX) ? '—' : currentX.toFixed(2)}</span>
           </div>
@@ -326,11 +319,11 @@
         </div>
       </section>
 
-      <section class="bg-white border-2 border-brut-ink p-4 shadow-[3px_3px_0px_#141414] flex flex-col gap-2">
-        <label class="text-[9px] font-mono font-black text-brut-ink uppercase tracking-wider">3. Notation Guide</label>
-        <div class="space-y-2 font-mono text-[9px]">
-          <div class="flex items-center gap-2 pb-1.5 border-b border-brut-ink/10">
-            <div class="w-6 h-6 border border-brut-ink bg-brut-bg flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
+      <section class="bg-[#f5f5f5] border-2 border-black/30 p-4 -[3px_3px_0px_#141414] flex flex-col gap-2 rounded-2xl">
+        <label class="text-[9px] no font-black text-brut-ink uppercase tracking-wider">3. Notation Guide</label>
+        <div class="space-y-2 no text-[9px]">
+          <div class="flex items-center gap-2 pb-1.5 border-b border-black/30/10">
+            <div class="w-6 h-6 border border-black/30  flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
               {@html renderMath("\\theta")}
             </div>
             <div>
@@ -338,8 +331,8 @@
               <div class="text-[8px] text-[#141414]/65 leading-tight">Variable optimized directly.</div>
             </div>
           </div>
-          <div class="flex items-center gap-2 pb-1.5 border-b border-brut-ink/10">
-            <div class="w-6 h-6 border border-brut-ink bg-brut-bg flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
+          <div class="flex items-center gap-2 pb-1.5 border-b border-black/30/10">
+            <div class="w-6 h-6 border border-black/30  flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
               {@html renderMath("L")}
             </div>
             <div>
@@ -347,8 +340,8 @@
               <div class="text-[8px] text-[#141414]/65 leading-tight">Strict objective function L(θ).</div>
             </div>
           </div>
-          <div class="flex items-center gap-2 pb-1.5 border-b border-brut-ink/10">
-            <div class="w-6 h-6 border border-brut-ink bg-brut-bg flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
+          <div class="flex items-center gap-2 pb-1.5 border-b border-black/30/10">
+            <div class="w-6 h-6 border border-black/30  flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
               {@html renderMath("\\eta")}
             </div>
             <div>
@@ -356,8 +349,8 @@
               <div class="text-[8px] text-[#141414]/65 leading-tight">Step size scaling factor.</div>
             </div>
           </div>
-          <div class="flex items-center gap-2 pb-1.5 border-b border-brut-ink/10">
-            <div class="w-6 h-6 border border-brut-ink bg-brut-bg flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
+          <div class="flex items-center gap-2 pb-1.5 border-b border-black/30/10">
+            <div class="w-6 h-6 border border-black/30  flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
               {@html renderMath("dL")}
             </div>
             <div>
@@ -365,8 +358,8 @@
               <div class="text-[8px] text-[#141414]/65 leading-tight">Infinitessimal change in loss.</div>
             </div>
           </div>
-          <div class="flex items-center gap-2 pb-1.5 border-b border-brut-ink/10">
-            <div class="w-6 h-6 border border-brut-ink bg-brut-bg flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
+          <div class="flex items-center gap-2 pb-1.5 border-b border-black/30/10">
+            <div class="w-6 h-6 border border-black/30  flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
               {@html renderMath("d\\theta")}
             </div>
             <div>
@@ -375,7 +368,7 @@
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <div class="w-6 h-6 border border-brut-ink bg-brut-bg flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
+            <div class="w-6 h-6 border border-black/30  flex items-center justify-center font-bold text-[10px] text-brut-ink flex-shrink-0">
               {@html renderMath("\\frac{dL}{d\\theta}")}
             </div>
             <div>
@@ -388,8 +381,8 @@
 
       <!-- SVG Mini history line graph -->
       <div class="mt-auto">
-        <div class="h-28 w-full bg-white border-2 border-brut-ink p-2 shadow-[2px_2px_0px_#141414] relative overflow-hidden flex flex-col justify-between">
-          <div class="text-[8px] font-mono font-black text-brut-ink uppercase z-10">L(θ) History</div>
+        <div class="h-28 w-full bg-white border-2 border-black/30 -[2px_2px_0px_#141414] relative overflow-hidden flex flex-col justify-between rounded-2xl">
+          <div class="text-[8px] no font-black text-brut-ink uppercase z-10 pl-2">L(θ) History</div>
           <div class="w-full h-16 relative overflow-visible mt-2">
             {#if lossHistoryData.length > 0}
               <svg width="100%" height="100%" viewBox="0 0 270 80" class="overflow-visible" preserveAspectRatio="none">
@@ -404,7 +397,7 @@
                 />
               </svg>
             {:else}
-              <div class="w-full h-full flex items-center justify-center text-[8px] font-mono font-bold text-brut-ink/40">
+              <div class="w-full h-full flex items-center justify-center text-[8px] no font-bold text-brut-ink/40">
                 NO HISTORY
               </div>
             {/if}
@@ -414,10 +407,10 @@
     </aside>
 
     <!-- Graph Content Area -->
-    <main class="flex-1 p-6 flex flex-col min-w-0 bg-brut-bg gap-6 overflow-y-auto">
-      <div class="flex-1 min-h-[400px] bg-white border-2 border-brut-ink shadow-[5px_5px_0px_#141414] overflow-hidden relative">
+    <main class="flex-1 p-6 flex flex-col min-w-0  gap-6 overflow-y-auto">
+      <div class="flex-1 min-h-[400px] bg-white border-2 border-black/30 -[5px_5px_0px_#141414] overflow-hidden relative rounded-2xl">
         <!-- Elegant Header Decal -->
-        <div class="absolute top-4 left-4 z-10 bg-white border border-[#141414] px-3 py-1 text-[9px] font-mono uppercase tracking-widest font-bold flex items-center gap-1.5 shadow-[1.5px_1.5px_0px_#141414]">
+        <div class="absolute top-4 left-4 z-10 bg-[#f5f5f5] border border-black/30 px-3 py-1 text-[9px] no uppercase tracking-widest font-bold flex items-center gap-1.5 -[1.5px_1.5px_0px_#141414] rounded-2xl">
           <span class="w-1.5 h-1.5 bg-brut-orange animate-pulse" />
           <span>Loss Surface Projection: L(θ)</span>
         </div>
@@ -441,10 +434,10 @@
       </div>
 
       <!-- Optimization Metrics Panel -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 shrink-0 font-mono text-brut-ink">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 shrink-0 no text-brut-ink ">
         <!-- The Update Tool -->
-        <div class="bg-white border-2 border-brut-ink p-4 shadow-[4px_4px_0px_#141414] flex flex-col justify-between group overflow-hidden">
-          <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-dashed border-brut-ink/15">
+        <div class="bg-[#f5f5f5] border-2 border-black/30 p-4 -[4px_4px_0px_#141414] flex flex-col justify-between group overflow-hidden rounded-2xl">
+          <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-dashed border-black/30/15">
             <Zap class="w-3 h-3 text-brut-orange" />
             <h4 class="text-[9px] font-black uppercase tracking-wider">Update Rule</h4>
           </div>
@@ -452,12 +445,12 @@
             <div class="text-xs text-brut-ink font-bold text-center scale-105">
               {@html renderMath("\\theta_{next} = \\theta - \\eta \\cdot \\frac{dL}{d\\theta}")}
             </div>
-            <div class="bg-brut-bg/40 border border-dashed border-brut-ink/20 p-2 text-center">
-              <div class="text-[10px] font-semibold text-brut-ink/80 scale-105">
+            <div class="/40 border border-dashed border-black/30/20 p-2 text-center">
+              <div class="text-[10px] mibold text-brut-ink/80 scale-105">
                 {@html renderMath(`${isNaN(currentX) ? '\\text{NaN}' : currentX.toFixed(2)} - ${isNaN(learningRate) ? '\\text{NaN}' : learningRate.toFixed(2)} \\cdot ${isNaN(lossGradient) ? '\\text{NaN}' : lossGradient.toFixed(2)}`)}
               </div>
-              <div class="text-center mt-1 pt-1 border-t border-brut-ink/15">
-                <span class="text-xl font-black text-brut-orange font-mono tracking-tighter">
+              <div class="text-center mt-1 pt-1 border-t border-black/30/15">
+                <span class="text-xl font-black text-brut-orange no tracking-tighter">
                   {isNaN(nextX) ? '—' : nextX.toFixed(3)}
                 </span>
               </div>
@@ -466,8 +459,8 @@
         </div>
 
         <!-- Gradient Detail -->
-        <div class="bg-white border-2 border-brut-ink p-4 shadow-[4px_4px_0px_#141414] flex flex-col justify-between overflow-hidden">
-          <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-dashed border-brut-ink/15">
+        <div class="bg-[#f5f5f5] border-2 border-black/30 p-4 -[4px_4px_0px_#141414] flex flex-col justify-between overflow-hidden rounded-2xl">
+          <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-dashed border-black/30/15">
             <RefreshCw class="w-3 h-3 text-brut-ink" />
             <h4 class="text-[9px] font-black uppercase tracking-wider">Gradient (Slope)</h4>
           </div>
@@ -475,11 +468,11 @@
             <div class="text-xs text-brut-ink font-bold scale-105">
               {@html renderMath(`\\frac{dL}{d\\theta} = L'(\\theta) = ${latexDerivative}`)}
             </div>
-            <div class="bg-brut-bg/40 border border-dashed border-brut-ink/20 p-2 text-center">
+            <div class="/40 border border-dashed border-black/30/20 p-2 text-center">
               <div class="text-[9px] text-[#141414] scale-105">
                 {@html renderMath(`L'(${isNaN(currentX) ? '\\text{NaN}' : currentX.toFixed(2)})`)}
               </div>
-              <div class="text-xl font-black text-brut-ink font-mono tracking-tighter mt-1 pt-1 border-t border-brut-ink/15">
+              <div class="text-xl font-black text-brut-ink no tracking-tighter mt-1 pt-1 border-t border-black/30/15">
                 {isNaN(lossGradient) ? '—' : lossGradient.toFixed(4)}
               </div>
             </div>
@@ -487,8 +480,8 @@
         </div>
 
         <!-- Loss Function -->
-        <div class="bg-white border-2 border-brut-ink p-4 shadow-[4px_4px_0px_#141414] flex flex-col justify-between overflow-hidden">
-          <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-dashed border-brut-ink/15">
+        <div class="bg-[#f5f5f5] border-2 border-black/30 p-4 -[4px_4px_0px_#141414] flex flex-col justify-between overflow-hidden rounded-2xl">
+          <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-dashed border-black/30/15">
             <FunctionSquare class="w-3 h-3 text-brut-ink" />
             <h4 class="text-[9px] font-black uppercase tracking-wider">Loss Function</h4>
           </div>
@@ -496,11 +489,11 @@
             <div class="text-xs text-brut-ink font-bold text-center truncate scale-105">
               {@html renderMath(`L(\\theta) = ${latexExpression}`)}
             </div>
-            <div class="bg-brut-bg/40 border border-dashed border-brut-ink/20 p-2 text-center">
+            <div class="/40 border border-dashed border-black/30/20 p-2 text-center">
               <div class="text-[9px] text-brut-ink/80 scale-105">
                 {@html renderMath(`L(${isNaN(currentX) ? '\\text{NaN}' : currentX.toFixed(2)})`)}
               </div>
-              <div class="text-xl font-black text-brut-ink font-mono tracking-tighter mt-1 pt-1 border-t border-brut-ink/15">
+              <div class="text-xl font-black text-brut-ink no tracking-tighter mt-1 pt-1 border-t border-black/30/15">
                 {isNaN(yAtX) ? '—' : yAtX.toFixed(3)}
               </div>
             </div>

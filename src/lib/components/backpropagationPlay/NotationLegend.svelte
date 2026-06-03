@@ -22,15 +22,15 @@
 </script>
 
 <section class="bg-white overflow-hidden" id="notation-legend">
-  <div class="tech-header bg-[#E4E3E0] border-b border-[#141414] p-3 flex justify-between items-center">
+  <div class="tech-header bg-[#f5f5f5] border-[#141414] p-3 flex justify-between items-center">
     <h2 class="tech-label text-xs uppercase font-bold tracking-wider">Reference Manual</h2>
-    <span class="text-[9px] text-[#141414]/60 font-mono font-bold">LATEX_REF</span>
+    <span class="text-[9px] text-[#141414]/60  font-bold">LATEX_REF</span>
   </div>
   
   <div class="p-6 space-y-8 bg-white">
     <!-- Activation Function -->
-    <div class="bg-[#E4E3E0]/40 p-4 border border-[#141414]">
-      <h3 class="text-[10px] uppercase tracking-wider font-mono font-bold text-[#F27D26] mb-4 capitalize">
+    <div class="bg-[#f5f5f5] p-4 border border-[#141414] rounded-2xl">
+      <h3 class="text-[10px] uppercase tracking-wider  font-bold text-[#F27D26] mb-4 capitalize">
         {activationType} transfer & Derivative
       </h3>
       <div class="text-[#141414] space-y-4">
@@ -57,14 +57,14 @@
 
     <!-- Symbol Legend -->
     <div class="grid grid-cols-1 gap-4">
-      <h3 class="text-[10px] font-bold uppercase tracking-widest text-[#141414]/60 font-mono">Symbolic Mapping</h3>
+      <h3 class="text-[10px] font-bold uppercase tracking-widest text-[#141414]/60 ">Symbolic Mapping</h3>
       <div class="grid grid-cols-1 gap-y-3">
         {#each symbols as item}
-          <div class="flex items-center gap-3 text-[11px] font-mono">
-            <span class="font-bold text-[#141414] bg-[#E4E3E0] border border-[#141414] w-[48px] h-7 flex items-center justify-center shadow-[1px_1px_0px_#141414]">
+          <div class="flex items-center gap-3 text-[11px] ">
+            <span class="font-bold text-[#141414] bg-[#f5f5f5] border border-[#141414] w-[48px] h-7 flex items-center justify-center">
               <Latex math={item.symbol}/>
             </span>
-            <span class="text-[#141414]/70 uppercase tracking-wide text-[10px] font-mono leading-none">{item.meaning}</span>
+            <span class="text-[#141414]/70 uppercase tracking-wide text-[10px]  leading-none">{item.meaning}</span>
           </div>
         {/each}
       </div>
