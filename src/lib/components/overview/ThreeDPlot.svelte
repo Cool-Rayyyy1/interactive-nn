@@ -22,9 +22,9 @@ let {
 }: Props = $props();
 
     // 3D parameters: Yaw/Pitch angles & Zoom
-  let yaw = $state(-0.6); // Horizontal rotation
-  let pitch = $state(0.5); // Vertical tilt
-  let zoom = $state(45); // Plot base scaling (increased default zoom)
+  let yaw = $state(-0.22);
+  let pitch = $state(0.42);
+  let zoom = $state(54);
   let isDragging = $state(false);
   let canRotate = $state(true); // Support native scroll when turned off
   
@@ -66,8 +66,8 @@ let {
     // Clear Canvas
     ctx.clearRect(0, 0, dims.width, dims.height);
 
-    const centerX = dims.width / 2;
-    const centerY = dims.height / 2 + 15; // Slightly lower center for elevation offset
+    const centerX = dims.width / 2 - 34;
+    const centerY = dims.height / 2 + 2;
 
     // Define Grid points [-5, 5]
     const gridRes = 18; // 18x18 mesh (perfect density / performance)
@@ -115,7 +115,7 @@ let {
         const zRot2 = -yRot1 * sinP + z3d * cosP;
 
         // Perspective Division factor or Isometric representation
-        const cameraDist = 18;
+        const cameraDist = 30;
         const pScale = cameraDist / (cameraDist + zRot2);
 
         vertices[r][c] = {
@@ -331,38 +331,90 @@ let {
   }
 </script>
 
-<div class="relative flex flex-col justify-between items-stretch grow bg-white rounded-none p-0 group select-none overflow-hidden text-[#141414]">
-  <div class="absolute top-0 left-0 z-10 pointer-events-none">
-    <span class="flex items-center gap-1.5 text-[10px] font-bold text-[#141414] uppercase tracking-widest bg-[#E4E3E0] px-3 py-1.5 border border-[#141414] shadow-[2px_2px_0px_#141414] font-mono">
-      <Rotate3d class="w-3.5 h-3.5 text-[#F27D26]" /> 3D SURFACE PLOT
+<div class="relative flex flex-col justify-between items-stretch grow p-0 group select-none text-[#141414]">
+  <!-- Top Left Badge -->
+  <div class="absolute top-4 left-4 z-10 pointer-events-none">
+
+    <span
+      class="
+        flex
+        items-center
+        gap-2
+        text-[10px]
+        font-bold
+        uppercase
+        tracking-widest
+        bg-[#f5f5f5]
+        text-[#141414]
+        px-4
+        py-2
+        border
+        border-black/30
+        rounded-2xl
+      "
+    >
+      <Rotate3d class="w-3.5 h-3.5 text-[#F27D26]" />
+      3D Surface Plot
     </span>
+
   </div>
 
-  <div class="absolute top-0 right-0 z-10 flex gap-1.5">
-    <button
-      onclick={() => canRotate = !canRotate}
-      class="text-[9.5px] font-mono hover:bg-[#F27D26] hover:text-[#141414] px-2.5 py-1.5 border border-[#141414] font-bold uppercase cursor-pointer shadow-[2px_2px_0px_#141414] transition active:translate-x-[1.5px] active:translate-y-[1.5px] active:shadow-none {
-        canRotate ? 'bg-[#141414] text-white' : 'bg-white text-[#141414] opacity-90'
-      }"
-      title="Toggle Drag Rotation. Turn off to allow native scrolling when dragging over this plot."
-    >
-      {canRotate ? "Orbit Mode [On]" : "Touch Scroll [Off]"}
-    </button>
+  <!-- Top Right Controls -->
+  <div class="absolute top-4 right-4 z-10 flex gap-2">
+
     <button
       onclick={resetView}
-      class="text-[9.5px] text-[#141414] font-mono hover:bg-[#F27D26] hover:text-[#141414] px-2.5 py-1.5 bg-white border border-[#141414] font-bold uppercase cursor-pointer shadow-[2px_2px_0px_#141414] transition active:translate-x-[1.5px] active:translate-y-[1.5px] active:shadow-none"
+      class="
+        text-[10px]
+        text-[#141414]
+        bg-white
+        border
+        border-black/30
+        rounded-2xl
+        px-4
+        py-2
+        font-bold
+        uppercase
+        cursor-pointer
+        transition
+        duration-200
+        hover:bg-[#F27D26]
+        hover:text-white
+        hover:scale-[1.02]
+        active:scale-[0.98]
+      "
       title="Reset View Rotation"
     >
       Reset View
     </button>
+
   </div>
 
-  <!-- Actual Drawing Canvas -->
+  <!-- Canvas Area -->
   <div
     bind:this={containerRef}
-    class="flex-1 w-full min-h-[260px] flex items-center justify-center relative overflow-hidden bg-[#E4E3E0]/20 border border-[#141414]/30 mt-8 mb-1"
+    class="
+      flex-1
+      w-full
+      min-h-[520px]
+      flex
+      items-center
+      justify-center
+      relative
+      overflow-hidden
+      bg-[#fafafa]
+      border
+      border-black/30
+      rounded-[28px]
+      overflow-hidden p-0
+      mt-1
+      mx-2
+      mb-2
+      right-2
+    "
     style="cursor: {canRotate ? 'move' : 'default'};"
   >
+
     <canvas
       bind:this={canvasRef}
       width={dims.width}
@@ -377,23 +429,99 @@ let {
       class="touch-none select-none block"
       style="touch-action: {canRotate ? 'none' : 'auto'};"
     ></canvas>
+
     {#if isDragging}
-      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-[9px] text-[#141414] px-3 py-1 font-mono uppercase font-bold border border-[#141414] shadow-[2px_2px_0px_#141414] pointer-events-none">
+
+      <div
+        class="
+          absolute
+          bottom-4
+          left-1/2
+          -translate-x-1/2
+          bg-white
+          text-[10px]
+          text-[#141414]
+          px-4
+          py-2
+          font-bold
+          border
+          border-black/30
+          rounded-2xl
+          pointer-events-none
+        "
+      >
         Yaw: {yaw.toFixed(2)}r | Pitch: {pitch.toFixed(2)}r
       </div>
+
     {/if}
+
   </div>
 
-  <!-- Zoom / Scaling Slider Control -->
-  <div class="pt-3 border-t border-[#141414]/30 flex items-center justify-between gap-3 text-[#141414]/80 text-xs text-sans">
-    <span class="text-[10px] font-mono uppercase font-black whitespace-nowrap tracking-wider">Perspective Scale</span>
+  <!-- Bottom Controls -->
+  <div
+    class="
+      px-5
+      py-4
+      pb-1
+      pt-6
+      border-t mt-auto top-4
+      border-black/30
+      flex
+      items-center
+      justify-between
+      gap-4
+      text-xs
+    "
+  >
+
+    <span
+      class="
+        text-[10px]
+        uppercase
+        font-black
+        whitespace-nowrap
+        tracking-widest
+        text-[#141414]/70
+      "
+    >
+      Perspective Scale
+    </span>
+
     <input
       type="range"
       min="20"
       max="90"
       bind:value={zoom}
-      class="w-full h-2 bg-[#E4E3E0] border border-[#141414] appearance-none cursor-ew-resize accent-[#F27D26] outline-none"
+      class="
+        w-full
+        h-2
+        rounded-full
+        bg-[#f5f5f5]
+        border
+        border-black/30
+        appearance-none
+        cursor-ew-resize
+        accent-[#F27D26]
+        outline-none
+      "
     />
-    <span class="text-[10px] font-mono text-[#141414] font-bold bg-[#E4E3E0] px-1.5 py-0.5 border border-[#141414]">{effectiveZoom.toFixed(0)}px</span>
+
+    <span
+      class="
+        text-[10px]
+        text-[#141414]
+        font-bold
+        bg-[#f5f5f5]
+        px-3
+        py-1.5
+        border
+        border-black/30
+        rounded-xl
+      "
+    >
+      {effectiveZoom.toFixed(0)}px
+    </span>
+
   </div>
+
 </div>

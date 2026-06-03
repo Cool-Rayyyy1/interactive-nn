@@ -35,7 +35,7 @@
     <h4 class="text-xs font-mono font-black text-[#141414] uppercase tracking-widest">
       Network Architecture Diagram
     </h4>
-    <span class="text-[9px] text-[#141414]/70 font-mono uppercase tracking-wide">
+    <span class="text-[9px] text-[#141414]/70 font-mono uppercase tracking-wide ">
       {#if layerCount === 2}
         L1: {neuronCount} {neuronCount === 1 ? "Node" : "Nodes"} | L2: {layer2NeuronCount} {layer2NeuronCount === 1 ? "Node" : "Nodes"}
       {:else}

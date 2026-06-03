@@ -179,421 +179,251 @@
   ));
 </script>
 
-<div class="min-h-screen bg-[#E4E3E0] text-[#141414] flex flex-col font-sans select-none antialiased p-4 md:p-6 overflow-x-hidden">
-  
-  <!-- HEADER BAR -->
-  <!-- <header class="px-6 py-5 bg-white border-2 border-[#141414] shadow-[4px_4px_0px_#141414] flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-    <div class="flex items-center gap-4">
-      <div class="bg-[#F27D26] border-2 border-[#141414] p-3 shadow-[2px_2px_0px_#141414]">
-        <Brain class="w-7 h-7 text-[#141414]" />
-      </div>
-      <div>
-        <h1 class="text-2xl md:text-3xl font-serif font-black tracking-tight text-[#141414] flex items-baseline gap-2 capitalize">
-          perceptron 3d lab
-          <span class="font-serif italic text-base font-normal text-[#141414]/70">
-            mapping space
-          </span>
-        </h1>
-        <p class="font-mono text-[9px] uppercase tracking-wider text-[#141414]/70 mt-1">
-          visualize multidimensional decision boundaries, multi-neuron combinations, and high-fidelity output space.
-        </p>
-      </div>
-    </div> -->
+<div class="min-h-screen text-[#141414] flex flex-col select-none antialiased p-4 md:p-6 overflow-x-hidden">
 
-    <!-- Live configuration metrics badge -->
-    <!-- <div class="flex flex-wrap items-center gap-3 bg-[#E4E3E0] border-2 border-[#141414] px-4 py-2 rounded-none font-mono text-xs shadow-[2px_2px_0px_#141414] font-bold">
-      <span class="text-[#141414]/60 uppercase">Layers:</span>
-      <span class="text-[#F27D26]">{layerCount}</span>
-      <span class="text-[#141414]/20 font-light">/</span>
-      <span class="text-[#141414]/60 uppercase">Nodes:</span>
-      <span class="text-[#141414]">
-        {layerCount === 2 ? `${neuronCount} → ${layer2NeuronCount}` : `${neuronCount}`}
-      </span>
-      <span class="text-[#141414]/20 font-light">/</span>
-      <span class="text-[#141414]/60 uppercase">Biases:</span>
-      <span class="text-[#141414]">
-        {bias >= 0 ? `+${bias.toFixed(1)}` : bias.toFixed(1)}
-        {#if layerCount === 2}
-          | {bias2 >= 0 ? `+${bias2.toFixed(1)}` : bias2.toFixed(1)}
-        {/if}
-      </span>
-    </div>
-  </header> -->
-
-  <!-- MAIN CONTENT GRID -->
   <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-    
-    <!-- LEFT PANEL: Controls, Sliders, and Presets (5 cols) -->
+
+    <!-- LEFT PANEL -->
     <div class="lg:col-span-5 flex flex-col gap-6">
-      
-      <!-- NEURAL CONFIGURATION CARD -->
-      <section class="bg-white border-2 border-[#141414] p-5 shadow-[4px_4px_0px_#141414] flex flex-col gap-5">
-        <h3 class="text-xs font-mono font-black uppercase text-[#141414] tracking-widest flex items-center gap-2 border-b-2 border-[#141414] pb-2">
+
+      <!-- CONFIG CARD -->
+      <section class="bg-white border rounded-3xl p-5 flex flex-col gap-5 shadow-sm">
+
+        <h3 class="text-xs font-black uppercase tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
           <Sliders class="w-4 h-4 text-[#F27D26]" />
           Architecture Config
         </h3>
 
-        <!-- Option for Layers Count -->
+        <!-- Layer Count -->
         <div class="space-y-2">
-          <label class="text-[10px] text-[#141414]/70 font-black font-mono uppercase tracking-widest block">
+          <label class="text-[10px] text-[#141414]/70 font-black uppercase tracking-widest block">
             Network Layer Depth
           </label>
-          <div class="grid grid-cols-2 gap-1 bg-[#E4E3E0] p-1 border border-[#141414]">
+
+          <div class="grid grid-cols-2 gap-1 bg-[#f5f5f5] p-1 border border-black/30 rounded-2xl">
+
             {#each [1, 2] as num}
               <button
                 onclick={() => {
                   layerCount = num;
                   activeLayerIdx = 0;
                 }}
-                class="py-2 text-xs font-bold font-mono transition cursor-pointer {
-                  layerCount === num
-                    ? 'bg-[#141414] text-[#E4E3E0]'
-                    : 'text-[#141414]/60 hover:text-[#141414] hover:bg-white/40'
-                }"
+                class="
+                  py-2
+                  text-xs
+                  font-bold
+                  transition
+                  duration-200
+                  cursor-pointer
+                  rounded-2xl
+                  active:scale-[0.98]
+
+                  {
+                    layerCount === num
+                      ? 'bg-[#141414] text-white'
+                      : 'text-[#141414]/60 hover:bg-white hover:text-[#141414] hover:scale-[1.02]'
+                  }
+                "
               >
                 {num} {num === 1 ? 'Hidden Layer' : 'Hidden Layers'}
               </button>
             {/each}
+
           </div>
         </div>
 
-        <!-- Neuron Count Swapper -->
+        <!-- Neuron Count -->
         <div class="space-y-2">
-          <label class="text-[10px] text-[#141414]/70 font-black font-mono uppercase tracking-widest block">
+
+          <label class="text-[10px] text-[#141414]/70 font-black uppercase tracking-widest block">
             {layerCount === 2 ? "Layer 1 (L1) Hidden Neurons" : "Number of Hidden Neurons"}
           </label>
-          <div class="grid grid-cols-3 gap-1 bg-[#E4E3E0] p-1 border border-[#141414]">
+
+          <div class="grid grid-cols-3 gap-1 bg-[#f5f5f5] p-1 border border-black/30 rounded-2xl">
+
             {#each [1, 2, 3] as num}
               <button
                 onclick={() => setNeuronCount(num)}
-                class="py-2 text-xs font-bold font-mono transition cursor-pointer {
-                  neuronCount === num
-                    ? 'bg-[#141414] text-[#E4E3E0]'
-                    : 'text-[#141414]/60 hover:text-[#141414] hover:bg-white/40'
-                }"
+                class="
+                  py-2
+                  text-xs
+                  font-bold
+                  transition
+                  duration-200
+                  cursor-pointer
+                  rounded-2xl
+                  active:scale-[0.98]
+
+                  {
+                    neuronCount === num
+                      ? 'bg-[#141414] text-white'
+                      : 'text-[#141414]/60 hover:bg-white hover:text-[#141414] hover:scale-[1.02]'
+                  }
+                "
               >
                 {num} {num === 1 ? 'Node' : 'Nodes'}
               </button>
             {/each}
+
           </div>
         </div>
 
-        <!-- Layer 2 Neuron Count Swapper -->
-        {#if layerCount === 2}
-          <div class="space-y-2">
-            <label class="text-[10px] text-[#141414]/70 font-black font-mono uppercase tracking-widest block">
-              Layer 2 (L2) Hidden Neurons
-            </label>
-            <div class="grid grid-cols-3 gap-1 bg-[#E4E3E0] p-1 border border-[#141414]">
-              {#each [1, 2, 3] as num}
-                <button
-                  onclick={() => setLayer2NeuronCount(num)}
-                  class="py-2 text-xs font-bold font-mono transition cursor-pointer {
-                    layer2NeuronCount === num
-                      ? 'bg-[#141414] text-[#E4E3E0]'
-                      : 'text-[#141414]/60 hover:text-[#141414] hover:bg-white/40'
-                  }"
-                >
-                  {num} {num === 1 ? 'Node' : 'Nodes'}
-                </button>
-              {/each}
-            </div>
-          </div>
-        {/if}
+        <!-- Bias Box -->
+        <div class="bg-[#f5f5f5] border border-black/30 rounded-3xl p-5 flex flex-col gap-4">
 
-        <!-- Global/Separated Bias Sliders -->
-        <div class="bg-[#E4E3E0] border border-[#141414] p-4 flex flex-col gap-4 shadow-[2px_2px_0px_#141414]">
-          
-          <!-- Bias 1 -->
-          <div class="flex flex-col gap-1.5">
+          <div class="flex flex-col gap-2">
+
             <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-[#141414] flex items-center gap-1 font-mono uppercase tracking-wider">
-                {layerCount === 2 ? "Layer 1 Bias" : "Global Bias"} <span class="text-[#F27D26]">b₁</span>
+              <span class="font-bold">
+                Global Bias
               </span>
-              <span class="font-extrabold text-[#F27D26] font-mono text-sm">
+
+              <span class="font-bold text-[#F27D26]">
                 {bias >= 0 ? `+${bias.toFixed(1)}` : bias.toFixed(1)}
               </span>
             </div>
+
             <input
               type="range"
               min="-6"
               max="6"
               step="0.1"
               bind:value={bias}
-              class="w-full h-2 bg-white border border-[#141414] appearance-none cursor-ew-resize accent-[#F27D26] outline-none"
+              class="
+                w-full
+                h-2
+                rounded-full
+                bg-white
+                border
+                border-black/30
+                appearance-none
+                cursor-ew-resize
+                accent-[#F27D26]
+                outline-none
+              "
             />
           </div>
 
-          <!-- Bias 2 (only in 2-layer mode) -->
-          {#if layerCount === 2}
-            <div class="flex flex-col gap-1.5 border-t border-[#141414]/15 pt-3">
-              <div class="flex justify-between items-center text-xs">
-                <span class="font-bold text-[#141414] flex items-center gap-1 font-mono uppercase tracking-wider">
-                  Layer 2 Bias <span class="text-[#F27D26]">b₂</span>
-                </span>
-                <span class="font-extrabold text-[#F27D26] font-mono text-sm">
-                  {bias2 >= 0 ? `+${bias2.toFixed(1)}` : bias2.toFixed(1)}
-                </span>
-              </div>
-              <input
-                type="range"
-                min="-6"
-                max="6"
-                step="0.1"
-                bind:value={bias2}
-                class="w-full h-2 bg-white border border-[#141414] appearance-none cursor-ew-resize accent-[#F27D26] outline-none"
-              />
-            </div>
-          {/if}
-
-          <span class="text-[9.5px] text-[#141414]/70 font-mono uppercase tracking-tight leading-relaxed">
-            * Bias offsets the activation boundary of all units inside respective layers.
+          <span class="text-[10px] text-[#141414]/60 leading-relaxed">
+            Bias offsets the activation boundary of all neurons.
           </span>
+
         </div>
 
-        <!-- SLIDERS FOR DETAILED NEURON TWEAKS -->
-        <div class="border border-[#141414] bg-[#E4E3E0]/30 p-4 space-y-4">
+        <!-- Synaptic Weights -->
+        <div class="border border-black/30 bg-[#fafafa] rounded-3xl p-5 space-y-4">
+
           <div class="flex justify-between items-center">
-            <span class="text-[10px] uppercase font-mono text-[#141414] tracking-widest font-black">
+
+            <span class="text-[10px] uppercase tracking-widest font-black">
               Synaptic Weights
             </span>
+
             <button
               onclick={randomizeNeuronsWeights}
-              class="text-[#141414] hover:bg-[#F27D26] flex items-center gap-1.5 text-[9px] bg-white px-2 py-1.5 font-mono uppercase tracking-wider border border-[#141414] transition cursor-pointer shadow-[1px_1px_0px_#141414] active:shadow-none"
+              class="
+                bg-white
+                border
+                border-black/30
+                rounded-2xl
+                px-3
+                py-2
+                text-[10px]
+                flex
+                items-center
+                gap-2
+                transition
+                duration-200
+                cursor-pointer
+                hover:bg-[#F27D26]
+                hover:text-white
+                hover:scale-[1.02]
+                active:scale-[0.98]
+              "
             >
-              <RotateCcw class="w-3 h-3" /> Randomize
+              <RotateCcw class="w-3 h-3" />
+              Randomize
             </button>
+
           </div>
 
-          <!-- Parameter selector tabs -->
-          {#if layerCount === 2}
-            <div class="grid grid-cols-2 gap-1 bg-[#E4E3E0] p-1 border border-[#141414]">
-              <button
-                onclick={() => activeLayerIdx = 0}
-                class="py-1.5 text-[10px] font-bold font-mono uppercase cursor-pointer transition {
-                  activeLayerIdx === 0
-                    ? 'bg-[#141414] text-[#E4E3E0]'
-                    : 'text-[#141414]/60 hover:text-[#141414] hover:bg-white/40'
-                }"
-              >
-                Layer 1 (L1)
-              </button>
-              <button
-                onclick={() => activeLayerIdx = 1}
-                class="py-1.5 text-[10px] font-bold font-mono uppercase cursor-pointer transition {
-                  activeLayerIdx === 1
-                    ? 'bg-[#141414] text-[#E4E3E0]'
-                    : 'text-[#141414]/60 hover:text-[#141414] hover:bg-white/40'
-                }"
-              >
-                Layer 2 (L2)
-              </button>
-            </div>
-          {/if}
+          <!-- Weight Slider -->
+          <div class="space-y-4">
 
-          <!-- Node Swapper Tab Selection for Layer 1 -->
-          {#if (layerCount === 1 || activeLayerIdx === 0) && neuronCount > 1}
-            <div class="flex gap-1 bg-[#E4E3E0] p-1 border border-[#141414]">
-              {#each neurons.slice(0, neuronCount) as _, idx}
-                <button
-                  onclick={() => activeNeuronIdx = idx}
-                  class="flex-1 py-1.5 text-[9px] font-mono font-black uppercase transition cursor-pointer {
-                    activeNeuronIdx === idx
-                      ? 'bg-[#141414] text-[#E4E3E0]'
-                      : 'text-[#141414]/50 hover:text-[#141414] hover:bg-white/40'
-                  }"
-                >
-                  Neuron {idx + 1}
-                </button>
-              {/each}
-            </div>
-          {/if}
+            <div class="flex flex-col gap-2">
 
-          <!-- Node Swapper Tab Selection for Layer 2 -->
-          {#if layerCount === 2 && activeLayerIdx === 1 && layer2NeuronCount > 1}
-            <div class="flex gap-1 bg-[#E4E3E0] p-1 border border-[#141414]">
-              {#each layer2Neurons.slice(0, layer2NeuronCount) as _, idx}
-                <button
-                  onclick={() => activeLayer2Idx = idx}
-                  class="flex-1 py-1.5 text-[9px] font-mono font-black uppercase transition cursor-pointer {
-                    activeLayer2Idx === idx
-                      ? 'bg-[#141414] text-[#E4E3E0]'
-                      : 'text-[#141414]/50 hover:text-[#141414] hover:bg-white/40'
-                  }"
-                >
-                  Neuron {idx + 1}
-                </button>
-              {/each}
-            </div>
-          {/if}
+              <div class="flex justify-between items-center text-[11px] font-bold">
 
-          <!-- Sliders for active Layer 1 weight card -->
-          {#if (layerCount === 1 || activeLayerIdx === 0) && neurons[activeNeuronIdx]}
-            <div class="space-y-4">
-              
-              <!-- Weight 1 (w1) -->
-              <div class="flex flex-col gap-1.5">
-                <div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-wider font-bold">
-                  <span class="text-[#141414]/70">Weight 1 (w₁)</span>
-                  <span class="text-[#141414] font-black bg-white px-1.5 py-0.5 border border-[#141414]">
-                    {neurons[activeNeuronIdx].w1 >= 0
-                      ? `+${neurons[activeNeuronIdx].w1.toFixed(1)}`
-                      : neurons[activeNeuronIdx].w1.toFixed(1)}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="-12"
-                  max="12"
-                  step="0.1"
-                  value={neurons[activeNeuronIdx].w1}
-                  oninput={(e) => handleWeightChange("w1", parseFloat((e.target as HTMLInputElement).value))}
-                  class="w-full h-2 bg-[#E4E3E0] border border-[#141414] appearance-none cursor-ew-resize accent-[#141414] outline-none"
-                />
+                <span class="text-[#141414]/70">
+                  Weight 1 (w₁)
+                </span>
+
+                <span class="bg-white border border-black/30 rounded-xl px-2 py-1">
+                  {neurons[activeNeuronIdx].w1.toFixed(1)}
+                </span>
+
               </div>
 
-              <!-- Weight 2 (w2) -->
-              <div class="flex flex-col gap-1.5">
-                <div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-wider font-bold">
-                  <span class="text-[#141414]/70">Weight 2 (w₂)</span>
-                  <span class="text-[#141414] font-black bg-white px-1.5 py-0.5 border border-[#141414]">
-                    {neurons[activeNeuronIdx].w2 >= 0
-                      ? `+${neurons[activeNeuronIdx].w2.toFixed(1)}`
-                      : neurons[activeNeuronIdx].w2.toFixed(1)}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="-12"
-                  max="12"
-                  step="0.1"
-                  value={neurons[activeNeuronIdx].w2}
-                  oninput={(e) => handleWeightChange("w2", parseFloat((e.target as HTMLInputElement).value))}
-                  class="w-full h-2 bg-[#E4E3E0] border border-[#141414] appearance-none cursor-ew-resize accent-[#F27D26] outline-none"
-                />
-              </div>
+              <input
+                type="range"
+                min="-12"
+                max="12"
+                step="0.1"
+                value={neurons[activeNeuronIdx].w1}
+                oninput={(e) =>
+                  handleWeightChange(
+                    "w1",
+                    parseFloat((e.target as HTMLInputElement).value)
+                  )
+                }
+                class="
+                  w-full
+                  h-2
+                  rounded-full
+                  bg-white
+                  border
+                  border-black/30
+                  appearance-none
+                  cursor-ew-resize
+                  accent-[#141414]
+                  outline-none
+                "
+              />
 
-              <!-- Activation Selector -->
-              <div class="flex flex-col gap-1.5">
-                <label class="text-[10px] text-[#141414]/70 font-mono uppercase tracking-widest font-black">
-                  Activation function (f_L1)
-                </label>
-                <select
-                  value={neurons[activeNeuronIdx].act}
-                  onchange={(e) => handleNeuronActivationChange((e.target as HTMLSelectElement).value as Act)}
-                  class="w-full bg-white hover:bg-[#E4E3E0] border border-[#141414] px-3 py-2 text-xs text-[#141414] focus:outline-none transition font-mono tracking-wide cursor-pointer shadow-[2px_2px_0px_#141414]"
-                >
-                  <option value="sign">sign (hard threshold signum [-1, 1])</option>
-                  <option value="step">step (binary threshold Heaviside [0, 1])</option>
-                  <option value="tanh">tangent (hyperbolic tanh continuous [-1, 1])</option>
-                  <option value="sigmoid">sigmoid (logistic continuous [0, 1])</option>
-                  <option value="relu">ReLU (rectified linear positive pass [0, inf))</option>
-                </select>
-              </div>
             </div>
-          {/if}
 
-          <!-- Sliders for active Layer 2 weight card -->
-          {#if layerCount === 2 && activeLayerIdx === 1 && layer2Neurons[activeLayer2Idx]}
-            <div class="space-y-4">
-              
-              <!-- weight v1 -->
-              <div class="flex flex-col gap-1.5">
-                <div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-wider font-bold">
-                  <span class="text-[#141414]/70">L2 Conn 1 Weight (v₁)</span>
-                  <span class="text-[#141414] font-black bg-white px-1.5 py-0.5 border border-[#141414]">
-                    {layer2Neurons[activeLayer2Idx].v1 >= 0
-                      ? `+${layer2Neurons[activeLayer2Idx].v1.toFixed(1)}`
-                      : layer2Neurons[activeLayer2Idx].v1.toFixed(1)}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="-12"
-                  max="12"
-                  step="0.1"
-                  value={layer2Neurons[activeLayer2Idx].v1}
-                  oninput={(e) => handleLayer2WeightChange("v1", parseFloat((e.target as HTMLInputElement).value))}
-                  class="w-full h-2 bg-[#E4E3E0] border border-[#141414] appearance-none cursor-ew-resize accent-[#141414] outline-none"
-                />
-              </div>
+          </div>
 
-              <!-- weight v2 - only if Layer 1 has 2 or 3 neurons -->
-              {#if neuronCount >= 2}
-                <div class="flex flex-col gap-1.5">
-                  <div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-wider font-bold">
-                    <span class="text-[#141414]/70">L2 Conn 2 Weight (v₂)</span>
-                    <span class="text-[#141414] font-black bg-white px-1.5 py-0.5 border border-[#141414]">
-                      {layer2Neurons[activeLayer2Idx].v2 >= 0
-                        ? `+${layer2Neurons[activeLayer2Idx].v2.toFixed(1)}`
-                        : layer2Neurons[activeLayer2Idx].v2.toFixed(1)}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="-12"
-                    max="12"
-                    step="0.1"
-                    value={layer2Neurons[activeLayer2Idx].v2}
-                    oninput={(e) => handleLayer2WeightChange("v2", parseFloat((e.target as HTMLInputElement).value))}
-                    class="w-full h-2 bg-[#E4E3E0] border border-[#141414] appearance-none cursor-ew-resize accent-[#F27D26] outline-none"
-                  />
-                </div>
-              {/if}
+          <!-- Activation -->
+          <div class="flex flex-col gap-2">
 
-              <!-- weight v3 - only if Layer 1 has 3 neurons -->
-              {#if neuronCount >= 3}
-                <div class="flex flex-col gap-1.5">
-                  <div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-wider font-bold">
-                    <span class="text-[#141414]/70">L2 Conn 3 Weight (v₃)</span>
-                    <span class="text-[#141414] font-black bg-white px-1.5 py-0.5 border border-[#141414]">
-                      {layer2Neurons[activeLayer2Idx].v3 >= 0
-                        ? `+${layer2Neurons[activeLayer2Idx].v3.toFixed(1)}`
-                        : layer2Neurons[activeLayer2Idx].v3.toFixed(1)}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="-12"
-                    max="12"
-                    step="0.1"
-                    value={layer2Neurons[activeLayer2Idx].v3}
-                    oninput={(e) => handleLayer2WeightChange("v3", parseFloat((e.target as HTMLInputElement).value))}
-                    class="w-full h-2 bg-[#E4E3E0] border border-[#141414] appearance-none cursor-ew-resize accent-[#141414] outline-none"
-                  />
-                </div>
-              {/if}
-
-              <!-- Activation Selector for Layer 2 -->
-              <div class="flex flex-col gap-1.5">
-                <label class="text-[10px] text-[#141414]/70 font-mono uppercase tracking-widest font-black">
-                  Activation function (f_L2)
-                </label>
-                <select
-                  value={layer2Neurons[activeLayer2Idx].act}
-                  onchange={(e) => handleLayer2ActivationChange((e.target as HTMLSelectElement).value as Act)}
-                  class="w-full bg-white hover:bg-[#E4E3E0] border border-[#141414] px-3 py-2 text-xs text-[#141414] focus:outline-none transition font-mono tracking-wide cursor-pointer shadow-[2px_2px_0px_#141414]"
-                >
-                  <option value="sign">sign (hard threshold signum [-1, 1])</option>
-                  <option value="step">step (binary threshold Heaviside [0, 1])</option>
-                  <option value="tanh">tangent (hyperbolic tanh continuous [-1, 1])</option>
-                  <option value="sigmoid">sigmoid (logistic continuous [0, 1])</option>
-                  <option value="relu">ReLU (rectified linear positive pass [0, inf))</option>
-                </select>
-              </div>
-            </div>
-          {/if}
-        </div>
-
-        <!-- Combined Output layer activation if count > 1 or depth === 2 -->
-        {#if layerCount === 2 || neuronCount > 1}
-          <div class="bg-[#E4E3E0] border border-[#141414] p-4 flex flex-col gap-3 shadow-[2px_2px_0px_#141414]">
-            <label class="text-[10px] text-[#141414] font-black uppercase tracking-widest flex items-center gap-1.5 font-mono">
-              Combiner Activation (g)
+            <label class="text-[10px] text-[#141414]/70 font-black uppercase tracking-widest">
+              Activation Function
             </label>
+
             <select
-              bind:value={outputActivation}
-              class="w-full bg-white border border-[#141414] px-3 py-2 text-xs text-[#141414] font-mono focus:outline-none transition cursor-pointer"
+              value={neurons[activeNeuronIdx].act}
+              onchange={(e) =>
+                handleNeuronActivationChange(
+                  (e.target as HTMLSelectElement).value as Act
+                )
+              }
+              class="
+                w-full
+                bg-white
+                border
+                border-black/30
+                rounded-2xl
+                px-4
+                py-3
+                text-sm
+                text-[#141414]
+                focus:outline-none
+                transition
+                duration-200
+                cursor-pointer
+                hover:bg-[#fafafa]
+              "
             >
               <option value="sign">sign</option>
               <option value="step">step</option>
@@ -601,152 +431,106 @@
               <option value="sigmoid">sigmoid</option>
               <option value="relu">relu</option>
             </select>
+
           </div>
-        {/if}
+
+        </div>
+
       </section>
 
-      <!-- REALTIME TESTING SUITE -->
-      <section class="bg-white border-2 border-[#141414] p-5 shadow-[4px_4px_0px_#141414] flex flex-col gap-4">
-        <h3 class="text-xs font-mono font-black uppercase text-[#141414] tracking-widest flex items-center gap-2 border-b-2 border-[#141414] pb-2">
+      <!-- TESTING CARD -->
+      <section class="bg-white border rounded-3xl p-5 flex flex-col gap-4 shadow-sm">
+
+        <h3 class="text-xs font-black uppercase tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
           <Binary class="w-4 h-4 text-[#F27D26]" />
           Coordinate Evaluation
         </h3>
 
         <div class="grid grid-cols-2 gap-4">
-          <!-- x1 Input slider & field -->
-          <div class="flex flex-col gap-2 bg-[#E4E3E0] p-3 border border-[#141414] shadow-[2px_2px_0px_#141414]">
-            <span class="text-[10px] text-[#141414]/90 font-mono uppercase tracking-wider font-extrabold">Input Coord x₁</span>
+
+          <div class="flex flex-col gap-2 bg-[#f5f5f5] border border-black/30 rounded-3xl p-4">
+
+            <span class="text-[10px] font-bold uppercase tracking-wider">
+              Input Coord x₁
+            </span>
+
             <input
               type="number"
-              step="0.5"
-              min="-5"
-              max="5"
               bind:value={testX1}
-              class="bg-white text-[#141414] font-mono text-xs border border-[#141414] px-2 py-1 focus:outline-none"
+              class="
+                bg-white
+                border
+                border-black/30
+                rounded-2xl
+                px-3
+                py-2
+                text-sm
+                focus:outline-none
+              "
             />
-            <input
-              type="range"
-              min="-5"
-              max="5"
-              step="0.2"
-              bind:value={testX1}
-              class="w-full h-2 bg-white border border-[#141414] appearance-none cursor-ew-resize accent-[#141414] outline-none"
-            />
+
           </div>
 
-          <!-- x2 Input slider & field -->
-          <div class="flex flex-col gap-2 bg-[#E4E3E0] p-3 border border-[#141414] shadow-[2px_2px_0px_#141414]">
-            <span class="text-[10px] text-[#141414]/90 font-mono uppercase tracking-wider font-extrabold">Input Coord x₂</span>
+          <div class="flex flex-col gap-2 bg-[#f5f5f5] border border-black/30 rounded-3xl p-4">
+
+            <span class="text-[10px] font-bold uppercase tracking-wider">
+              Input Coord x₂
+            </span>
+
             <input
               type="number"
-              step="0.5"
-              min="-5"
-              max="5"
               bind:value={testX2}
-              class="bg-white text-[#141414] font-mono text-xs border border-[#141414] px-2 py-1 focus:outline-none"
+              class="
+                bg-white
+                border
+                border-black/30
+                rounded-2xl
+                px-3
+                py-2
+                text-sm
+                focus:outline-none
+              "
             />
-            <input
-              type="range"
-              min="-5"
-              max="5"
-              step="0.2"
-              bind:value={testX2}
-              class="w-full h-2 bg-white border border-[#141414] appearance-none cursor-ew-resize accent-[#F27D26] outline-none"
-            />
+
           </div>
+
         </div>
 
-        <!-- Live output prediction screen -->
-        <div class="bg-[#E4E3E0] border border-[#141414] px-4 py-3.5 flex items-center justify-between shadow-inner">
-          <div class="flex items-center gap-2">
+        <!-- Output -->
+        <div class="bg-[#f5f5f5] border border-black/30 rounded-3xl px-5 py-4 flex items-center justify-between">
+
+          <div class="flex items-center gap-3">
+
             <Gauge class="w-5 h-5 text-[#F27D26]" />
+
             <div>
-              <span class="text-[10px] uppercase font-mono text-[#141414] block tracking-wider font-black">
+              <span class="text-[10px] uppercase tracking-wider font-black block">
                 Evaluated Output
               </span>
-              <span class="text-[9.5px] italic text-[#141414]/70 font-serif">
+
+              <span class="text-[11px] text-[#141414]/60">
                 at x₁={testX1.toFixed(1)}, x₂={testX2.toFixed(1)}
               </span>
             </div>
+
           </div>
-          
-          <div class="flex items-center gap-3">
-            <span class="text-xl font-bold font-mono tracking-tight text-[#141414]">
-              y = {outputVal >= 0 ? `+${outputVal.toFixed(4)}` : outputVal.toFixed(4)}
-            </span>
-            
-            {#if outputVal >= 0.5}
-              <CheckCircle class="w-5 h-5 text-[#F27D26] fill-white stroke-[#141414]" />
-            {:else}
-              <XCircle class="w-5 h-5 text-[#141414]/40 fill-white stroke-[#141414]" />
-            {/if}
-          </div>
+
+          <span class="text-2xl font-bold tracking-tight">
+            y = {outputVal.toFixed(4)}
+          </span>
+
         </div>
+
       </section>
 
-      <!-- MAPPING EQUATIONS -->
-      <section class="bg-white border-2 border-[#141414] p-5 shadow-[4px_4px_0px_#141414] flex flex-col gap-4">
-        <h3 class="text-xs font-mono font-black uppercase text-[#141414] tracking-widest flex items-center gap-2 border-b-2 border-[#141414] pb-2">
-          <BookOpen class="w-4 h-4 text-[#F27D26]" />
-          Mapping Equations
-        </h3>
-        <div class="bg-[#E4E3E0] p-4 border border-[#141414] font-mono space-y-1 text-[11px] text-[#141414] shadow-[2px_2px_0px_#141414] overflow-x-auto">
-          {#if layerCount === 2}
-            <p class="text-[#141414] font-black">
-              y = {outputActivation}( ∑ h₂_j )
-            </p>
-            <p class="text-[10px] font-bold mt-2 text-[#141414]/70 uppercase tracking-widest border-b border-[#141414]/10 pb-0.5">
-              Layer 2 Hidden Nodes:
-            </p>
-            <div class="text-[9.5px] text-[#141414] pl-2 space-y-1 mt-1 uppercase font-medium leading-normal">
-              {#each layer2Neurons.slice(0, layer2NeuronCount) as neu, idx}
-                {@const v1Part = `${neu.v1 >= 0 ? `+${neu.v1.toFixed(1)}` : neu.v1.toFixed(1)}·h₁_1`}
-                {@const v2Part = neuronCount >= 2 ? ` ${neu.v2 >= 0 ? `+${neu.v2.toFixed(1)}` : neu.v2.toFixed(1)}·h₁_2` : ""}
-                {@const v3Part = neuronCount >= 3 ? ` ${neu.v3 >= 0 ? `+${neu.v3.toFixed(1)}` : neu.v3.toFixed(1)}·h₁_3` : ""}
-                {@const bPart = bias2 >= 0 ? `+${bias2.toFixed(1)}` : bias2.toFixed(1)}
-                <p>
-                  h₂__{idx+1} = {neu.act}( {v1Part}{v2Part}{v3Part} {bPart} )
-                </p>
-              {/each}
-            </div>
-            <p class="text-[10px] font-bold mt-2.5 text-[#141414]/70 uppercase tracking-widest border-b border-[#141414]/10 pb-0.5">
-              Layer 1 Hidden Nodes:
-            </p>
-            <div class="text-[9.5px] text-[#141414] pl-2 space-y-0.5 mt-1 uppercase font-medium leading-normal">
-              {#each neurons.slice(0, neuronCount) as neu, idx}
-                <p>
-                  h₁__{idx+1} = {neu.act}( {neu.w1 >= 0 ? `+${neu.w1.toFixed(1)}` : neu.w1.toFixed(1)}·x₁ + {neu.w2 >= 0 ? `+${neu.w2.toFixed(1)}` : neu.w2.toFixed(1)}·x₂ + {bias >= 0 ? `+${bias.toFixed(1)}` : bias.toFixed(1)} )
-                </p>
-              {/each}
-            </div>
-          {:else if neuronCount === 1}
-            <p class="text-[#141414] font-black">
-              y = {neurons[0]?.act}( <span class="text-[#141414]">{neurons[0]?.w1 >= 0 ? `+${neurons[0].w1}` : neurons[0].w1}</span> · x₁ + <span class="text-[#F27D26]">{neurons[0]?.w2 >= 0 ? `+${neurons[0].w2}` : neurons[0].w2}</span> · x₂ <span class="text-[#F27D26]">{bias >= 0 ? `+${bias}` : bias}</span> )
-            </p>
-            <p class="text-[10px] text-[#141414]/65 mt-2 uppercase tracking-wide">
-              * Single linear separation boundary separating coordinates.
-            </p>
-          {:else}
-            <p class="text-[#141414] font-black">
-              y = {outputActivation}( ∑ h_i )
-            </p>
-            <div class="text-[10px] text-[#141414] pl-2 space-y-1.5 mt-1.5 uppercase font-bold">
-              {#each neurons.slice(0, neuronCount) as neu, idx}
-                <p>
-                  h__{idx+1} = {neu.act}( {neu.w1 >= 0 ? `+${neu.w1}` : neu.w1}·x₁ + {neu.w2 >= 0 ? `+${neu.w2}` : neu.w2}·x₂ + {bias >= 0 ? `+${bias}` : bias} )
-                </p>
-              {/each}
-            </div>
-          {/if}
-        </div>
-      </section>
     </div>
 
-    <!-- RIGHT PANEL: 3D Render Graphics and SVG Diagrams (7 cols) -->
+    <!-- RIGHT PANEL -->
     <div class="lg:col-span-7 flex flex-col gap-6">
-      
-      <!-- THREE DIMENSIONAL GRAPH PLOT -->
-      <div class="flex-1 min-h-[380px] flex flex-col bg-white border-2 border-[#141414] p-5 relative shadow-[4px_4px_0px_#141414]">
+
+      <!-- PLOT -->
+      <div class="flex-1 min-h-[380px] flex flex-col bg-white border rounded-[28px] p-5 relative overflow-hidden shadow-sm">
+
         <ThreeDPlot
           {neurons}
           {bias}
@@ -755,10 +539,12 @@
           layer2Neurons={layerCount === 2 ? layer2Neurons : []}
           {bias2}
         />
+
       </div>
 
-      <!-- SCHEMATIC CIRCUIT GRAPH DIAGRAM -->
-      <div class="bg-white border-2 border-[#141414] p-5 shadow-[4px_4px_0px_#141414]">
+      <!-- NETWORK -->
+      <div class="bg-white border rounded-[28px] p-5 shadow-sm">
+
         <NetworkDiagram
           {neurons}
           {bias}
@@ -767,8 +553,11 @@
           layer2Neurons={layerCount === 2 ? layer2Neurons : []}
           {bias2}
         />
+
       </div>
+
     </div>
 
   </main>
+
 </div>
