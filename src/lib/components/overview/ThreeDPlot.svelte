@@ -264,7 +264,6 @@ let {
       const py = centerY - yRot2 * effectiveZoom * pScale;
 
       ctx.fillStyle = color;
-      ctx.font = "bold 9px 'JetBrains Mono', monospace";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(text, px, py);

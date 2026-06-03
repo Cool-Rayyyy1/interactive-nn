@@ -32,10 +32,10 @@
 
 <div class="w-full bg-white select-none">
   <div class="flex justify-between items-center mb-3 pb-2 border-b-2 border-[#141414]">
-    <h4 class="text-xs font-mono font-black text-[#141414] uppercase tracking-widest">
+    <h4 class="text-xs font-black text-[#141414] uppercase tracking-widest">
       Network Architecture Diagram
     </h4>
-    <span class="text-[9px] text-[#141414]/70 font-mono uppercase tracking-wide ">
+    <span class="text-[9px] text-[#141414]/70 uppercase tracking-wide ">
       {#if layerCount === 2}
         L1: {neuronCount} {neuronCount === 1 ? "Node" : "Nodes"} | L2: {layer2NeuronCount} {layer2NeuronCount === 1 ? "Node" : "Nodes"}
       {:else}
@@ -114,7 +114,6 @@
                 y={yBubble + 2.5}
                 fill="#F27D26"
                 font-size="7"
-                font-family="'JetBrains Mono', monospace"
                 font-weight="bold"
                 text-anchor="middle"
               >
@@ -164,7 +163,6 @@
               y={yBubble1 + 2.5}
               fill="#141414"
               font-size="7.5"
-              font-family="'JetBrains Mono', monospace"
               font-weight="black"
               text-anchor="middle"
             >
@@ -195,7 +193,6 @@
               y={yBubble2 + 2.5}
               fill="#F27D26"
               font-size="7.5"
-              font-family="'JetBrains Mono', monospace"
               font-weight="black"
               text-anchor="middle"
             >
@@ -234,23 +231,23 @@
         <!-- INPUT NODES COLUMN -->
         <!-- Node X1 -->
         <circle cx="60" cy="65" r="16" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-        <text x="60" y="69" fill="#141414" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="60" y="69" fill="#141414" font-size="11" font-weight="black" text-anchor="middle">
           x₁
         </text>
 
         <!-- Node X2 -->
         <circle cx="60" cy="135" r="16" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-        <text x="60" y="139" fill="#141414" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="60" y="139" fill="#141414" font-size="11"  font-weight="black" text-anchor="middle">
           x₂
         </text>
 
         <!-- Node Bias 1 -->
         <circle cx="60" cy="200" r="16" fill="#E4E3E0" stroke="#141414" stroke-width="2" />
-        <text x="60" y="204" fill="#141414" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="60" y="204" fill="#141414" font-size="11"  font-weight="black" text-anchor="middle">
           b₁
         </text>
         <rect x="80" y="193" width="31" height="12" fill="#FFFFFF" stroke="#141414" stroke-width="1" />
-        <text x="95" y="201" fill="#F27D26" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="95" y="201" fill="#F27D26" font-size="7.5"  font-weight="black" text-anchor="middle">
           {bias >= 0 ? `+${bias.toFixed(1)}` : bias.toFixed(1)}
         </text>
 
@@ -259,10 +256,10 @@
           {@const ny = getNeuronY(idx, neuronCount)}
           <g>
             <circle cx="210" cy={ny} r="18" fill="#E4E3E0" stroke="#141414" stroke-width="2" />
-            <text x="210" y={ny + 2} fill="#141414" font-size="8" font-weight="black" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+            <text x="210" y={ny + 2} fill="#141414" font-size="8" font-weight="black"  text-anchor="middle">
               h₁_{idx + 1}
             </text>
-            <text x="210" y={ny + 10} fill="#F27D26" font-size="5.5" font-weight="bold" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+            <text x="210" y={ny + 10} fill="#F27D26" font-size="5.5" font-weight="bold"  text-anchor="middle">
               {neu.act}
             </text>
           </g>
@@ -270,11 +267,11 @@
 
         <!-- Node Bias 2 -->
         <circle cx="210" cy="240" r="14" fill="#E4E3E0" stroke="#141414" stroke-width="2" />
-        <text x="210" y="244" fill="#141414" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="210" y="244" fill="#141414" font-size="9"  font-weight="black" text-anchor="middle">
           b₂
         </text>
         <rect x="228" y="233" width="31" height="12" fill="#FFFFFF" stroke="#141414" stroke-width="1" />
-        <text x="243" y="241" fill="#F27D26" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="243" y="241" fill="#F27D26" font-size="7.5"  font-weight="black" text-anchor="middle">
           {bias2 >= 0 ? `+${bias2.toFixed(1)}` : bias2.toFixed(1)}
         </text>
 
@@ -283,10 +280,10 @@
           {@const ny2 = getNeuronY(idx, layer2NeuronCount)}
           <g>
             <circle cx="380" cy={ny2} r="18" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-            <text x="380" y={ny2 + 2} fill="#141414" font-size="8" font-weight="black" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+            <text x="380" y={ny2 + 2} fill="#141414" font-size="8" font-weight="black"  text-anchor="middle">
               h₂_{idx + 1}
             </text>
-            <text x="380" y={ny2 + 10} fill="#F27D26" font-size="5.5" font-weight="bold" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+            <text x="380" y={ny2 + 10} fill="#F27D26" font-size="5.5" font-weight="bold"  text-anchor="middle">
               {neu2.act}
             </text>
           </g>
@@ -310,7 +307,7 @@
           
           <!-- Summation node -->
           <circle cx="470" cy="130" r="15" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-          <text x="470" y="134.5" fill="#141414" font-size="12" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+          <text x="470" y="134.5" fill="#141414" font-size="12"  font-weight="black" text-anchor="middle">
             ∑
           </text>
 
@@ -335,10 +332,10 @@
             stroke="#141414"
             stroke-width="2"
           />
-          <text x="544" y="125" fill="#141414" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+          <text x="544" y="125" fill="#141414" font-size="7.5"  font-weight="black" text-anchor="middle">
             COMB(G)
           </text>
-          <text x="544" y="139" fill="#F27D26" font-size="9.5" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', monospace">
+          <text x="544" y="139" fill="#F27D26" font-size="9.5" font-weight="bold" text-anchor="middle" >
             {outputActivation}
           </text>
 
@@ -374,10 +371,10 @@
             stroke="#141414"
             stroke-width="2"
           />
-          <text x="522.5" y="124" fill="#141414" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+          <text x="522.5" y="124" fill="#141414" font-size="7.5"  font-weight="black" text-anchor="middle">
             OUTPUT ACT(G)
           </text>
-          <text x="522.5" y="140" fill="#F27D26" font-size="11" font-weight="black" text-anchor="middle" font-family="'JetBrains Mono', monospace">
+          <text x="522.5" y="140" fill="#F27D26" font-size="11" font-weight="black" text-anchor="middle" >
             {outputActivation}
           </text>
 
@@ -431,7 +428,7 @@
               y={yBubble1 + 3}
               fill="#141414"
               font-size="8"
-              font-family="'JetBrains Mono', monospace"
+              
               font-weight="black"
               text-anchor="middle"
             >
@@ -461,7 +458,7 @@
               y={yBubble2 + 3}
               fill="#F27D26"
               font-size="8"
-              font-family="'JetBrains Mono', monospace"
+              
               font-weight="black"
               text-anchor="middle"
             >
@@ -483,21 +480,21 @@
 
         <!-- INPUT NODES COLUMN -->
         <circle cx="80" cy="60" r="18" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-        <text x="80" y="64" fill="#141414" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="80" y="64" fill="#141414" font-size="11"  font-weight="black" text-anchor="middle">
           x₁
         </text>
 
         <circle cx="80" cy="130" r="18" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-        <text x="80" y="134" fill="#141414" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="80" y="134" fill="#141414" font-size="11"  font-weight="black" text-anchor="middle">
           x₂
         </text>
 
         <circle cx="80" cy="200" r="18" fill="#E4E3E0" stroke="#141414" stroke-width="2" />
-        <text x="80" y="204" fill="#141414" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="80" y="204" fill="#141414" font-size="11"  font-weight="black" text-anchor="middle">
           b
         </text>
         <rect x="104" y="193" width="36" height="13" fill="#FFFFFF" stroke="#141414" stroke-width="1" />
-        <text x="122" y="202" fill="#F27D26" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+        <text x="122" y="202" fill="#F27D26" font-size="8"  font-weight="black" text-anchor="middle">
           {bias >= 0 ? `+${bias.toFixed(1)}` : bias.toFixed(1)}
         </text>
 
@@ -506,10 +503,10 @@
           {@const ny = getNeuronY(idx, neuronCount)}
           <g>
             <circle cx="260" cy={ny} r="20" fill="#E4E3E0" stroke="#141414" stroke-width="2" />
-            <text x="260" y={ny + 2} fill="#141414" font-size="9" font-weight="black" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+            <text x="260" y={ny + 2} fill="#141414" font-size="9" font-weight="black"  text-anchor="middle">
               h_{idx + 1}
             </text>
-            <text x="260" y={ny + 11} fill="#F27D26" font-size="6.5" font-weight="bold" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+            <text x="260" y={ny + 11} fill="#F27D26" font-size="6.5" font-weight="bold"  text-anchor="middle">
               {neu.act}
             </text>
           </g>
@@ -531,7 +528,7 @@
           {/each}
 
           <circle cx="420" cy="130" r="18" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
-          <text x="420" y="135" fill="#141414" font-size="15" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+          <text x="420" y="135" fill="#141414" font-size="15"  font-weight="black" text-anchor="middle">
             ∑
           </text>
 
@@ -554,10 +551,10 @@
             stroke="#141414"
             stroke-width="2"
           />
-          <text x="522" y="126" fill="#141414" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+          <text x="522" y="126" fill="#141414" font-size="8"  font-weight="black" text-anchor="middle">
             ACT (G)
           </text>
-          <text x="522" y="140" fill="#F27D26" font-size="10" font-weight="black" text-anchor="middle" font-family="'JetBrains Mono', monospace">
+          <text x="522" y="140" fill="#F27D26" font-size="10" font-weight="black" text-anchor="middle" >
             {outputActivation}
           </text>
 
@@ -590,10 +587,10 @@
             stroke="#141414"
             stroke-width="2"
           />
-          <text x="495" y="124" fill="#141414" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+          <text x="495" y="124" fill="#141414" font-size="8"  font-weight="black" text-anchor="middle">
             PERCEPTRON ACT(F)
           </text>
-          <text x="495" y="140" fill="#F27D26" font-size="11" font-weight="black" text-anchor="middle" font-family="'JetBrains Mono', monospace">
+          <text x="495" y="140" fill="#F27D26" font-size="11" font-weight="black" text-anchor="middle" >
             {neurons[0]?.act || "sign"}
           </text>
 
@@ -611,7 +608,7 @@
 
       <!-- FINAL OUTPUT NODE -->
       <circle cx="600" cy="130" r="18" fill="#F27D26" stroke="#141414" stroke-width="2.5" />
-      <text x="600" y="135" fill="#141414" font-size="12" font-family="'JetBrains Mono', monospace" font-weight="black" text-anchor="middle">
+      <text x="600" y="135" fill="#141414" font-size="12"  font-weight="black" text-anchor="middle">
         y
       </text>
     </svg>
