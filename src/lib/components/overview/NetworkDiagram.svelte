@@ -31,7 +31,7 @@
 </script>
 
 <div class="w-full bg-white select-none">
-  <div class="flex justify-between items-center mb-3 pb-2 border-b-2 border-[#141414]">
+  <div class="flex justify-between items-center mb-3 pb-2 border-b-2 border-[#141414] border-black/30">
     <h4 class="text-xs font-black text-[#141414] uppercase tracking-widest">
       Network Architecture Diagram
     </h4>

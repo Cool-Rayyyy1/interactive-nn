@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Network } from 'lucide-svelte';
 
-  // Svelte 5 runes for props
   let { 
     networkState, 
     mode, 
@@ -21,14 +20,14 @@
   } = $props();
 </script>
 
-<div class="flex-1 border border-[#141414] bg-white relative overflow-hidden group">
-  <div class="absolute top-4 left-4 z-10">
-    <h2 class="text-xs font-mono uppercase tracking-widest opacity-50 flex items-center gap-2">
+<div class="flex-1 border border-[#141414] bg-white relative overflow-hidden group rounded-2xl">
+  <div class="absolute top-4 left-4 z-10 ">
+    <h2 class="text-xs  uppercase tracking-widest opacity-50 flex items-center gap-2">
       <Network class="w-4 h-4" /> Network Architecture
     </h2>
   </div>
   
-  <svg class="w-full h-full" aria-label="Neural Network Diagram">
+  <svg class="w-full h-full " aria-label="Neural Network Diagram">
     {#if networkState}
       <!-- Pass 1: Connection Lines -->
       {#each networkState.layers as layerSize, lIdx}
@@ -142,7 +141,7 @@
               y="{y}%" 
               dy="4"
               text-anchor="middle" 
-              class="text-[11px] font-mono pointer-events-none font-bold fill-[#141414]"
+              class="text-[11px]  pointer-events-none font-bold fill-[#141414]"
             >
               {lIdx === 0 ? (nIdx === 0 ? 'X' : 'Y') : (lIdx === networkState.layers.length - 1 ? (nIdx === 0 ? 'A' : 'B') : '')}
             </text>
@@ -223,7 +222,7 @@
                       dy="0"
                       text-anchor="middle"
                       dominant-baseline="central"
-                      class="text-[10px] font-mono font-bold {
+                      class="text-[10px]  font-bold {
                         isWeightSelected ? 'fill-white' : 'fill-[#141414]'
                       }"
                     >
@@ -251,7 +250,7 @@
                 y="{y}%"
                 dy="-18"
                 text-anchor="middle"
-                class="text-[10px] font-mono font-bold pointer-events-none transition-all duration-200 {
+                class="text-[10px]  font-bold pointer-events-none transition-all duration-200 {
                   isBiasSelected ? 'fill-[#141414] text-[11px] scale-110 font-extrabold' : 'fill-[#F27D26]'
                 }"
               >

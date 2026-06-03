@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { NeuralNetwork } from '$lib/networks/ml-engine';
 
-  // State / Callback interfaces
   let { 
     networkState, 
     nnRef, 
@@ -58,13 +57,13 @@
   });
 </script>
 
-<aside class="lg:col-span-3 p-6 flex flex-col gap-6 bg-[#E4E3E0]/20">
-  <div class="flex-1 border border-[#141414] bg-white relative flex flex-col">
-    <div class="p-4 border-b border-[#141414] flex justify-between items-center">
-      <h2 class="text-xs font-mono uppercase tracking-widest opacity-50">Decision Space</h2>
+<aside class="lg:col-span-3 p-6 flex flex-col gap-6">
+  <div class="flex-1 border border-[#141414] bg-white relative flex flex-col rounded-2xl">
+    <div class="p-4 border-b border-[#141414] flex justify-between items-center bg-[#E4E3E0]/30 ">
+      <h2 class="text-xs  uppercase tracking-widest opacity-50">Decision Space</h2>
       <button 
         onclick={ongenerateData}
-        class="text-[10px] uppercase font-mono hover:underline cursor-pointer"
+        class="text-[10px] uppercase  hover:underline cursor-pointer"
         id="btn-regen-data"
       >Regenerate Data</button>
     </div>
@@ -91,17 +90,17 @@
     </div>
 
     <div class="p-4 border-t border-[#141414] bg-[#E4E3E0]/30">
-      <div class="flex justify-between items-center text-[10px] font-mono uppercase opacity-50 mb-2">
+      <div class="flex justify-between items-center text-[10px]  uppercase opacity-50 mb-2">
         <span>Legend</span>
       </div>
       <div class="flex gap-4">
         <div class="flex items-center gap-2">
           <div class="w-3 h-3 bg-[#F27D26] rounded-full border border-white"></div>
-          <span class="text-[10px] font-mono">Class A</span>
+          <span class="text-[10px] ">Class A</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="w-3 h-3 bg-[#141414] rounded-full border border-white"></div>
-          <span class="text-[10px] font-mono">Class B</span>
+          <span class="text-[10px] ">Class B</span>
         </div>
       </div>
     </div>

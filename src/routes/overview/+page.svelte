@@ -187,7 +187,7 @@
     <div class="lg:col-span-5 flex flex-col gap-6">
 
       <!-- CONFIG CARD -->
-      <section class="bg-white border rounded-3xl p-5 flex flex-col gap-5 shadow-sm">
+      <section class="bg-white border rounded-2xl p-5 flex flex-col gap-5 shadow-sm">
 
         <h3 class="text-xs font-black uppercase tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
           <Sliders class="w-4 h-4 text-[#F27D26]" />
@@ -311,7 +311,7 @@
         </div>
 
         <!-- Synaptic Weights -->
-        <div class="border border-black/30 bg-[#fafafa] rounded-3xl p-5 space-y-4">
+        <div class="border border-black/30 bg-[#f5f5f5] rounded-3xl p-5 space-y-4">
 
           <div class="flex justify-between items-center">
 
@@ -497,7 +497,7 @@
         </div>
 
         <!-- Output -->
-        <div class="bg-[#f5f5f5] border border-black/30 rounded-3xl px-5 py-4 flex items-center justify-between">
+        <div class="bg-[#f5f5f5] border border-black/30 rounded-2xl px-5 py-4 flex items-center justify-between">
 
           <div class="flex items-center gap-3">
 

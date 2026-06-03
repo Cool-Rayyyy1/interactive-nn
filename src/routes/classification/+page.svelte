@@ -246,7 +246,7 @@
   };
 </script>
 
-<div class="min-h-screen bg-[#E4E3E0] text-[#141414] font-sans selection:bg-[#141414] selection:text-[#E4E3E0]">
+<div class="min-h-screen text-[#141414] font-sans selection:bg-[#141414] selection:text-[#E4E3E0]">
   <!-- Header -->
   <header class="border-b border-[#141414] p-6 flex justify-between items-center">
     <div>
@@ -254,14 +254,14 @@
         <Zap class="w-8 h-8 text-[#F27D26]" />
         Neural Vision
       </h1>
-      <p class="text-xs uppercase tracking-widest opacity-50 mt-1 font-mono">
+      <p class="text-xs uppercase tracking-widest opacity-50 mt-1 ">
         Interactive ML Playground • Binary Classification (Svelte 5)
       </p>
     </div>
     <div class="flex gap-4">
       <button 
         onclick={reset}
-        class="p-3 border border-[#141414] hover:bg-[#141414] hover:text-[#E4E3E0] transition-colors"
+        class="p-3 border hover:bg-[#141414] hover:text-[#E4E3E0] transition-colors rounded-2xl"
         title="Reset Network"
         id="btn-reset"
       >
@@ -270,7 +270,7 @@
       <button 
         onclick={togglePlay}
         disabled={mode === 'manual'}
-        class="px-8 py-3 border border-[#141414] flex items-center gap-2 transition-all {
+        class="px-8 py-3 border border-[#141414] flex items-center gap-2 transition-all rounded-2xl {
           mode === 'manual' 
             ? 'opacity-40 bg-[#E1DFDB] text-[#141414]/40 border-gray-400 cursor-not-allowed' 
             : isPlaying 
@@ -285,29 +285,29 @@
         {:else}
           <Play class="w-5 h-5" />
         {/if}
-        <span class="font-mono uppercase tracking-wider">
+        <span class=" uppercase tracking-wider">
           {mode === 'manual' ? 'Backprop Paused' : isPlaying ? 'Stop' : 'Train'}
         </span>
       </button>
     </div>
   </header>
 
-  <main class="grid grid-cols-1 lg:grid-cols-12 h-[calc(100vh-100px)]">
+  <main class="grid grid-cols-1 lg:grid-cols-12 h-[calc(100vh-100px)] ">
     <!-- Left Panel: Controls -->
-    <aside class="lg:col-span-3 border-r border-[#141414] p-6 overflow-y-auto bg-[#E4E3E0]/50 backdrop-blur-sm">
+    <aside class="lg:col-span-3  p-6 overflow-y-auto  backdrop-blur-sm">
       <div class="space-y-6">
         
         <!-- Mode Selection -->
-        <section class="p-4 border border-[#141414] bg-[#F27D26]/10" id="section-mode">
-          <h2 class="text-xs font-mono uppercase tracking-widest opacity-80 mb-3 flex items-center gap-1.5 font-bold">
+        <section class="p-4 border border-[#141414] bg-[#F27D26]/10 rounded-2xl" id="section-mode">
+          <h2 class="text-xs  uppercase tracking-widest opacity-80 mb-3 flex items-center gap-1.5 font-bold">
             <Zap class="w-4 h-4 text-[#F27D26]" /> Training Mode
           </h2>
-          <div class="grid grid-cols-2 gap-2 text-[10px] font-mono uppercase">
+          <div class="grid grid-cols-2 gap-2 text-[10px]  uppercase">
             <button
               onclick={() => {
                 mode = 'auto';
               }}
-              class="p-2 border border-[#141414] transition-all flex flex-col items-center justify-center gap-0.5 {
+              class="p-2 border border-[#141414] transition-all flex flex-col items-center justify-center gap-0.5 rounded-2xl {
                 mode === 'auto' ? 'bg-[#141414] text-[#E4E3E0] font-bold' : 'bg-white text-black hover:bg-[#141414]/10'
               }"
               id="btn-mode-auto"
@@ -320,7 +320,7 @@
                 mode = 'manual';
                 isPlaying = false;
               }}
-              class="p-2 border border-[#141414] transition-all flex flex-col items-center justify-center gap-0.5 {
+              class="p-2 border border-[#141414] transition-all flex flex-col items-center justify-center gap-0.5 rounded-2xl {
                 mode === 'manual' ? 'bg-[#141414] text-[#E4E3E0] font-bold' : 'bg-white text-black hover:bg-[#141414]/10'
               }"
               id="btn-mode-manual"
@@ -332,13 +332,13 @@
         </section>
 
         <section id="section-config">
-          <h2 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-4 flex items-center gap-2">
+          <h2 class="text-xs  uppercase tracking-widest opacity-50 mb-4 flex items-center gap-2 rounded-2xl ">
             <Settings2 class="w-4 h-4" /> Configuration
           </h2>
           
-          <div class="space-y-6">
+          <div class="space-y-6 ">
             <div>
-              <label class="text-sm font-sans font-semibold block mb-2" for="range-lr">
+              <label class="text-sm font-sans font-semibold block mb-2 " for="range-lr">
                 Learning Rate: {learningRate.toFixed(3)} {mode === 'manual' ? '(Offline)' : ''}
               </label>
               <input 
@@ -360,26 +360,26 @@
               <div class="flex justify-between items-center">
                 <span class="text-sm font-sans font-semibold" id="label-hddl-layers">Hidden Layers</span>
                 <div class="flex gap-2">
-                  <button onclick={removeLayer} class="p-1 border border-[#141414] hover:bg-[#141414] hover:text-[#E4E3E0]" aria-label="Decrease layers"><Minus class="w-4 h-4" /></button>
-                  <button onclick={addLayer} class="p-1 border border-[#141414] hover:bg-[#141414] hover:text-[#E4E3E0]" aria-label="Increase layers"><Plus class="w-4 h-4" /></button>
+                  <button onclick={removeLayer} class="p-1  border border-[#141414] hover:bg-[#141414] hover:text-[#E4E3E0] rounded-2xl" aria-label="Decrease layers"><Minus class="w-4 h-4" /></button>
+                  <button onclick={addLayer} class="p-1 border border-[#141414] hover:bg-[#141414] hover:text-[#E4E3E0] rounded-2xl" aria-label="Increase layers"><Plus class="w-4 h-4" /></button>
                 </div>
               </div>
 
-              <div class="space-y-2">
+              <div class="space-y-2 bg-[#f5f5f5]">
                 {#each layers as layer, idx}
-                  <div class="p-3 border border-[#141414] bg-white/50 transition-all">
+                  <div class="p-3 border border-[#141414] bg-white/50 transition-all rounded-2xl ">
                     <div class="flex justify-between items-center mb-2">
-                      <span class="text-[10px] font-mono uppercase opacity-50">Layer {idx + 1}</span>
+                      <span class="text-[10px]  uppercase opacity-50">Layer {idx + 1}</span>
                       <div class="flex items-center gap-2">
                         <button 
                           onclick={() => updateLayer(idx, { neurons: Math.max(1, layer.neurons - 1) })}
-                          class="w-5 h-5 border border-[#141414] flex items-center justify-center text-xs"
+                          class="w-5 h-5 border border-[#141414] flex items-center justify-center text-xs rounded-2xl "
                           aria-label="Decrease neurons"
                         >-</button>
-                        <span class="font-mono text-sm w-4 text-center">{layer.neurons}</span>
+                        <span class=" text-sm w-4 text-center">{layer.neurons}</span>
                         <button 
                           onclick={() => updateLayer(idx, { neurons: Math.min(8, layer.neurons + 1) })}
-                          class="w-5 h-5 border border-[#141414] flex items-center justify-center text-xs"
+                          class="w-5 h-5 border border-[#141414] flex items-center justify-center text-xs rounded-2xl"
                           aria-label="Increase neurons"
                         >+</button>
                       </div>
@@ -387,7 +387,7 @@
                     <select 
                       bind:value={layer.activation}
                       onchange={(e) => updateLayer(idx, { activation: (e.target as HTMLSelectElement).value as ActivationType })}
-                      class="w-full bg-transparent border border-[#141414] p-1.5 text-xs font-mono uppercase"
+                      class="w-full bg-transparent border border-[#141414] p-1.5 text-xs  uppercase"
                       aria-label="Layer activation class"
                     >
                       <option value="relu">ReLU</option>
@@ -417,16 +417,16 @@
         {/if}
 
         <section id="section-stats">
-          <h2 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-4 flex items-center gap-2">
+          <h2 class="text-xs  bg-[#f5f5f5] uppercase tracking-widest opacity-50 mb-4 flex items-center gap-2 ">
             <Activity class="w-4 h-4" /> Stats
           </h2>
           <div class="grid grid-cols-2 gap-4">
-            <div class="p-4 border border-[#141414] bg-white">
-              <div class="text-[10px] font-mono uppercase opacity-50">Epochs</div>
+            <div class="p-4 border border-[#141414] bg-white rounded-2xl bg-[#f5f5f5] ">
+              <div class="text-[10px]  uppercase opacity-50 bg-[#f5f5f5]">Epochs</div>
               <div class="text-2xl font-sans font-bold">{epoch}</div>
             </div>
-            <div class="p-4 border border-[#141414] bg-white">
-              <div class="text-[10px] font-mono uppercase opacity-50">Loss (MSE)</div>
+            <div class="p-4 border border-[#141414] bg-white rounded-2xl bg-[#f5f5f5]">
+              <div class="text-[10px]  uppercase opacity-50">Loss (MSE)</div>
               <div class="text-2xl font-sans font-bold">
                 {currentLoss.toFixed(4)}
               </div>
@@ -440,7 +440,7 @@
     </aside>
 
     <!-- Center Panel: Visualization -->
-    <div class="lg:col-span-6 border-r border-[#141414] p-6 flex flex-col gap-6 overflow-hidden">
+    <div class="lg:col-span-6  border-[#141414] p-6 flex flex-col gap-6 overflow-hidden rounded-2xl">
       <!-- Network Diagram Component -->
       <NetworkDiagram
         {networkState}
@@ -451,7 +451,7 @@
         }}
       />
 
-      <div class="h-1/3 border border-[#141414] bg-[#141414] text-[#E4E3E0] p-6 font-mono text-xs overflow-y-auto">
+      <div class="h-1/3 border border-[#141414] bg-[#141414] text-[#E4E3E0] p-6  text-xs overflow-y-auto rounded-2xl">
         <div class="flex items-center gap-2 mb-2 opacity-50">
           <Info class="w-4 h-4" /> <span>System Logs</span>
         </div>

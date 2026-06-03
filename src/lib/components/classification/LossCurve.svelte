@@ -26,15 +26,15 @@
 </script>
 
 <section class="h-48" id="section-loss-curve">
-  <h2 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-4">Loss Curve</h2>
-  <div class="h-full border border-[#141414] bg-white p-2">
+  <h2 class="text-xs  uppercase tracking-widest opacity-50 mb-4 ">Loss Curve</h2>
+  <div class="h-full border border-[#141414] bg-white p-2 rounded-2xl">
     {#if lossHistory.length > 0}
       <svg class="w-full h-full" viewBox="0 0 {chartWidth} {chartHeight}">
         <!-- Y-gridlines and ticks -->
         {#each [0, 0.25, 0.5, 0.75, 1.0] as relativeVal}
           {@const yCoord = scaleY(relativeVal * maxLoss)}
           <line x1="40" y1={yCoord} x2={chartWidth - 15} y2={yCoord} stroke="#efefef" stroke-width="1" />
-          <text x="34" y={yCoord + 3} class="text-[8px] font-mono fill-[#141414]/40" text-anchor="end">
+          <text x="34" y={yCoord + 3} class="text-[8px]  fill-[#141414]/40" text-anchor="end">
             {(relativeVal * maxLoss).toFixed(2)}
           </text>
         {/each}
@@ -49,11 +49,11 @@
         {/if}
 
         <!-- Axis Labels -->
-        <text x="25" y="15" class="text-[8px] font-mono font-bold fill-[#141414]/60" text-anchor="end">MSE</text>
-        <text x={chartWidth - 25} y={chartHeight - 6} class="text-[8px] font-mono font-bold fill-[#141414]/60" text-anchor="end">EPOCHS</text>
+        <text x="25" y="15" class="text-[8px]  font-bold fill-[#141414]/60" text-anchor="end">MSE</text>
+        <text x={chartWidth - 25} y={chartHeight - 6} class="text-[8px]  font-bold fill-[#141414]/60" text-anchor="end">EPOCHS</text>
       </svg>
     {:else}
-      <div class="flex items-center justify-center h-full text-xs font-mono opacity-50">
+      <div class="flex items-center justify-center h-full text-xs  opacity-50">
         Awaiting first training loop...
       </div>
     {/if}
