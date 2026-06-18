@@ -174,7 +174,7 @@
       </div>
 
       <div>
-        <span class=" mb-1.5 block  text-[10px] text-[#141414]/70 ">Activation transfer</span>
+        <span class=" mb-1.5 block  text-[10px] text-[#141414]/70 ">Activation Functions</span>
         <div class="relative">
           <select
             value={activationType}
