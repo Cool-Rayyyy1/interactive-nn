@@ -192,7 +192,7 @@
       <text text-anchor="middle" y="5" class="text-[14px]  font-bold fill-[#F27D26]">
         {target.toFixed(2)}
       </text>
-      <text text-anchor="middle" y="-40" class="tech-label text-[#141414]/60 italic font-serif text-[13px] lowercase">target (y)</text>
+      <text text-anchor="middle" y="-40" class=" text-[#141414]/60 italic font-serif text-[13px] lowercase">target (y)</text>
     </g>
   </svg>
 </div>

@@ -341,7 +341,6 @@ let {
         gap-2
         text-[10px]
         font-bold
-        uppercase
         tracking-widest
         bg-[#f5f5f5]
         text-[#141414]
@@ -373,7 +372,6 @@ let {
         px-4
         py-2
         font-bold
-        uppercase
         cursor-pointer
         transition
         duration-200
@@ -476,7 +474,6 @@ let {
     <span
       class="
         text-[10px]
-        uppercase
         font-black
         whitespace-nowrap
         tracking-widest

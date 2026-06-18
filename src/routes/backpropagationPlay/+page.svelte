@@ -32,13 +32,13 @@
       <div class="flex items-center gap-4">
         <div class="flex items-center gap-2">
           <div class="w-2 h-2 rounded-full bg-[#F27D26]"></div>
-          <h1 class="text-xs  font-bold tracking-wider text-[#141414] uppercase">Engine Control & Sandbox</h1>
+          <h1 class="text-xs  font-bold tracking-wider text-[#141414] ">Engine Control & Sandbox</h1>
         </div>
       </div>
 
       <div class="flex items-center gap-6">
         <div class="flex flex-col items-end leading-none">
-          <span class="text-[9px] text-[#141414]/60 uppercase  tracking-wider font-bold">Epoch step</span>
+          <span class="text-[9px] text-[#141414]/60   tracking-wider font-bold">Epoch step</span>
           <span class="text-xl  font-bold text-[#F27D26] tabular-nums mt-0.5">
             {String(model.epoch).padStart(4, '0')}
           </span>
@@ -106,12 +106,12 @@
               model.step === 'update' ? 'bg-[#F27D26] animate-pulse' : 
               'bg-white'
             )}></div>
-            <span class="tech-label text-xs uppercase tracking-wider ">
+            <span class=" text-xs  tracking-wider ">
               {model.step === 'idle' ? 'System Idle' : `Current Phase: ${model.step} propagation`}
             </span>
           </div>
 
-          <div class="tech-label text-xs  uppercase tracking-wider">
+          <div class=" text-xs   tracking-wider">
             Sub-step: <span class="text-[#F27D26] font-bold">{model.subStep}</span>
           </div>
         </div>
@@ -144,13 +144,13 @@
             model.step !== 'idle' && model.step !== 'forward' && "md:flex-col md:items-center md:py-8 md:px-1"
           )}>
             <span class={cn(
-              "tech-label transition-transform duration-300 text-xs font-bold uppercase  tracking-widest",
+              " transition-transform duration-300 text-xs font-bold   tracking-widest",
               model.step !== 'idle' && model.step !== 'forward' && "md:rotate-90 md:my-10 md:whitespace-nowrap md:origin-center"
             )}>
               Phase 01
             </span>
             <span class={cn(
-              "font-bold text-[10px] md:text-xs uppercase tracking-widest  truncate",
+              "font-bold text-[10px] md:text-xs  tracking-widest  truncate",
               model.step === 'forward' ? "text-[#F27D26]" : "text-[#141414]/60",
               model.step !== 'idle' && model.step !== 'forward' && "hidden"
             )}>
@@ -165,7 +165,7 @@
               </div>
             {:else}
               {#if model.step === 'idle'}
-                <div class="min-h-[6rem] flex items-center justify-center bg-[#E4E3E0]/10  text-xs uppercase p-4">
+                <div class="min-h-[6rem] flex items-center justify-center bg-[#E4E3E0]/10  text-xs  p-4">
                   <p class="text-[#141414]/50 italic text-center">
                     Awaiting forward...
                   </p>
@@ -189,13 +189,13 @@
             model.step !== 'idle' && model.step !== 'backward' && "md:flex-col md:items-center md:py-8 md:px-1"
           )}>
             <span class={cn(
-              "tech-label transition-transform duration-300 text-xs font-bold uppercase  tracking-widest",
+              " transition-transform duration-300 text-xs font-bold   tracking-widest",
               model.step !== 'idle' && model.step !== 'backward' && "md:rotate-90 md:my-10 md:whitespace-nowrap md:origin-center"
             )}>
               Phase 02
             </span>
             <span class={cn(
-              "font-bold text-[10px] md:text-xs uppercase tracking-widest  truncate",
+              "font-bold text-[10px] md:text-xs  tracking-widest  truncate",
               model.step === 'backward' ? "text-[#F27D26]" : "text-[#141414]/60",
               model.step !== 'idle' && model.step !== 'backward' && "hidden"
             )}>
@@ -210,7 +210,7 @@
               </div>
             {:else}
               {#if model.step === 'idle'}
-                <div class="min-h-[6rem] flex items-center justify-center bg-[#E4E3E0]/10  text-xs uppercase p-4">
+                <div class="min-h-[6rem] flex items-center justify-center bg-[#E4E3E0]/10  text-xs  p-4">
                   <p class="text-[#141414]/50 italic text-center">
                     Awaiting backward...
                   </p>
@@ -234,13 +234,13 @@
             model.step !== 'idle' && model.step !== 'update' && "md:flex-col md:items-center md:py-8 md:px-1"
           )}>
             <span class={cn(
-              "tech-label transition-transform duration-300 text-xs font-bold uppercase  tracking-widest",
+              " transition-transform duration-300 text-xs font-bold   tracking-widest",
               model.step !== 'idle' && model.step !== 'update' && "md:rotate-90 md:my-10 md:whitespace-nowrap md:origin-center"
             )}>
               Phase 03
             </span>
             <span class={cn(
-              "font-bold text-[10px] md:text-xs uppercase tracking-widest  truncate",
+              "font-bold text-[10px] md:text-xs  tracking-widest  truncate",
               model.step === 'update' ? "text-[#F27D26]" : "text-[#141414]/60",
               model.step !== 'idle' && model.step !== 'update' && "hidden"
             )}>
@@ -255,7 +255,7 @@
               </div>
             {:else}
               {#if model.step === 'idle'}
-                <div class="min-h-[6rem] flex items-center justify-center bg-[#E4E3E0]/10  text-xs uppercase p-4">
+                <div class="min-h-[6rem] flex items-center justify-center bg-[#E4E3E0]/10  text-xs  p-4">
                   <p class="text-[#141414]/50 italic text-center">
                     Awaiting updates...
                   </p>

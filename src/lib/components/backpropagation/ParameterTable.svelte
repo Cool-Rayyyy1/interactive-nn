@@ -25,7 +25,7 @@
     <div class="grid grid-cols-2 gap-8">
       <!-- Weights -->
       <div class="space-y-4">
-        <h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Weights (W)</h3>
+        <h3 class="text-[10px] font-bold tracking-widest text-slate-400">Weights (W)</h3>
         <div class="space-y-1">
           {#each Object.entries(weights) as [key, value]}
             {@const val = value as number}
@@ -43,7 +43,7 @@
 
       <!-- Biases -->
       <div class="space-y-4">
-        <h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Biases (B)</h3>
+        <h3 class="text-[10px] font-bold tracking-widest text-slate-400">Biases (B)</h3>
         <div class="space-y-1">
           {#each Object.entries(biases) as [key, value]}
             {@const val = value as number}

@@ -212,7 +212,7 @@
       stroke-dasharray="4 4" 
       class="opacity-40"
     />
-    <text x={10} y={toSVGY(targetY) - 5} font-size="9" font-weight="bold" fill="#141414" class="font-mono uppercase tracking-wider opacity-60">Min L(θ): {targetY.toFixed(3)}</text>
+    <text x={10} y={toSVGY(targetY) - 5} font-size="9" font-weight="bold" fill="#141414" class="font-mono tracking-wider opacity-60">Min L(θ): {targetY.toFixed(3)}</text>
 
     <!-- Function Plot -->
     <path
@@ -273,7 +273,7 @@
             font-weight="black"
             fill="#F27D26"
             text-anchor={gradDir > 0 ? "start" : "end"}
-            class="font-mono uppercase tracking-wider"
+            class="font-mono tracking-wider"
           >
             dL/dθ
           </text>
@@ -295,7 +295,7 @@
             font-weight="black"
             fill="#141414"
             text-anchor="middle"
-            class="font-mono uppercase tracking-wider bg-white px-1"
+            class="font-mono tracking-wider bg-white px-1"
           >
             -η dL/dθ (Step)
           </text>
@@ -320,7 +320,7 @@
         text-anchor="middle" 
         font-weight="black" 
         fill="#141414" 
-        class="font-mono uppercase tracking-wider"
+        class="font-mono tracking-wider"
       >
         θ
       </text>

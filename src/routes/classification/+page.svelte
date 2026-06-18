@@ -254,7 +254,7 @@
         <Zap class="w-8 h-8 text-[#F27D26]" />
         Neural Vision
       </h1>
-      <p class="text-xs uppercase tracking-widest opacity-50 mt-1 ">
+      <p class="text-xs case tracking-widest opacity-50 mt-1 ">
         Interactive ML Playground • Binary Classification (Svelte 5)
       </p>
     </div>
@@ -285,7 +285,7 @@
         {:else}
           <Play class="w-5 h-5" />
         {/if}
-        <span class=" uppercase tracking-wider">
+        <span class=" case tracking-wider">
           {mode === 'manual' ? 'Backprop Paused' : isPlaying ? 'Stop' : 'Train'}
         </span>
       </button>
@@ -299,10 +299,10 @@
         
         <!-- Mode Selection -->
         <section class="p-4 border border-[#141414] bg-[#F27D26]/10 rounded-2xl" id="section-mode">
-          <h2 class="text-xs  uppercase tracking-widest opacity-80 mb-3 flex items-center gap-1.5 font-bold">
+          <h2 class="text-xs  case tracking-widest opacity-80 mb-3 flex items-center gap-1.5 font-bold">
             <Zap class="w-4 h-4 text-[#F27D26]" /> Training Mode
           </h2>
-          <div class="grid grid-cols-2 gap-2 text-[10px]  uppercase">
+          <div class="grid grid-cols-2 gap-2 text-[10px]  case">
             <button
               onclick={() => {
                 mode = 'auto';
@@ -332,7 +332,7 @@
         </section>
 
         <section id="section-config">
-          <h2 class="text-xs  uppercase tracking-widest opacity-50 mb-4 flex items-center gap-2 rounded-2xl ">
+          <h2 class="text-xs  case tracking-widest opacity-50 mb-4 flex items-center gap-2 rounded-2xl ">
             <Settings2 class="w-4 h-4" /> Configuration
           </h2>
           
@@ -369,7 +369,7 @@
                 {#each layers as layer, idx}
                   <div class="p-3 border border-[#141414] bg-white/50 transition-all rounded-2xl ">
                     <div class="flex justify-between items-center mb-2">
-                      <span class="text-[10px]  uppercase opacity-50">Layer {idx + 1}</span>
+                      <span class="text-[10px]  case opacity-50">Layer {idx + 1}</span>
                       <div class="flex items-center gap-2">
                         <button 
                           onclick={() => updateLayer(idx, { neurons: Math.max(1, layer.neurons - 1) })}
@@ -387,7 +387,7 @@
                     <select 
                       bind:value={layer.activation}
                       onchange={(e) => updateLayer(idx, { activation: (e.target as HTMLSelectElement).value as ActivationType })}
-                      class="w-full bg-transparent border border-[#141414] p-1.5 text-xs  uppercase"
+                      class="w-full bg-transparent border border-[#141414] p-1.5 text-xs  case"
                       aria-label="Layer activation class"
                     >
                       <option value="relu">ReLU</option>
@@ -417,16 +417,16 @@
         {/if}
 
         <section id="section-stats">
-          <h2 class="text-xs  bg-[#f5f5f5] uppercase tracking-widest opacity-50 mb-4 flex items-center gap-2 ">
+          <h2 class="text-xs case tracking-widest opacity-50 mb-4 flex items-center gap-2 ">
             <Activity class="w-4 h-4" /> Stats
           </h2>
           <div class="grid grid-cols-2 gap-4">
             <div class="p-4 border border-[#141414] bg-white rounded-2xl bg-[#f5f5f5] ">
-              <div class="text-[10px]  uppercase opacity-50 bg-[#f5f5f5]">Epochs</div>
+              <div class="text-[10px]  case opacity-50">Epochs</div>
               <div class="text-2xl font-sans font-bold">{epoch}</div>
             </div>
             <div class="p-4 border border-[#141414] bg-white rounded-2xl bg-[#f5f5f5]">
-              <div class="text-[10px]  uppercase opacity-50">Loss (MSE)</div>
+              <div class="text-[10px]  case opacity-50">Loss (MSE)</div>
               <div class="text-2xl font-sans font-bold">
                 {currentLoss.toFixed(4)}
               </div>

@@ -189,14 +189,14 @@
       <!-- CONFIG CARD -->
       <section class="bg-white border rounded-2xl p-5 flex flex-col gap-5 shadow-sm">
 
-        <h3 class="text-xs font-black uppercase tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
+        <h3 class="text-xs font-black tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
           <Sliders class="w-4 h-4 text-[#F27D26]" />
-          Architecture Config
+          Configurations
         </h3>
 
         <!-- Layer Count -->
         <div class="space-y-2">
-          <label class="text-[10px] text-[#141414]/70 font-black uppercase tracking-widest block">
+          <label class="text-[10px] text-[#141414]/70 font-black tracking-widest block">
             Network Layer Depth
           </label>
 
@@ -235,7 +235,7 @@
         <!-- Neuron Count -->
         <div class="space-y-2">
 
-          <label class="text-[10px] text-[#141414]/70 font-black uppercase tracking-widest block">
+          <label class="text-[10px] text-[#141414]/70 font-black tracking-widest block">
             {layerCount === 2 ? "Layer 1 (L1) Hidden Neurons" : "Number of Hidden Neurons"}
           </label>
 
@@ -275,7 +275,7 @@
 
             <div class="flex justify-between items-center text-xs">
               <span class="font-bold">
-                Global Bias
+                Bias
               </span>
 
               <span class="font-bold text-[#F27D26]">
@@ -315,8 +315,8 @@
 
           <div class="flex justify-between items-center">
 
-            <span class="text-[10px] uppercase tracking-widest font-black">
-              Synaptic Weights
+            <span class="text-[10px] tracking-widest font-black">
+              Weights
             </span>
 
             <button
@@ -397,7 +397,7 @@
           <!-- Activation -->
           <div class="flex flex-col gap-2">
 
-            <label class="text-[10px] text-[#141414]/70 font-black uppercase tracking-widest">
+            <label class="text-[10px] text-[#141414]/70 font-black tracking-widest">
               Activation Function
             </label>
 
@@ -441,7 +441,7 @@
       <!-- TESTING CARD -->
       <section class="bg-white border rounded-3xl p-5 flex flex-col gap-4 shadow-sm">
 
-        <h3 class="text-xs font-black uppercase tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
+        <h3 class="text-xs font-black tracking-widest flex items-center gap-2 border-b border-black/30 pb-3">
           <Binary class="w-4 h-4 text-[#F27D26]" />
           Coordinate Evaluation
         </h3>
@@ -450,8 +450,8 @@
 
           <div class="flex flex-col gap-2 bg-[#f5f5f5] border border-black/30 rounded-3xl p-4">
 
-            <span class="text-[10px] font-bold uppercase tracking-wider">
-              Input Coord x₁
+            <span class="text-[10px] font-bold tracking-wider">
+              Input x₁
             </span>
 
             <input
@@ -473,8 +473,8 @@
 
           <div class="flex flex-col gap-2 bg-[#f5f5f5] border border-black/30 rounded-3xl p-4">
 
-            <span class="text-[10px] font-bold uppercase tracking-wider">
-              Input Coord x₂
+            <span class="text-[10px] font-bold tracking-wider">
+              Input x₂
             </span>
 
             <input
@@ -504,8 +504,8 @@
             <Gauge class="w-5 h-5 text-[#F27D26]" />
 
             <div>
-              <span class="text-[10px] uppercase tracking-wider font-black block">
-                Evaluated Output
+              <span class="text-[10px] tracking-wider font-black block">
+                Output
               </span>
 
               <span class="text-[11px] text-[#141414]/60">

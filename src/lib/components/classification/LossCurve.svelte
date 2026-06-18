@@ -26,7 +26,7 @@
 </script>
 
 <section class="h-48" id="section-loss-curve">
-  <h2 class="text-xs  uppercase tracking-widest opacity-50 mb-4 ">Loss Curve</h2>
+  <h2 class="text-xs tracking-widest opacity-50 mb-4 ">Loss</h2>
   <div class="h-full border border-[#141414] bg-white p-2 rounded-2xl">
     {#if lossHistory.length > 0}
       <svg class="w-full h-full" viewBox="0 0 {chartWidth} {chartHeight}">

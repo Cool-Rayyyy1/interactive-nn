@@ -32,10 +32,10 @@
 
 <div class="w-full bg-white select-none">
   <div class="flex justify-between items-center mb-3 pb-2 border-b-2 border-[#141414] border-black/30">
-    <h4 class="text-xs font-black text-[#141414] uppercase tracking-widest">
+    <h4 class="text-xs font-black text-[#141414] tracking-widest">
       Network Architecture Diagram
     </h4>
-    <span class="text-[9px] text-[#141414]/70 uppercase tracking-wide ">
+    <span class="text-[9px] text-[#141414]/70 tracking-wide ">
       {#if layerCount === 2}
         L1: {neuronCount} {neuronCount === 1 ? "Node" : "Nodes"} | L2: {layer2NeuronCount} {layer2NeuronCount === 1 ? "Node" : "Nodes"}
       {:else}

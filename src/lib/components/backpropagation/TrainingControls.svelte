@@ -67,7 +67,7 @@
     <div class="flex flex-wrap items-center gap-4 py-1 ml-auto">
     
     <div class="flex flex-col gap-1.5">
-      <label class="text-[10px] uppercase tracking-wider text-slate-500 font-bold flex items-center gap-1">
+      <label class="text-[10px] tracking-wider text-slate-500 font-bold flex items-center gap-1">
         <Settings2 size={10} /> Learning Rate
       </label>
       <input
@@ -79,19 +79,19 @@
     </div>
 
     <div class="flex flex-col gap-1.5">
-      <label class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Target (y)</label>
+      <label class="text-[10px] tracking-wider text-slate-500 font-bold">Target (y)</label>
       <input type="number" step="0.1" bind:value={target}
         class="w-20 px-2 py-1.5 bg-white border border-slate-200 rounded font-mono" />
     </div>
 
     <div class="flex flex-col gap-1.5">
-      <label class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Max Epoch</label>
+      <label class="text-[10px] tracking-wider text-slate-500 font-bold">Max Epoch</label>
       <input type="number" bind:value={maxEpoch}
         class="w-20 px-2 py-1.5 bg-white border border-slate-200 rounded font-mono" />
     </div>
 
     <div class="flex flex-col gap-1.5">
-      <label class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Activation</label>
+      <label class="text-[10px]  tracking-wider text-slate-500 font-bold">Activation</label>
       <select bind:value={activationType}
         class="w-24 px-2 py-1.5 bg-white border border-slate-200 rounded text-xs appearance-none cursor-pointer hover:border-slate-300">
         {#each activationOptions as opt}
@@ -103,13 +103,13 @@
     <div class="w-px h-8 bg-slate-200 mx-1"></div>
 
     <div class="flex flex-col gap-1.5">
-      <label class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Input x₁</label>
+      <label class="text-[10px] tracking-wider text-slate-500 font-bold">Input x₁</label>
       <input type="number" step="0.1" bind:value={x1}
         class="w-16 px-2 py-1.5 bg-slate-50 border border-slate-200 rounded font-mono" />
     </div>
 
     <div class="flex flex-col gap-1.5">
-      <label class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Input x₂</label>
+      <label class="text-[10px]  tracking-wider text-slate-500 font-bold">Input x₂</label>
       <input type="number" step="0.1" bind:value={x2}
         class="w-16 px-2 py-1.5 bg-slate-50 border border-slate-200 rounded font-mono" />
     </div>

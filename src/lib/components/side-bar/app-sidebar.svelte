@@ -63,15 +63,9 @@
           // },
           {
             title: "ML Playground", 
-            // url: '/playground'
             url: "/classification/"
           },
           
-
-          // {
-          //   title: "Derivative Playground",
-          //   url: 'derivative/'
-          // }
         ]
       },
       {

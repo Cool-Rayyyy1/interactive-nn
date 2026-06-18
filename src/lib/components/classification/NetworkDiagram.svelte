@@ -22,7 +22,7 @@
 
 <div class="flex-1 border border-[#141414] bg-white relative overflow-hidden group rounded-2xl">
   <div class="absolute top-4 left-4 z-10 ">
-    <h2 class="text-xs  uppercase tracking-widest opacity-50 flex items-center gap-2">
+    <h2 class="text-xs tracking-widest opacity-50 flex items-center gap-2">
       <Network class="w-4 h-4" /> Network Architecture
     </h2>
   </div>

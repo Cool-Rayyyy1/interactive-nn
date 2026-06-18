@@ -26,14 +26,14 @@
 </script>
 
 <section class="p-4 border border-[#141414] bg-white space-y-3 rounded-2xl " id="section-tuning">
-  <h2 class="text-xs  uppercase tracking-widest text-[#F27D26] flex items-center gap-2 font-bold">
+  <h2 class="text-xs tracking-widest text-[#F27D26] flex items-center gap-2 font-bold">
     <Settings2 class="w-4 h-4" /> Tuning Console
   </h2>
   {#if selectedElement && networkState}
     <div class="space-y-3">
       <div class="text-[10px]  flex justify-between">
         <span class="opacity-50">Component:</span>
-        <span class="font-bold uppercase text-[#F27D26]">
+        <span class="font-bold text-[#F27D26]">
           {selectedElement.type}
         </span>
       </div>

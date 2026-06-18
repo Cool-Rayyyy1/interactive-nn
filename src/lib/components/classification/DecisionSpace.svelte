@@ -60,10 +60,10 @@
 <aside class="lg:col-span-3 p-6 flex flex-col gap-6">
   <div class="flex-1 border border-[#141414] bg-white relative flex flex-col rounded-2xl">
     <div class="p-4 border-b border-[#141414] flex justify-between items-center bg-[#E4E3E0]/30 ">
-      <h2 class="text-xs  uppercase tracking-widest opacity-50">Decision Space</h2>
+      <h2 class="text-xs tracking-widest opacity-50">Decision Space</h2>
       <button 
         onclick={ongenerateData}
-        class="text-[10px] uppercase  hover:underline cursor-pointer"
+        class="text-[10px]  hover:underline cursor-pointer"
         id="btn-regen-data"
       >Regenerate Data</button>
     </div>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="p-4 border-t border-[#141414] bg-[#E4E3E0]/30">
-      <div class="flex justify-between items-center text-[10px]  uppercase opacity-50 mb-2">
+      <div class="flex justify-between items-center text-[10px] opacity-50 mb-2">
         <span>Legend</span>
       </div>
       <div class="flex gap-4">
