@@ -60,14 +60,14 @@
           <div class="w-12 h-12 flex items-center justify-center bg-slate-50 border border-slate-100 rounded">
             <KaTeX math={sym.symbol} />
           </div>
-          <span class="text-slate-500 font-mono text-[10px] uppercase tracking-tight">{sym.meaning}</span>
+          <span class="text-slate-500 font-mono text-[10px] case tracking-tight">{sym.meaning}</span>
         </div>
       {/each}
       <div class="flex items-center gap-4 text-xs text-indigo-600">
         <div class="w-12 h-12 flex items-center justify-center bg-indigo-50 border border-indigo-100 rounded">
           <KaTeX math={activationType === 'sigmoid' ? '\\sigma' : activationType === 'tanh' ? '\\tanh' : '\\text{ReLU}'} />
         </div>
-        <span class="text-[10px] uppercase tracking-tight font-bold">Selected Activation</span>
+        <span class="text-[10px] case tracking-tight font-bold">Selected Activation</span>
       </div>
     </div>
   </div>

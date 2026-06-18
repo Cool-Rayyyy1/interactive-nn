@@ -15,7 +15,7 @@
   <!-- Symbolic Equation Box -->
   <div class="p-6 border-0">
     <h5 class=" mb-4 flex items-center gap-2 text-[#141414]/70 border-black/30 text-[10px]">
-      <Zap class="w-3.5 h-3.5 text-[#F27D26]" /> Symbolic Expression Mapping
+      <Zap class="w-3.5 h-3.5 text-[#F27D26]" /> Equation
     </h5>
     <div class="flex items-center justify-center overflow-x-auto min-h-[60px]">
       {#if symbolicMath}
@@ -34,7 +34,7 @@
   <!-- Numerical Calculation Box -->
   <div class="p-6 border-0">
     <h5 class=" mb-4 flex items-center gap-2 text-[#141414]/70 border-black/30 text-[10px]">
-      <Calculator class="w-3.5 h-3.5 text-[#141414]" /> Numerical Evaluation Trace
+      <Calculator class="w-3.5 h-3.5 text-[#141414]" /> Calculation
     </h5>
     <div class="flex items-center justify-center overflow-x-auto min-h-[60px]">
       {#if numericMath}

@@ -47,7 +47,7 @@ let points = $derived(
       </svg>
       
       {#if history.length === 0}
-        <div class="absolute inset-0 flex items-center justify-center text-slate-300 text-[10px] font-mono uppercase tracking-widest">
+        <div class="absolute inset-0 flex items-center justify-center text-slate-300 text-[10px] font-mono case tracking-widest">
           No training data
         </div>
       {/if}
