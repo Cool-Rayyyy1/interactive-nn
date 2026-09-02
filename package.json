@@ -3,8 +3,11 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
-    "start": "node build",
+    "start": "vite preview",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
@@ -20,7 +23,7 @@
   "devDependencies": {
     "@internationalized/date": "^3.8.2",
     "@lucide/svelte": "^0.535.0",
-    "@sveltejs/adapter-node": "^5.2.12",
+    "@sveltejs/adapter-vercel": "5.8.2",
     "@sveltejs/kit": "^2.22.0",
     "@sveltejs/vite-plugin-svelte": "^6.0.0",
     "@tailwindcss/typography": "^0.5.16",
